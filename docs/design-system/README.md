@@ -42,7 +42,7 @@ Prefer **semantic tokens** (stable API) over palette names:
 
 ## Screenshot placeholders
 
-Drop screenshots into `docs/design-system/images/` and reference them from these docs.
+Drop screenshots into `docs/design-system/images/` (they’ll render immediately) and reference them from these docs.
 
 Recommended screenshots to add:
 
