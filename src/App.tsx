@@ -4,7 +4,7 @@ import { HomePage } from './pages/HomePage';
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50">
+    <div className="min-h-screen bg-bg text-text">
       <Navbar />
       <main className="mx-auto flex max-w-6xl flex-1 flex-col px-4 pb-10 pt-6 sm:px-6 lg:px-8">
         <Routes>

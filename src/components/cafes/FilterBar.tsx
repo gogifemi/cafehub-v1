@@ -12,11 +12,11 @@ export const FilterBar = ({
   onOnlyOpenNowChange
 }: FilterBarProps) => {
   return (
-    <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-slate-300">
-      <div className="inline-flex items-center gap-2 rounded-full bg-slate-900/80 px-3 py-1.5">
-        <span className="text-slate-400">Min rating</span>
+    <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-text-muted">
+      <div className="inline-flex items-center gap-2 rounded-full bg-surface-subtle px-3 py-1.5">
+        <span className="text-text-subtle">Min rating</span>
         <select
-          className="rounded-full border border-slate-700 bg-slate-950/80 px-2 py-1 text-xs text-slate-100 focus:outline-none focus:ring-1 focus:ring-amber-400"
+          className="rounded-full border border-border-subtle bg-bg-soft px-2 py-1 text-xs text-text focus:outline-none focus:ring-1 focus:ring-accent"
           value={String(minRating)}
           onChange={(e) => onMinRatingChange(Number(e.target.value))}
         >
@@ -31,12 +31,12 @@ export const FilterBar = ({
         type="button"
         className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 transition ${
           onlyOpenNow
-            ? 'border-emerald-400/80 bg-emerald-500/10 text-emerald-200'
-            : 'border-slate-700 bg-slate-900/80 text-slate-300 hover:border-slate-500'
+            ? 'border-status-success/80 bg-status-success/10 text-status-success'
+            : 'border-border-subtle bg-surface-subtle text-text-muted hover:border-border-strong'
         }`}
         onClick={() => onOnlyOpenNowChange(!onlyOpenNow)}
       >
-        <span className={onlyOpenNow ? 'text-emerald-400' : 'text-slate-400'}>●</span>
+        <span className={onlyOpenNow ? 'text-status-success' : 'text-text-subtle'}>●</span>
         Open now
       </button>
     </div>

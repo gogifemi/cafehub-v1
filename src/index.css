@@ -2,6 +2,118 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Design tokens: typography */
+:root {
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Rounded', 'Segoe UI Rounded',
+    'Segoe UI', sans-serif;
+
+  /* Core monochrome palette (logo) */
+  --core-black: 0 0% 0%;
+  --core-white: 0 0% 100%;
+
+  /* Turkish coffee base palette (browns, creams, spices) */
+  --coffee-espresso: 24 32% 15%; /* deep, almost-black espresso */
+  --coffee-grounds: 26 32% 20%;
+  --coffee-foam: 35 70% 88%;
+  --coffee-bronze: 28 68% 46%;
+  --coffee-cream: 36 80% 92%;
+  --spice-cardamom: 142 40% 45%;
+  --spice-cinnamon: 20 70% 46%;
+  --spice-clove: 18 42% 32%;
+
+  /* Semantic colors – default theme (Turkish coffee) */
+  --color-bg: var(--coffee-espresso);
+  --color-bg-soft: var(--coffee-grounds);
+  --color-surface: var(--coffee-grounds);
+  --color-surface-subtle: var(--spice-clove);
+  --color-surface-elevated: var(--coffee-bronze);
+
+  --color-border-subtle: 24 25% 32%;
+  --color-border: 24 30% 40%;
+  --color-border-strong: 24 35% 50%;
+
+  --color-text: var(--coffee-cream);
+  --color-text-muted: 35 40% 80%;
+  --color-text-subtle: 35 30% 70%;
+  --color-text-accent: var(--coffee-cream);
+
+  --color-accent: var(--coffee-bronze);
+  --color-accent-soft: 32 85% 60%;
+  --color-accent-strong: 28 92% 48%;
+
+  --color-success: var(--spice-cardamom);
+  --color-warning: 35 90% 60%;
+  --color-info: 200 90% 60%;
+
+  --color-ring: var(--color-accent);
+
+  /* Gradient accents used for borders and badges */
+  --color-accent-1: var(--spice-cardamom);
+  --color-accent-2: var(--coffee-bronze);
+  --color-accent-3: var(--spice-cinnamon);
+  --color-accent-4: 0 84% 60%;
+
+  color-scheme: dark;
+}
+
+/* Core monochrome theme – pure black/white */
+:root[data-theme='core'] {
+  --color-bg: 0 0% 4%;
+  --color-bg-soft: 0 0% 8%;
+  --color-surface: 0 0% 6%;
+  --color-surface-subtle: 0 0% 12%;
+  --color-surface-elevated: 0 0% 18%;
+
+  --color-border-subtle: 0 0% 22%;
+  --color-border: 0 0% 32%;
+  --color-border-strong: 0 0% 45%;
+
+  --color-text: 0 0% 98%;
+  --color-text-muted: 0 0% 70%;
+  --color-text-subtle: 0 0% 55%;
+  --color-text-accent: 0 0% 100%;
+
+  --color-accent: 0 0% 100%;
+  --color-accent-soft: 0 0% 85%;
+  --color-accent-strong: 0 0% 100%;
+
+  --color-success: 140 40% 60%;
+  --color-warning: 45 90% 60%;
+  --color-info: 210 90% 60%;
+
+  --color-ring: var(--color-accent);
+}
+
+/* Explicit Turkish coffee theme override (same as default) */
+:root[data-theme='turkish'] {
+  --color-bg: var(--coffee-espresso);
+  --color-bg-soft: var(--coffee-grounds);
+  --color-surface: var(--coffee-grounds);
+  --color-surface-subtle: var(--spice-clove);
+  --color-surface-elevated: var(--coffee-bronze);
+
+  --color-border-subtle: 24 25% 32%;
+  --color-border: 24 30% 40%;
+  --color-border-strong: 24 35% 50%;
+
+  --color-text: var(--coffee-cream);
+  --color-text-muted: 35 40% 80%;
+  --color-text-subtle: 35 30% 70%;
+  --color-text-accent: var(--coffee-cream);
+
+  --color-accent: var(--coffee-bronze);
+  --color-accent-soft: 32 85% 60%;
+  --color-accent-strong: 28 92% 48%;
+
+  --color-success: var(--spice-cardamom);
+  --color-warning: 35 90% 60%;
+  --color-info: 200 90% 60%;
+
+  --color-ring: var(--color-accent);
+
+  color-scheme: dark;
+}
+
 *,
 *::before,
 *::after {
@@ -16,10 +128,14 @@ body,
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI',
-    sans-serif;
-  background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
-  color: #e5e7eb;
+  font-family: var(--font-sans);
+  background: radial-gradient(
+    circle at top,
+    hsl(var(--color-bg-soft)) 0,
+    hsl(var(--color-bg-soft)) 40%,
+    hsl(var(--color-bg)) 100%
+  );
+  color: hsl(var(--color-text));
 }
 
 .gradient-border {
@@ -31,7 +147,13 @@ body {
   position: absolute;
   inset: -1px;
   border-radius: inherit;
-  background: linear-gradient(135deg, #22c55e, #eab308, #f97316, #ef4444);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--color-accent-1)),
+    hsl(var(--color-accent-2)),
+    hsl(var(--color-accent-3)),
+    hsl(var(--color-accent-4))
+  );
   opacity: 0.75;
   z-index: -1;
 }

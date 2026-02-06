@@ -11,18 +11,18 @@ export const Rating = ({ value }: RatingProps) => {
     <div className="flex items-center gap-1 text-xs">
       <div className="flex items-center">
         {Array.from({ length: fullStars }).map((_, idx) => (
-          <span key={`full-${idx}`} className="text-amber-400">
+          <span key={`full-${idx}`} className="text-accent">
             ★
           </span>
         ))}
-        {hasHalf && <span className="text-amber-400/70">☆</span>}
+        {hasHalf && <span className="text-accent/70">☆</span>}
         {Array.from({ length: emptyStars }).map((_, idx) => (
-          <span key={`empty-${idx}`} className="text-slate-600">
+          <span key={`empty-${idx}`} className="text-border-subtle">
             ☆
           </span>
         ))}
       </div>
-      <span className="font-medium text-amber-300">{value.toFixed(1)}</span>
+      <span className="font-medium text-accent-soft">{value.toFixed(1)}</span>
     </div>
   );
 };

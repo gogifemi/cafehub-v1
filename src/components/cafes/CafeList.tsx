@@ -8,7 +8,7 @@ interface CafeListProps {
 export const CafeList = ({ cafes }: CafeListProps) => {
   if (!cafes.length) {
     return (
-      <div className="mt-6 rounded-2xl border border-dashed border-slate-700 bg-slate-900/50 px-4 py-10 text-center text-sm text-slate-400">
+      <div className="mt-6 rounded-2xl border border-dashed border-border-subtle bg-surface-subtle px-4 py-10 text-center text-sm text-text-muted">
         No cafes match your filters yet. Try widening your search.
       </div>
     );

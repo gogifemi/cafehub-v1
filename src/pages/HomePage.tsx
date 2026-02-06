@@ -31,17 +31,17 @@ export const HomePage = () => {
     <section>
       <div className="flex flex-col gap-3 pb-4 pt-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-xl font-semibold tracking-tight text-slate-50 sm:text-2xl">
+          <h1 className="text-xl font-semibold tracking-tight text-text sm:text-2xl">
             Find your next cafe
           </h1>
-          <p className="mt-1 max-w-xl text-sm text-slate-400">
+          <p className="mt-1 max-w-xl text-sm text-text-muted">
             Search curated cafes with real ratings, locations, and filters designed for working,
             socializing, or grabbing a quick espresso.
           </p>
         </div>
-        <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 px-3 py-2 text-xs text-emerald-200">
+        <div className="rounded-xl border border-status-info/30 bg-status-info/10 px-3 py-2 text-xs text-status-info">
           <p className="font-medium">Single-page app</p>
-          <p className="text-emerald-200/80">
+          <p className="text-status-info/80">
             Routing & folder structure already prepared for future pages.
           </p>
         </div>
