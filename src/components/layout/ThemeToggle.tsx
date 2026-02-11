@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 type ColorTheme = 'turkish' | 'core';
 
@@ -6,6 +7,7 @@ const STORAGE_KEY = 'cafehub-color-theme';
 
 export const ThemeToggle = () => {
   const [theme, setTheme] = useState<ColorTheme>('turkish');
+  const { t } = useTranslation();
 
   useEffect(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY) as ColorTheme | null;
@@ -29,7 +31,9 @@ export const ThemeToggle = () => {
       type="button"
       onClick={toggleTheme}
       className="inline-flex items-center gap-2 rounded-full border border-border-subtle bg-surface-subtle px-3 py-1.5 text-xs font-medium text-text-muted shadow-sm hover:border-border-strong hover:text-text"
-      aria-label={`Switch to ${isCore ? 'Turkish coffee' : 'core monochrome'} theme`}
+        aria-label={
+          isCore ? t('theme.switchToTurkish') : t('theme.switchToCore')
+        }
     >
       <span
         className={`flex h-4 w-7 items-center rounded-full border border-border bg-bg-soft px-0.5 transition ${
@@ -39,9 +43,11 @@ export const ThemeToggle = () => {
         <span className="h-3 w-3 rounded-full bg-accent" />
       </span>
       <span className="hidden sm:inline">
-        {isCore ? 'Core monochrome' : 'Turkish coffee'}
+        {isCore ? t('theme.labelDesktopCore') : t('theme.labelDesktopTurkish')}
       </span>
-      <span className="sm:hidden">{isCore ? 'Core' : 'Coffee'}</span>
+      <span className="sm:hidden">
+        {isCore ? t('theme.labelMobileCore') : t('theme.labelMobileTurkish')}
+      </span>
     </button>
   );
 };

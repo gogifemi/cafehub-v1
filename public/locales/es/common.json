@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "brandTitle": "CafeHub",
+    "brandTagline": "Find your next favorite spot",
+    "nearbyGems": "Nearby gems",
+    "mapSoon": "Map (soon)",
+    "favoritesSoon": "Favorites (soon)",
+    "home": "Home",
+    "browse": "Browse",
+    "addCafe": "Add cafe",
+    "about": "About"
+  },
+  "home": {
+    "heroTitle": "Find your next cafe",
+    "heroSubtitle": "Search curated cafes with real ratings, locations, and filters designed for working, socializing, or grabbing a quick espresso.",
+    "badgeTitle": "Single-page app",
+    "badgeBody": "Routing & folder structure already prepared for future pages."
+  },
+  "search": {
+    "label": "Search cafes",
+    "placeholder": "Try “specialty coffee” or “quiet to work”",
+    "cityLabel": "City",
+    "cities": {
+      "all": "All cities",
+      "istanbul": "Istanbul",
+      "ankara": "Ankara",
+      "izmir": "Izmir"
+    }
+  },
+  "filters": {
+    "minRating": "Min rating",
+    "any": "Any",
+    "openNow": "Open now"
+  },
+  "cafes": {
+    "openNow": "Open now",
+    "closed": "Closed",
+    "distance": "{{minutes}} min walk",
+    "reviews": "{{count}} reviews"
+  },
+  "status": {
+    "noResults": "No cafes match your filters yet. Try widening your search.",
+    "loading": "Loading…",
+    "error": "Something went wrong. Please try again later."
+  },
+  "theme": {
+    "switchToTurkish": "Switch to Turkish coffee theme",
+    "switchToCore": "Switch to core monochrome theme",
+    "labelDesktopTurkish": "Turkish coffee",
+    "labelDesktopCore": "Core monochrome",
+    "labelMobileTurkish": "Coffee",
+    "labelMobileCore": "Core"
+  },
+  "actions": {
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save"
+  }
+}
+

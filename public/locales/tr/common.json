@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "brandTitle": "CafeHub",
+    "brandTagline": "Bir sonraki favori kafeni bul",
+    "nearbyGems": "Yakındaki inciler",
+    "mapSoon": "Harita (yakında)",
+    "favoritesSoon": "Favoriler (yakında)",
+    "home": "Ana sayfa",
+    "browse": "Keşfet",
+    "addCafe": "Kafe ekle",
+    "about": "Hakkında"
+  },
+  "home": {
+    "heroTitle": "Bir sonraki kafenizi bulun",
+    "heroSubtitle": "Çalışmak, sosyalleşmek veya hızlı bir espresso için gerçek puanlar, konumlar ve filtrelerle seçili kafeleri keşfedin.",
+    "badgeTitle": "Tek sayfalık uygulama",
+    "badgeBody": "Yönlendirme ve klasör yapısı gelecekteki sayfalar için hazır."
+  },
+  "search": {
+    "label": "Kafeleri ara",
+    "placeholder": "“third wave kahve” veya “çalışmaya uygun” deneyin",
+    "cityLabel": "Şehir",
+    "cities": {
+      "all": "Tüm şehirler",
+      "istanbul": "İstanbul",
+      "ankara": "Ankara",
+      "izmir": "İzmir"
+    }
+  },
+  "filters": {
+    "minRating": "En az puan",
+    "any": "Farketmez",
+    "openNow": "Şu an açık"
+  },
+  "cafes": {
+    "openNow": "Şu an açık",
+    "closed": "Kapalı",
+    "distance": "{{minutes}} dk yürüyüş",
+    "reviews": "{{count}} yorum"
+  },
+  "status": {
+    "noResults": "Filtrelerinize uyan kafe yok. Aramanızı genişletmeyi deneyin.",
+    "loading": "Yükleniyor…",
+    "error": "Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyin."
+  },
+  "theme": {
+    "switchToTurkish": "Türk kahvesi temasına geç",
+    "switchToCore": "Core monokrom temasına geç",
+    "labelDesktopTurkish": "Türk kahvesi",
+    "labelDesktopCore": "Core monokrom",
+    "labelMobileTurkish": "Kahve",
+    "labelMobileCore": "Core"
+  },
+  "actions": {
+    "submit": "Gönder",
+    "cancel": "İptal",
+    "save": "Kaydet"
+  }
+}
+
