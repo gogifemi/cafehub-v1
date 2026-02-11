@@ -36,7 +36,9 @@
     "openNow": "Open now",
     "closed": "Closed",
     "distance": "{{minutes}} min walk",
-    "reviews": "{{count}} reviews"
+    "reviews_0": "No reviews yet",
+    "reviews_1": "{{count}} review",
+    "reviews_other": "{{count}} reviews"
   },
   "status": {
     "noResults": "No cafes match your filters yet. Try widening your search.",

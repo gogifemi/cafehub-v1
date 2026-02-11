@@ -36,7 +36,9 @@
     "openNow": "Şu an açık",
     "closed": "Kapalı",
     "distance": "{{minutes}} dk yürüyüş",
-    "reviews": "{{count}} yorum"
+    "reviews_0": "Henüz yorum yok",
+    "reviews_1": "{{count}} yorum",
+    "reviews_other": "{{count}} yorum"
   },
   "status": {
     "noResults": "Filtrelerinize uyan kafe yok. Aramanızı genişletmeyi deneyin.",
