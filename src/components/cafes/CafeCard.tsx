@@ -1,6 +1,7 @@
 import type { Cafe } from '../../types/cafe';
 import { Rating } from './Rating';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 interface CafeCardProps {
   cafe: Cafe;
@@ -8,9 +9,25 @@ interface CafeCardProps {
 
 export const CafeCard = ({ cafe }: CafeCardProps) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const onViewDetails = () => {
+    navigate(`/cafe/${cafe.id}`);
+  };
 
   return (
-    <article className="group relative overflow-hidden rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm shadow-black/40 transition hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-accent/30">
+    <article
+      className="group relative cursor-pointer overflow-hidden rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm shadow-black/40 transition hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-accent/30"
+      onClick={onViewDetails}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onViewDetails();
+        }
+      }}
+    >
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1 space-y-1.5">
           <h3 className="text-sm font-semibold tracking-tight text-text">
