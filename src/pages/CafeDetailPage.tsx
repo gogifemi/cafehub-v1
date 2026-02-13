@@ -39,10 +39,10 @@ export const CafeDetailPage = () => {
   ];
 
   const menuItems = [
-    { name: 'Espresso', price: '40 TL' },
-    { name: 'Latte', price: '55 TL' },
-    { name: 'Filtre Kahve', price: '45 TL' },
-    { name: 'Cheesecake', price: '70 TL' }
+    'Espresso',
+    'Latte',
+    'Filtre Kahve',
+    'Cheesecake'
   ];
 
   const reviews = [
@@ -183,10 +183,7 @@ export const CafeDetailPage = () => {
           <p className="text-xs font-medium text-text-muted">{t('cafeDetail.menu')}</p>
           <ul className="mt-1 space-y-1 text-xs text-text-muted">
             {menuItems.map((item) => (
-              <li key={item.name} className="flex items-center justify-between">
-                <span>{item.name}</span>
-                <span className="text-text-subtle">{item.price}</span>
-              </li>
+              <li key={item}>{item}</li>
             ))}
           </ul>
         </div>

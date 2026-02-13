@@ -59,6 +59,7 @@
     "step3": "Payment",
     "step4": "Payment Confirmation",
     "partySize": "Party Size",
+    "partySizeInfo": "Für Gruppen mit mehr als 10 Personen geben Sie dies bitte in den Reservierungsnotizen an oder rufen Sie uns an.",
     "duration": "Reservation Duration",
     "durationOptions": {
       "20": "20 min - 15 TL",
@@ -68,6 +69,7 @@
     "durationInfo": "You pay 15 TL for 20 minutes, 20 TL for 35 minutes, and 40 TL for 55 minutes. For 55-minute reservations, 40 TL is added to your bill after the reservation is completed.",
     "tableSelection": "Table Selection",
     "tableInfo": "White tables: available, reddish tables: occupied, black tables: cannot be selected for this party size, green table: selected table.",
+    "capacityPeople": "{{count}} Personen",
     "notes": "Special Requests",
     "notesPlaceholder": "Birthday celebration, special requests...",
     "next": "Next →",

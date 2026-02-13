@@ -91,9 +91,18 @@ export const ReservationDetailsPage = () => {
 
       {/* Step 1A - Party Size */}
       <div className="space-y-2 rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm">
-        <label className="block text-xs font-medium text-text-muted">
-          {t('reservation.partySize')}
-        </label>
+        <div className="flex items-center gap-2">
+          <label className="block text-xs font-medium text-text-muted">
+            {t('reservation.partySize')}
+          </label>
+          <span
+            className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-border-subtle text-[10px] text-text-subtle"
+            title={t('reservation.partySizeInfo')}
+            aria-label={t('reservation.partySizeInfo')}
+          >
+            ?
+          </span>
+        </div>
         <div className="mt-2 flex flex-wrap gap-2">
           {PARTY_SIZES.map((size) => {
             const selected = state.partySize === size;
@@ -206,7 +215,7 @@ export const ReservationDetailsPage = () => {
               >
                 <span>No: {table.label}</span>
                 <span className="text-[10px] text-core-white/80">
-                  {table.capacity} {partySize > 1 ? 'pax' : 'pax'}
+                  {t('reservation.capacityPeople', { count: table.capacity })}
                 </span>
               </button>
             );

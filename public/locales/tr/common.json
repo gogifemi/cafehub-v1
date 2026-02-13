@@ -59,6 +59,7 @@
     "step3": "Ödeme",
     "step4": "Ödeme Onayı",
     "partySize": "Kişi Sayısı",
+    "partySizeInfo": "10 kişiden fazla gruplar için lütfen rezervasyon notlarında belirtiniz veya bizi arayınız.",
     "duration": "Rezervasyon Süresi",
     "durationOptions": {
       "20": "20 dk - 15 TL",
@@ -68,6 +69,7 @@
     "durationInfo": "20 dk için 15 TL, 35 dk için 20 TL ve 55 dk için 40 TL bedel ödenmesi gerekmektedir. 55 dk rezervasyon yapanların ödenen bedeli, rezervasyon gerçekleştikten sonra 40 TL adisyonlarına işlenir.",
     "tableSelection": "Masa Seçimi",
     "tableInfo": "Beyaz masalar: müsait masalar, kırmızımsı masalar: dolu masalar, siyah masalar: kişi sayısından ötürü seçilemez, yeşil masa: seçili masa.",
+    "capacityPeople": "{{count}} kişi",
     "notes": "Notlar",
     "notesPlaceholder": "Doğum günü kutlaması, özel istekler...",
     "next": "İleri →",
