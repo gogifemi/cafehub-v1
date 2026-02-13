@@ -111,6 +111,32 @@
     },
     "backToHome": "← Geri"
   },
+  "qrScan": {
+    "title": "QR Kodu Tara",
+    "instructions": "Masadaki QR kodunu okutun",
+    "enterManually": "QR kodunu girin",
+    "back": "← Geri"
+  },
+  "qrApproval": {
+    "tableNo": "Masa No",
+    "capacity": "Kapasite",
+    "location": "Konum",
+    "waiting": "Onay bekleniyor...",
+    "staffApproving": "Kafe personeli masanızı onaylıyor...",
+    "approved": "Masa onaylandı!",
+    "back": "← Geri"
+  },
+  "menu": {
+    "title": "Menü",
+    "back": "← Geri",
+    "coffees": "Kahveler",
+    "brews": "Filtre Kahveler",
+    "breakfast": "Kahvaltı",
+    "desserts": "Tatlılar",
+    "coldDrinks": "Soğuk İçecekler",
+    "food": "Yiyecekler",
+    "tableNo": "Masa No"
+  },
   "cafeDetail": {
     "scanQr": "QR Kodu Tara",
     "makeReservation": "Rezervasyon Yap",

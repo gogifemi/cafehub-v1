@@ -111,6 +111,32 @@
     },
     "backToHome": "← Back"
   },
+  "qrScan": {
+    "title": "QR-Code scannen",
+    "instructions": "Scannen Sie den QR-Code auf Ihrem Tisch",
+    "enterManually": "QR-Code manuell eingeben",
+    "back": "← Zurück"
+  },
+  "qrApproval": {
+    "tableNo": "Tisch Nr.",
+    "capacity": "Kapazität",
+    "location": "Standort",
+    "waiting": "Warte auf Bestätigung...",
+    "staffApproving": "Das Café-Personal bestätigt Ihren Tisch...",
+    "approved": "Tisch bestätigt!",
+    "back": "← Zurück"
+  },
+  "menu": {
+    "title": "Menü",
+    "back": "← Zurück",
+    "coffees": "Kaffee",
+    "brews": "Filterkaffee",
+    "breakfast": "Frühstück",
+    "desserts": "Desserts",
+    "coldDrinks": "Kalte Getränke",
+    "food": "Essen",
+    "tableNo": "Tisch Nr."
+  },
   "cafeDetail": {
     "scanQr": "Scan QR Code",
     "makeReservation": "Make Reservation",

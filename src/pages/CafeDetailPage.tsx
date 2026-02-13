@@ -114,6 +114,7 @@ export const CafeDetailPage = () => {
             <div className="flex flex-wrap gap-2">
               <button
                 type="button"
+                onClick={() => navigate(`/cafe/${id}/scan`)}
                 className="inline-flex items-center gap-1 rounded-full border border-border-subtle bg-surface-subtle px-3 py-1.5 text-xs font-medium text-text-muted hover:border-border-strong hover:text-text"
               >
                 <span>📷</span>

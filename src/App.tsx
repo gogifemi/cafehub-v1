@@ -7,6 +7,9 @@ import { ReservationSummaryPage } from './pages/ReservationSummaryPage';
 import { ReservationPaymentPage } from './pages/ReservationPaymentPage';
 import { ReservationReceiptPage } from './pages/ReservationReceiptPage';
 import { CafeDetailPage } from './pages/CafeDetailPage';
+import { QRScanPage } from './pages/QRScanPage';
+import { QRApprovalPage } from './pages/QRApprovalPage';
+import { CafeMenuPage } from './pages/CafeMenuPage';
 
 function App() {
   return (
@@ -17,6 +20,9 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/cafe/:id" element={<CafeDetailPage />} />
+            <Route path="/cafe/:id/scan" element={<QRScanPage />} />
+            <Route path="/cafe/:id/scan/approval" element={<QRApprovalPage />} />
+            <Route path="/cafe/:id/menu" element={<CafeMenuPage />} />
             <Route path="/cafe/:id/reserve" element={<ReservationDetailsPage />} />
             <Route path="/cafe/:id/reserve/summary" element={<ReservationSummaryPage />} />
             <Route path="/cafe/:id/reserve/payment" element={<ReservationPaymentPage />} />
