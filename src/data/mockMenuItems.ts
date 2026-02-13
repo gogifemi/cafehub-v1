@@ -7,6 +7,15 @@ export interface MenuItem {
 
 export type MenuCategoryKey = 'coffees' | 'brews' | 'breakfast' | 'desserts' | 'coldDrinks' | 'food';
 
+export const CATEGORY_ORDER: MenuCategoryKey[] = [
+  'coffees',
+  'brews',
+  'breakfast',
+  'desserts',
+  'coldDrinks',
+  'food'
+];
+
 export const menuItems: Record<MenuCategoryKey, MenuItem[]> = {
   coffees: [
     { name: 'Türk Kahvesi', description: 'Geleneksel, köpüklü', price: 45, popular: true },
@@ -55,3 +64,13 @@ export const menuItems: Record<MenuCategoryKey, MenuItem[]> = {
     { name: 'Lahmacun', description: '2 adet, limon', price: 70 }
   ]
 };
+
+export interface MenuItemWithCategory extends MenuItem {
+  categoryKey: MenuCategoryKey;
+}
+
+export function getAllMenuItems(): MenuItemWithCategory[] {
+  return CATEGORY_ORDER.flatMap((categoryKey) =>
+    menuItems[categoryKey].map((item) => ({ ...item, categoryKey }))
+  );
+}
