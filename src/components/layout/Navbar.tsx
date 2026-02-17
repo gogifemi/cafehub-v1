@@ -8,9 +8,13 @@ export const Navbar = () => {
   return (
     <header className="border-b border-border bg-bg/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-accent via-accent-soft to-accent-strong shadow-lg shadow-accent/40">
-            <span className="text-lg font-black text-core-black">C</span>
+            <img
+              src="/cafehub-cup-logo.png"
+              alt="CafeHub logo"
+              className="h-7 w-7 object-contain"
+            />
           </div>
           <div>
             <p className="text-sm font-semibold tracking-tight text-text">
