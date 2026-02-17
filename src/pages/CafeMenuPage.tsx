@@ -13,12 +13,12 @@ import { useOrder } from '../context/OrderContext';
 import { CartDrawer } from '../components/order/CartDrawer';
 
 const CATEGORY_ICONS: Record<MenuCategoryKey, string> = {
-  coffees: '📋',
-  brews: '☕',
-  breakfast: '🥐',
-  desserts: '🍰',
+  coffees: '☕',
+  hotDrinks: '🔥',
   coldDrinks: '🥤',
-  food: '🍔'
+  desserts: '🍰',
+  breakfast: '🥐',
+  meals: '🍽️'
 };
 
 type MenuTab = 'all' | MenuCategoryKey;
@@ -31,6 +31,26 @@ interface TableState {
 
 function getItemId(categoryKey: MenuCategoryKey, name: string): string {
   return `${categoryKey}-${name}`;
+}
+
+function getCardImageStyles(
+  categoryKey: MenuCategoryKey
+): { background: string; emoji: string } {
+  switch (categoryKey) {
+    case 'coffees':
+      return { background: 'bg-amber-800/30', emoji: '☕' };
+    case 'hotDrinks':
+      return { background: 'bg-orange-800/30', emoji: '🫖' };
+    case 'coldDrinks':
+      return { background: 'bg-blue-800/30', emoji: '🥤' };
+    case 'desserts':
+      return { background: 'bg-rose-800/30', emoji: '🍰' };
+    case 'breakfast':
+      return { background: 'bg-yellow-800/30', emoji: '🍳' };
+    case 'meals':
+    default:
+      return { background: 'bg-emerald-800/30', emoji: '🥪' };
+  }
 }
 
 export const CafeMenuPage = () => {
@@ -137,7 +157,7 @@ export const CafeMenuPage = () => {
               : 'border border-border-subtle bg-surface text-text-muted hover:border-coffee-300'
           }`}
         >
-          {t('menu.all')}
+          {t('menu.categories.all')}
         </button>
         {CATEGORY_ORDER.map((key) => (
           <button
@@ -150,74 +170,97 @@ export const CafeMenuPage = () => {
                 : 'border border-border-subtle bg-surface text-text-muted hover:border-coffee-300'
             }`}
           >
-            {CATEGORY_ICONS[key]} {t(`menu.${key}`)}
+            {CATEGORY_ICONS[key]} {t(`menu.categories.${key}`)}
           </button>
         ))}
       </div>
 
-      {/* Menu items */}
-      <div className="rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm">
-        <ul className="space-y-4">
+      {/* Menu items as cards */}
+      <div className="rounded-2xl border border-border-subtle bg-surface p-3 sm:p-4 shadow-sm">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
           {itemsForTab.map((item) => {
             const qty = getQuantity(item.categoryKey, item.name);
             const itemId = getItemId(item.categoryKey, item.name);
+            const { background, emoji } = getCardImageStyles(item.categoryKey);
             return (
-              <li
+              <article
                 key={itemId}
-                className="flex flex-col gap-2 border-b border-border-subtle pb-4 last:border-0 last:pb-0"
+                className="group flex flex-col overflow-hidden rounded-2xl border border-border-subtle bg-bg-soft text-[11px] shadow-sm transition hover:border-coffee-300 hover:shadow-md"
               >
-                <div className="flex items-start justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="font-medium text-text">{item.name}</span>
-                    {item.popular && (
-                      <span className="text-coffee-500" title="Popular">
-                        🔥
-                      </span>
-                    )}
-                  </div>
-                  <span className="shrink-0 text-sm font-medium text-text">{item.price} TL</span>
+                {/* Image / visual area */}
+                <div
+                  className={`flex h-36 w-full items-center justify-center ${background}`}
+                >
+                  <span className="text-3xl sm:text-4xl">{emoji}</span>
                 </div>
-                <p className="text-xs text-text-muted">{item.description}</p>
-                <div className="flex items-center justify-between">
-                  {qty === 0 ? (
-                    <button
-                      type="button"
-                      onClick={() => handleAdd(item, item.categoryKey)}
-                      className="inline-flex items-center gap-1 rounded-full border border-coffee-500 bg-coffee-500/10 px-3 py-1.5 text-xs font-medium text-coffee-600 hover:bg-coffee-500/20"
-                    >
-                      ➕ {t('order.add')}
-                    </button>
-                  ) : (
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={() => updateQuantity(itemId, qty - 1)}
-                        className="flex h-8 w-8 items-center justify-center rounded-full border border-border-subtle bg-surface text-text hover:border-coffee-300"
-                      >
-                        −
-                      </button>
-                      <span className="min-w-[1.5rem] text-center text-sm text-text">{qty}</span>
-                      <button
-                        type="button"
-                        onClick={() => updateQuantity(itemId, qty + 1)}
-                        className="flex h-8 w-8 items-center justify-center rounded-full border border-border-subtle bg-surface text-text hover:border-coffee-300"
-                      >
-                        +
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => removeFromCart(itemId)}
-                        className="ml-1 text-xs text-text-muted hover:text-text"
-                      >
-                        {t('order.remove')}
-                      </button>
+
+                {/* Content – previous text-centric design */}
+                <div className="flex flex-1 flex-col gap-2 p-2 sm:p-3">
+                  <div className="flex items-start justify-between gap-1">
+                    <div className="flex-1 space-y-0.5">
+                      <h2 className="truncate text-[11px] font-semibold text-text sm:text-xs">
+                        {item.name}
+                      </h2>
+                      <p className="text-[10px] text-text-muted sm:text-[11px]">
+                        {item.description}
+                      </p>
+                    </div>
+                    <span className="ml-1 shrink-0 text-[11px] font-semibold text-coffee-500 sm:text-xs">
+                      {item.price} TL
+                    </span>
+                  </div>
+
+                  {item.popular && (
+                    <div className="inline-flex items-center gap-1 self-start rounded-full bg-coffee-500/10 px-2 py-0.5 text-[10px] font-medium text-coffee-600">
+                      🔥 <span>Popüler</span>
                     </div>
                   )}
+
+                  <div className="mt-auto pt-1">
+                    {qty === 0 ? (
+                      <button
+                        type="button"
+                        onClick={() => handleAdd(item, item.categoryKey)}
+                        className="inline-flex w-full items-center justify-center gap-1 rounded-full border border-coffee-500 bg-coffee-500/10 px-3 py-1.5 text-[11px] font-medium text-coffee-600 transition hover:bg-coffee-500/20"
+                      >
+                        ☕ {t('order.add')}
+                      </button>
+                    ) : (
+                      <div className="flex items-center justify-between gap-1">
+                        <div className="flex items-center gap-1">
+                          <button
+                            type="button"
+                            onClick={() => updateQuantity(itemId, qty - 1)}
+                            className="flex h-7 w-7 items-center justify-center rounded-full border border-border-subtle bg-surface text-xs text-text transition hover:border-coffee-300"
+                          >
+                            −
+                          </button>
+                          <span className="min-w-[1.5rem] text-center text-xs text-text">
+                            {qty}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => updateQuantity(itemId, qty + 1)}
+                            className="flex h-7 w-7 items-center justify-center rounded-full border border-border-subtle bg-surface text-xs text-text transition hover:border-coffee-300"
+                          >
+                            +
+                          </button>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => removeFromCart(itemId)}
+                          className="text-[10px] text-text-muted transition hover:text-text"
+                        >
+                          {t('order.remove')}
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </li>
+              </article>
             );
           })}
-        </ul>
+        </div>
       </div>
 
       <CartDrawer

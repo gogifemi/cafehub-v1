@@ -129,13 +129,15 @@
   "menu": {
     "title": "Menu",
     "back": "← Back",
-    "all": "All",
-    "coffees": "Coffees",
-    "brews": "Brews",
-    "breakfast": "Breakfast",
-    "desserts": "Desserts",
-    "coldDrinks": "Cold Drinks",
-    "food": "Food",
+    "categories": {
+      "all": "All",
+      "coffees": "Coffees",
+      "hotDrinks": "Hot Drinks",
+      "coldDrinks": "Cold Drinks",
+      "desserts": "Desserts",
+      "breakfast": "Breakfast",
+      "meals": "Meals"
+    },
     "tableNo": "Table No"
   },
   "order": {

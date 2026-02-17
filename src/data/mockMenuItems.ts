@@ -5,15 +5,21 @@ export interface MenuItem {
   popular?: boolean;
 }
 
-export type MenuCategoryKey = 'coffees' | 'brews' | 'breakfast' | 'desserts' | 'coldDrinks' | 'food';
+export type MenuCategoryKey =
+  | 'coffees'
+  | 'hotDrinks'
+  | 'coldDrinks'
+  | 'desserts'
+  | 'breakfast'
+  | 'meals';
 
 export const CATEGORY_ORDER: MenuCategoryKey[] = [
   'coffees',
-  'brews',
-  'breakfast',
-  'desserts',
+  'hotDrinks',
   'coldDrinks',
-  'food'
+  'desserts',
+  'breakfast',
+  'meals'
 ];
 
 export const menuItems: Record<MenuCategoryKey, MenuItem[]> = {
@@ -27,7 +33,7 @@ export const menuItems: Record<MenuCategoryKey, MenuItem[]> = {
     { name: 'Soğuk Brew', description: '12 saat demlenmiş soğuk kahve', price: 65 },
     { name: 'Filtre Kahve', description: 'Günlük taze demleme', price: 45 }
   ],
-  brews: [
+  hotDrinks: [
     { name: 'Filtre Kahve', description: 'Günlük taze demleme', price: 45 },
     { name: 'V60', description: 'El ile demleme', price: 55 },
     { name: 'Chemex', description: 'Büyük porsiyon', price: 65 },
@@ -56,7 +62,7 @@ export const menuItems: Record<MenuCategoryKey, MenuItem[]> = {
     { name: 'Taze Sıkılmış Portakal Suyu', description: 'Günlük', price: 55 },
     { name: 'Smoothie', description: 'Meyve karışımı', price: 65 }
   ],
-  food: [
+  meals: [
     { name: 'Tost', description: 'Kaşarlı klasik', price: 55 },
     { name: 'Sandviç', description: 'Taze malzemeler', price: 75 },
     { name: 'Salata', description: 'Mevsim yeşillikleri', price: 85 },

@@ -129,13 +129,15 @@
   "menu": {
     "title": "Menü",
     "back": "← Geri",
-    "all": "Tümü",
-    "coffees": "Kahveler",
-    "brews": "Filtre Kahveler",
-    "breakfast": "Kahvaltı",
-    "desserts": "Tatlılar",
-    "coldDrinks": "Soğuk İçecekler",
-    "food": "Yiyecekler",
+    "categories": {
+      "all": "Tümü",
+      "coffees": "Kahveler",
+      "hotDrinks": "Sıcak İçecekler",
+      "coldDrinks": "Soğuk İçecekler",
+      "desserts": "Tatlılar",
+      "breakfast": "Kahvaltılar",
+      "meals": "Yiyecekler"
+    },
     "tableNo": "Masa No"
   },
   "order": {
