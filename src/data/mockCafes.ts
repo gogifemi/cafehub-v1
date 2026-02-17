@@ -1,4 +1,66 @@
 import type { Cafe } from '../types/cafe';
+import type { ProcessedFloorPlan } from '../types/floorPlan';
+
+const defaultProcessedFloorPlan: ProcessedFloorPlan = {
+  gridSize: { cols: 12, rows: 8 },
+  tables: [
+    {
+      id: 't1',
+      tableNumber: 1,
+      position: { x: 2, y: 2 },
+      capacity: 2,
+      shape: 'circle',
+      area: 'window',
+      areaLabel: 'Pencere Kenarı',
+      status: 'available'
+    },
+    {
+      id: 't2',
+      tableNumber: 2,
+      position: { x: 2, y: 4 },
+      capacity: 2,
+      shape: 'circle',
+      area: 'window',
+      areaLabel: 'Pencere Kenarı',
+      status: 'available'
+    },
+    {
+      id: 't3',
+      tableNumber: 3,
+      position: { x: 5, y: 2 },
+      capacity: 4,
+      shape: 'square',
+      area: 'indoor',
+      areaLabel: 'İç Mekan',
+      status: 'available'
+    },
+    {
+      id: 't4',
+      tableNumber: 4,
+      position: { x: 5, y: 4 },
+      capacity: 4,
+      shape: 'square',
+      area: 'indoor',
+      areaLabel: 'İç Mekan',
+      status: 'available'
+    },
+    {
+      id: 't5',
+      tableNumber: 5,
+      position: { x: 8, y: 3 },
+      capacity: 6,
+      shape: 'rectangle',
+      area: 'garden',
+      areaLabel: 'Bahçe',
+      status: 'available'
+    }
+  ],
+  elements: [
+    { type: 'window', path: [{ x: 1, y: 0 }, { x: 4, y: 0 }] },
+    { type: 'door', path: [{ x: 6, y: 0 }, { x: 7, y: 0 }] },
+    { type: 'bar', path: [{ x: 10, y: 1 }, { x: 10, y: 6 }] }
+  ]
+};
 
 export const mockCafesTr: Cafe[] = [
   {
@@ -12,7 +74,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 8,
     isOpenNow: true,
     tags: ['Özel kahve', 'Wi‑Fi', 'Sessiz', 'Prizler'],
-    category: 'specialty'
+    category: 'specialty',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'petra-roasting-kadikoy',
@@ -25,7 +88,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 12,
     isOpenNow: true,
     tags: ['Kavurucu', 'Third wave', 'Filtre kahve'],
-    category: 'specialty'
+    category: 'specialty',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'kronotrop-besiktas',
@@ -38,7 +102,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 5,
     isOpenNow: true,
     tags: ['Özel kahve', 'Wi‑Fi', 'Brunch', 'Prizler'],
-    category: 'work'
+    category: 'work',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'kronotrop-kadikoy',
@@ -51,7 +116,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 10,
     isOpenNow: true,
     tags: ['Özel kahve', 'Wi‑Fi', 'Sessiz', 'Pastalar'],
-    category: 'work'
+    category: 'work',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'kronotrop-nisantasi',
@@ -64,7 +130,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 7,
     isOpenNow: false,
     tags: ['Özel kahve', 'Wi‑Fi', 'Teras', 'Brunch'],
-    category: 'social'
+    category: 'social',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'espresso-lab-galata',
@@ -77,7 +144,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 4,
     isOpenNow: true,
     tags: ['Özel kahve', 'Third wave', 'Al-götür'],
-    category: 'specialty'
+    category: 'specialty',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'brew-lab-besiktas',
@@ -90,7 +158,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 6,
     isOpenNow: true,
     tags: ['Özel kahve', 'Wi‑Fi', 'Prizler', 'Sessiz'],
-    category: 'work'
+    category: 'work',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'story-coffee-nisantasi',
@@ -103,7 +172,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 9,
     isOpenNow: true,
     tags: ['Özel kahve', 'Wi‑Fi', 'Pastalar', 'Çalışma'],
-    category: 'work'
+    category: 'work',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'the-house-cafe-ortakoy',
@@ -116,7 +186,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 3,
     isOpenNow: true,
     tags: ['Manzara', 'Brunch', 'Wi‑Fi', 'Teras'],
-    category: 'social'
+    category: 'social',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'the-house-cafe-bebek',
@@ -129,7 +200,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 11,
     isOpenNow: true,
     tags: ['Sahil', 'Brunch', 'Wi‑Fi', 'Pastalar'],
-    category: 'social'
+    category: 'social',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'fazil-bey-kadikoy',
@@ -142,7 +214,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 14,
     isOpenNow: true,
     tags: ['Türk kahvesi', 'Geleneksel', 'Sade', 'Nargile'],
-    category: 'specialty'
+    category: 'specialty',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'walters-coffee-kadikoy',
@@ -155,7 +228,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 9,
     isOpenNow: true,
     tags: ['Tema', 'Özel kahve', 'Wi‑Fi', 'Eğlenceli'],
-    category: 'social'
+    category: 'social',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'cafe-crown-bebek',
@@ -168,7 +242,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 13,
     isOpenNow: false,
     tags: ['Özel kahve', 'Pastalar', 'Sahil', 'Wi‑Fi'],
-    category: 'social'
+    category: 'social',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'viyana-kahvesi-ortakoy',
@@ -181,7 +256,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 5,
     isOpenNow: true,
     tags: ['Viyana kahvesi', 'Tatlılar', 'Manzara', 'Wi‑Fi'],
-    category: 'bakery'
+    category: 'bakery',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'moc-nisantasi',
@@ -194,7 +270,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 6,
     isOpenNow: true,
     tags: ['Özel kahve', 'Wi‑Fi', 'Brunch', 'Prizler'],
-    category: 'work'
+    category: 'work',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'moc-kadikoy',
@@ -207,7 +284,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 11,
     isOpenNow: true,
     tags: ['Özel kahve', 'Wi‑Fi', 'Sessiz', 'Pastalar'],
-    category: 'work'
+    category: 'work',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'kahve-dunyasi-bagdat',
@@ -220,7 +298,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 15,
     isOpenNow: true,
     tags: ['Türk kahvesi', 'Çikolata', 'Wi‑Fi', 'Zincir'],
-    category: 'quick-bite'
+    category: 'quick-bite',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'kahve-dunyasi-besiktas',
@@ -233,7 +312,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 4,
     isOpenNow: true,
     tags: ['Türk kahvesi', 'Pastalar', 'Wi‑Fi', 'Prizler'],
-    category: 'quick-bite'
+    category: 'quick-bite',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'kahve-dunyasi-kadikoy',
@@ -246,7 +326,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 10,
     isOpenNow: true,
     tags: ['Türk kahvesi', 'Tatlılar', 'Wi‑Fi', 'Sessiz'],
-    category: 'quick-bite'
+    category: 'quick-bite',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'starbucks-reserve-zorlu',
@@ -259,7 +340,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 18,
     isOpenNow: true,
     tags: ['Reserve', 'Wi‑Fi', 'Alışveriş', 'Prizler'],
-    category: 'social'
+    category: 'social',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: '221b-coffee-moda',
@@ -272,7 +354,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 7,
     isOpenNow: true,
     tags: ['Tema', 'Özel kahve', 'Wi‑Fi', 'Sessiz'],
-    category: 'specialty'
+    category: 'specialty',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'coffetopia-kadikoy',
@@ -285,7 +368,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 13,
     isOpenNow: true,
     tags: ['Özel kahve', 'Third wave', 'Wi‑Fi', 'Prizler'],
-    category: 'specialty'
+    category: 'specialty',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'filter-coffee-besiktas',
@@ -298,7 +382,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 8,
     isOpenNow: true,
     tags: ['Filtre kahve', 'Wi‑Fi', 'Sessiz', 'Çalışma'],
-    category: 'work'
+    category: 'work',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'manifesto-coffee-galata',
@@ -311,7 +396,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 3,
     isOpenNow: true,
     tags: ['Özel kahve', 'Kavurucu', 'Wi‑Fi', 'Manzara'],
-    category: 'specialty'
+    category: 'specialty',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'roast-co-etiler',
@@ -324,7 +410,8 @@ export const mockCafesTr: Cafe[] = [
     distanceMinutesWalk: 14,
     isOpenNow: false,
     tags: ['Kavurucu', 'Brunch', 'Wi‑Fi', 'Teras'],
-    category: 'social'
+    category: 'social',
+    processedFloorPlan: defaultProcessedFloorPlan
   }
 ];
 
@@ -340,7 +427,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 8,
     isOpenNow: true,
     tags: ['Specialty coffee', 'Wi‑Fi', 'Quiet', 'Outlets'],
-    category: 'specialty'
+    category: 'specialty',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'petra-roasting-kadikoy',
@@ -353,7 +441,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 12,
     isOpenNow: true,
     tags: ['Roastery', 'Third wave', 'Filter coffee'],
-    category: 'specialty'
+    category: 'specialty',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'kronotrop-besiktas',
@@ -366,7 +455,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 5,
     isOpenNow: true,
     tags: ['Specialty coffee', 'Wi‑Fi', 'Brunch', 'Outlets'],
-    category: 'work'
+    category: 'work',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'kronotrop-kadikoy',
@@ -379,7 +469,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 10,
     isOpenNow: true,
     tags: ['Specialty coffee', 'Wi‑Fi', 'Quiet', 'Pastries'],
-    category: 'work'
+    category: 'work',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'kronotrop-nisantasi',
@@ -392,7 +483,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 7,
     isOpenNow: false,
     tags: ['Specialty coffee', 'Wi‑Fi', 'Terrace', 'Brunch'],
-    category: 'social'
+    category: 'social',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'espresso-lab-galata',
@@ -405,7 +497,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 4,
     isOpenNow: true,
     tags: ['Specialty coffee', 'Third wave', 'Grab & go'],
-    category: 'specialty'
+    category: 'specialty',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'brew-lab-besiktas',
@@ -418,7 +511,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 6,
     isOpenNow: true,
     tags: ['Specialty coffee', 'Wi‑Fi', 'Outlets', 'Quiet'],
-    category: 'work'
+    category: 'work',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'story-coffee-nisantasi',
@@ -431,7 +525,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 9,
     isOpenNow: true,
     tags: ['Specialty coffee', 'Wi‑Fi', 'Pastries', 'Work-friendly'],
-    category: 'work'
+    category: 'work',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'the-house-cafe-ortakoy',
@@ -444,7 +539,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 3,
     isOpenNow: true,
     tags: ['Waterfront', 'Brunch', 'Wi‑Fi', 'Terrace'],
-    category: 'social'
+    category: 'social',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'the-house-cafe-bebek',
@@ -457,7 +553,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 11,
     isOpenNow: true,
     tags: ['Seaside', 'Brunch', 'Wi‑Fi', 'Pastries'],
-    category: 'social'
+    category: 'social',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'fazil-bey-kadikoy',
@@ -470,7 +567,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 14,
     isOpenNow: true,
     tags: ['Turkish coffee', 'Traditional', 'Plain', 'Hookah'],
-    category: 'specialty'
+    category: 'specialty',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'walters-coffee-kadikoy',
@@ -483,7 +581,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 9,
     isOpenNow: true,
     tags: ['Theme café', 'Specialty coffee', 'Wi‑Fi', 'Fun'],
-    category: 'social'
+    category: 'social',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'cafe-crown-bebek',
@@ -496,7 +595,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 13,
     isOpenNow: false,
     tags: ['Specialty coffee', 'Pastries', 'Seaside', 'Wi‑Fi'],
-    category: 'social'
+    category: 'social',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'viyana-kahvesi-ortakoy',
@@ -509,7 +609,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 5,
     isOpenNow: true,
     tags: ['Vienna coffee', 'Desserts', 'Waterfront', 'Wi‑Fi'],
-    category: 'bakery'
+    category: 'bakery',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'moc-nisantasi',
@@ -522,7 +623,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 6,
     isOpenNow: true,
     tags: ['Specialty coffee', 'Wi‑Fi', 'Brunch', 'Outlets'],
-    category: 'work'
+    category: 'work',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'moc-kadikoy',
@@ -535,7 +637,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 11,
     isOpenNow: true,
     tags: ['Specialty coffee', 'Wi‑Fi', 'Quiet', 'Pastries'],
-    category: 'work'
+    category: 'work',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'kahve-dunyasi-bagdat',
@@ -548,7 +651,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 15,
     isOpenNow: true,
     tags: ['Turkish coffee', 'Chocolate', 'Wi‑Fi', 'Chain'],
-    category: 'quick-bite'
+    category: 'quick-bite',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'kahve-dunyasi-besiktas',
@@ -561,7 +665,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 4,
     isOpenNow: true,
     tags: ['Turkish coffee', 'Pastries', 'Wi‑Fi', 'Outlets'],
-    category: 'quick-bite'
+    category: 'quick-bite',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'kahve-dunyasi-kadikoy',
@@ -574,7 +679,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 10,
     isOpenNow: true,
     tags: ['Turkish coffee', 'Desserts', 'Wi‑Fi', 'Quiet'],
-    category: 'quick-bite'
+    category: 'quick-bite',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'starbucks-reserve-zorlu',
@@ -587,7 +693,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 18,
     isOpenNow: true,
     tags: ['Reserve', 'Wi‑Fi', 'Shopping', 'Outlets'],
-    category: 'social'
+    category: 'social',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: '221b-coffee-moda',
@@ -600,7 +707,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 7,
     isOpenNow: true,
     tags: ['Theme café', 'Specialty coffee', 'Wi‑Fi', 'Quiet'],
-    category: 'specialty'
+    category: 'specialty',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'coffetopia-kadikoy',
@@ -613,7 +721,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 13,
     isOpenNow: true,
     tags: ['Specialty coffee', 'Third wave', 'Wi‑Fi', 'Outlets'],
-    category: 'specialty'
+    category: 'specialty',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'filter-coffee-besiktas',
@@ -626,7 +735,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 8,
     isOpenNow: true,
     tags: ['Filter coffee', 'Wi‑Fi', 'Quiet', 'Work-friendly'],
-    category: 'work'
+    category: 'work',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'manifesto-coffee-galata',
@@ -639,7 +749,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 3,
     isOpenNow: true,
     tags: ['Specialty coffee', 'Roastery', 'Wi‑Fi', 'Views'],
-    category: 'specialty'
+    category: 'specialty',
+    processedFloorPlan: defaultProcessedFloorPlan
   },
   {
     id: 'roast-co-etiler',
@@ -652,7 +763,8 @@ export const mockCafesEn: Cafe[] = [
     distanceMinutesWalk: 14,
     isOpenNow: false,
     tags: ['Roastery', 'Brunch', 'Wi‑Fi', 'Terrace'],
-    category: 'social'
+    category: 'social',
+    processedFloorPlan: defaultProcessedFloorPlan
   }
 ];
 

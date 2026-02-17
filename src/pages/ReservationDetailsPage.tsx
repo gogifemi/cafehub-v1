@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useReservation } from '../context/ReservationContext';
-import { getFloorPlanForCafe } from '../data/mockFloorPlans';
+import { getMockCafesForLanguage } from '../data/mockCafes';
 
 const PARTY_SIZES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -15,7 +15,7 @@ const DURATION_OPTIONS: { value: number; price: number }[] = [
 export const ReservationDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { state, setDetails, reset } = useReservation();
 
   // Ensure cafeId is set for this flow
@@ -26,11 +26,14 @@ export const ReservationDetailsPage = () => {
     }
   }, [id, reset, state.cafeId]);
 
-  if (!id) {
+  const cafes = useMemo(() => getMockCafesForLanguage(i18n.language), [i18n.language]);
+  const cafe = id ? cafes.find((c) => c.id === id) : undefined;
+
+  if (!id || !cafe) {
     return null;
   }
 
-  const floorPlan = getFloorPlanForCafe(id);
+  const floorPlan = cafe.processedFloorPlan;
 
   const handlePartySizeSelect = (size: number) => {
     setDetails({
@@ -160,7 +163,7 @@ export const ReservationDetailsPage = () => {
         </div>
       </div>
 
-      {/* Step 1C - Table selection */}
+      {/* Step 1C - Table selection (interactive floor plan + list) */}
       <div className="space-y-3 rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm">
         <div className="flex items-center gap-2">
           <label className="block text-xs font-medium text-text-muted">
@@ -173,7 +176,62 @@ export const ReservationDetailsPage = () => {
             ?
           </span>
         </div>
-        <div className="mt-2 grid grid-cols-4 gap-2 sm:grid-cols-6">
+        {/* Simple interactive map based on processed floor plan */}
+        <div
+          className="mt-2 w-full overflow-hidden rounded-xl border border-border-subtle bg-bg-soft"
+          style={{ aspectRatio: `${floorPlan.gridSize.cols}/${floorPlan.gridSize.rows}` }}
+        >
+          <div className="relative h-full w-full">
+            {floorPlan.tables.map((table) => {
+              const isSelected = state.tableId === table.id;
+              const isOccupied = table.status === 'occupied';
+              const partySize = state.partySize ?? 1;
+              const sizeTooSmall = table.capacity < partySize;
+
+              const left = (table.position.x / floorPlan.gridSize.cols) * 100;
+              const top = (table.position.y / floorPlan.gridSize.rows) * 100;
+
+              const disabled = isOccupied || sizeTooSmall;
+
+              return (
+                <button
+                  key={table.id}
+                  type="button"
+                  disabled={disabled}
+                  onClick={() =>
+                    handleTableSelect(
+                      table.id,
+                      String(table.tableNumber),
+                      table.area,
+                      table.capacity
+                    )
+                  }
+                  className={`absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border px-2 py-1 text-[10px] font-medium shadow-sm ${
+                    isSelected
+                      ? 'border-emerald-500 bg-emerald-500 text-core-white'
+                      : isOccupied
+                      ? 'border-red-500 bg-red-500 text-core-white'
+                      : sizeTooSmall
+                      ? 'border-core-black bg-core-black text-core-white'
+                      : 'border-border-subtle bg-surface text-text'
+                  } disabled:opacity-60`}
+                  style={{
+                    left: `${left}%`,
+                    top: `${top}%`
+                  }}
+                >
+                  <span>No: {table.tableNumber}</span>
+                  <span className="text-[9px] text-core-white/80">
+                    {t('reservation.capacityPeople', { count: table.capacity })}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Backup list view of tables */}
+        <div className="mt-3 grid grid-cols-4 gap-2 sm:grid-cols-6">
           {floorPlan.tables.map((table) => {
             const isSelected = state.tableId === table.id;
             const isOccupied = table.status === 'occupied';
@@ -209,11 +267,16 @@ export const ReservationDetailsPage = () => {
                 type="button"
                 disabled={disabled}
                 onClick={() =>
-                  handleTableSelect(table.id, table.label, table.area, table.capacity)
+                  handleTableSelect(
+                    table.id,
+                    String(table.tableNumber),
+                    table.area,
+                    table.capacity
+                  )
                 }
                 className={`flex h-10 flex-col items-center justify-center rounded-lg border text-[11px] font-medium ${bg} ${border} ${text} ${cursor} disabled:opacity-60`}
               >
-                <span>No: {table.label}</span>
+                <span>No: {table.tableNumber}</span>
                 <span className="text-[10px] text-core-white/80">
                   {t('reservation.capacityPeople', { count: table.capacity })}
                 </span>

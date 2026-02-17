@@ -1,3 +1,5 @@
+import type { ProcessedFloorPlan } from './floorPlan';
+
 export type CafeCategory = 'work' | 'social' | 'quick-bite' | 'specialty' | 'bakery';
 
 export interface Cafe {
@@ -12,5 +14,11 @@ export interface Cafe {
   isOpenNow: boolean;
   tags: string[];
   category: CafeCategory;
+  /**
+   * Pre‑processed floor plan used by the reservation system.
+   * In production this would come from the backend, but for now
+   * it is mocked per‑cafe.
+   */
+  processedFloorPlan: ProcessedFloorPlan;
 }
 
