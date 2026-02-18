@@ -132,11 +132,11 @@ export const ReservationPaymentPage = () => {
 
         {/* Card form */}
         <div className="space-y-3 rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm">
-          <p className="text-xs font-medium text-text-muted">Card details</p>
+          <p className="text-xs font-medium text-text-muted">{t('payment.cardDetails')}</p>
           <div className="space-y-2">
             <div>
               <label className="block text-[11px] font-medium text-text-muted">
-                Card Number
+                {t('payment.cardNumber')}
               </label>
               <input
                 type="text"
@@ -150,7 +150,7 @@ export const ReservationPaymentPage = () => {
             <div className="flex gap-2">
               <div className="flex-1">
                 <label className="block text-[11px] font-medium text-text-muted">
-                  Expiry (MM/YY)
+                  {t('payment.expiry')}
                 </label>
                 <input
                   type="text"
@@ -162,7 +162,7 @@ export const ReservationPaymentPage = () => {
                 />
               </div>
               <div className="w-24">
-                <label className="block text-[11px] font-medium text-text-muted">CVC</label>
+                <label className="block text-[11px] font-medium text-text-muted">{t('payment.cvc')}</label>
                 <input
                   type="password"
                   inputMode="numeric"
@@ -175,7 +175,7 @@ export const ReservationPaymentPage = () => {
             </div>
             <div>
               <label className="block text-[11px] font-medium text-text-muted">
-                Cardholder Name
+                {t('payment.cardholderName')}
               </label>
               <input
                 type="text"

@@ -12,7 +12,7 @@ export const Navbar = () => {
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-accent via-accent-soft to-accent-strong shadow-lg shadow-accent/40">
             <img
               src="/cafehub-cup-logo.png"
-              alt="CafeHub logo"
+              alt={t('nav.logoAlt')}
               className="h-7 w-7 object-contain"
             />
           </div>

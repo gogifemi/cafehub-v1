@@ -38,7 +38,7 @@ export const CartDrawer = ({
         onKeyDown={(e) => e.key === 'Escape' && onClose()}
         role="button"
         tabIndex={0}
-        aria-label="Close cart"
+        aria-label={t('order.closeCart')}
       />
       <aside
         className="fixed right-0 top-0 z-50 flex h-full w-full max-w-md flex-col bg-bg shadow-xl sm:max-w-sm"
@@ -88,7 +88,7 @@ export const CartDrawer = ({
                         type="button"
                         onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
                         className="flex h-7 w-7 items-center justify-center rounded-full border border-border-subtle bg-surface text-text hover:border-coffee-300"
-                        aria-label="Decrease quantity"
+                        aria-label={t('order.decreaseQuantity')}
                       >
                         −
                       </button>
@@ -97,7 +97,7 @@ export const CartDrawer = ({
                         type="button"
                         onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
                         className="flex h-7 w-7 items-center justify-center rounded-full border border-border-subtle bg-surface text-text hover:border-coffee-300"
-                        aria-label="Increase quantity"
+                        aria-label={t('order.increaseQuantity')}
                       >
                         +
                       </button>

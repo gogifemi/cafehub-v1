@@ -8,7 +8,8 @@
     "home": "Home",
     "browse": "Browse",
     "addCafe": "Add cafe",
-    "about": "About"
+    "about": "About",
+    "logoAlt": "Logo CafeHub"
   },
   "home": {
     "heroTitle": "Find your next cafe",
@@ -142,6 +143,9 @@
     "add": "Añadir",
     "remove": "Quitar",
     "cart": "Mi carrito",
+    "closeCart": "Cerrar carrito",
+    "decreaseQuantity": "Reducir cantidad",
+    "increaseQuantity": "Aumentar cantidad",
     "emptyCart": "Su carrito está vacío",
     "subtotal": "Subtotal",
     "serviceFee": "Servicio",
@@ -190,7 +194,21 @@
     "back": "← Back",
     "photos": "Photos",
     "amenities": "Amenities",
-    "viewDetails": "View Details"
+    "viewDetails": "View Details",
+    "cafeNotFound": "Café no encontrado.",
+    "amenityWifi": "Wi‑Fi",
+    "amenityQuietArea": "Zona tranquila",
+    "amenityOutlets": "Enchufes",
+    "categoryDesserts": "Postres",
+    "categorySpecialtyCoffee": "Café especial",
+    "reviewSample2": "Gran café y personal amable. Wi‑Fi estable."
+  },
+  "payment": {
+    "cardDetails": "Datos de la tarjeta",
+    "cardNumber": "Número de tarjeta",
+    "expiry": "Caducidad (MM/AA)",
+    "cardholderName": "Nombre del titular",
+    "cvc": "CVC"
   },
   "actions": {
     "submit": "Submit",

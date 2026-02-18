@@ -8,7 +8,8 @@
     "home": "Ana sayfa",
     "browse": "Keşfet",
     "addCafe": "Kafe ekle",
-    "about": "Hakkında"
+    "about": "Hakkında",
+    "logoAlt": "cafehub logosu"
   },
   "home": {
     "heroTitle": "Bir sonraki kafenizi bulun",
@@ -144,6 +145,9 @@
     "add": "Ekle",
     "remove": "Kaldır",
     "cart": "Sepetim",
+    "closeCart": "Sepeti kapat",
+    "decreaseQuantity": "Adedi azalt",
+    "increaseQuantity": "Adedi artır",
     "emptyCart": "Sepetiniz boş",
     "subtotal": "Ara Toplam",
     "serviceFee": "Servis Ücreti",
@@ -192,7 +196,21 @@
     "back": "← Geri",
     "photos": "Fotoğraflar",
     "amenities": "Özellikler",
-    "viewDetails": "Detayları Görüntüle"
+    "viewDetails": "Detayları Görüntüle",
+    "cafeNotFound": "Kafe bulunamadı.",
+    "amenityWifi": "Wi‑Fi",
+    "amenityQuietArea": "Sessiz alan",
+    "amenityOutlets": "Prizler",
+    "categoryDesserts": "Tatlılar",
+    "categorySpecialtyCoffee": "Özel kahve",
+    "reviewSample2": "Harika kahve ve samimi personel. Wi‑Fi stabil."
+  },
+  "payment": {
+    "cardDetails": "Kredi kartı detayları",
+    "cardNumber": "Kredi Kartı Numarası",
+    "expiry": "Son Kullanma (AA/YY)",
+    "cardholderName": "Kart Sahibinin Adı",
+    "cvc": "CVC"
   },
   "actions": {
     "submit": "Gönder",

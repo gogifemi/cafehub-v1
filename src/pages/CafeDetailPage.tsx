@@ -26,7 +26,7 @@ export const CafeDetailPage = () => {
         >
           {t('cafeDetail.back')}
         </button>
-        <p className="text-sm text-text-muted">Cafe not found.</p>
+        <p className="text-sm text-text-muted">{t('cafeDetail.cafeNotFound')}</p>
       </section>
     );
   }
@@ -54,7 +54,7 @@ export const CafeDetailPage = () => {
     {
       author: 'John',
       rating: 4.5,
-      text: 'Great coffee and friendly staff. Wi‑Fi is stable.'
+      text: t('cafeDetail.reviewSample2')
     }
   ];
 
@@ -149,10 +149,10 @@ export const CafeDetailPage = () => {
         <div className="space-y-2 rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm">
           <p className="text-xs font-medium text-text-muted">{t('cafeDetail.amenities')}</p>
           <ul className="mt-2 space-y-1 text-xs text-text-muted">
-            <li>· Wi‑Fi</li>
-            <li>· Quiet area</li>
-            <li>· Power outlets</li>
-            <li>· {cafe.category === 'bakery' ? 'Desserts' : 'Specialty coffee'}</li>
+            <li>· {t('cafeDetail.amenityWifi')}</li>
+            <li>· {t('cafeDetail.amenityQuietArea')}</li>
+            <li>· {t('cafeDetail.amenityOutlets')}</li>
+            <li>· {cafe.category === 'bakery' ? t('cafeDetail.categoryDesserts') : t('cafeDetail.categorySpecialtyCoffee')}</li>
           </ul>
         </div>
       </div>
