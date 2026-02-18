@@ -210,7 +210,9 @@
     "cardNumber": "Kredi Kartı Numarası",
     "expiry": "Son Kullanma (AA/YY)",
     "cardholderName": "Kart Sahibinin Adı",
-    "cvc": "CVC"
+    "cvc": "CVC",
+    "applePayInstruction": "Ödemeyi tamamlamak için aşağıdaki \"Ödemeyi Tamamla\" butonuna tıklayın. Apple Pay veya Google Pay ile ödeme yapabilirsiniz.",
+    "cashInstruction": "Nakit ödeme seçtiniz. Ödemeyi tamamlamak için aşağıdaki \"Ödemeyi Tamamla\" butonuna tıklayın; garson masanıza gelecektir."
   },
   "actions": {
     "submit": "Gönder",

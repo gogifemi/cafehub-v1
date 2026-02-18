@@ -6,15 +6,17 @@ import { useOrder } from '../context/OrderContext';
 
 const VAT_RATE = 0.1;
 
-type LocalPaymentMethod = 'credit_card' | 'apple_google_pay' | 'debit_card';
+type LocalPaymentMethod = 'credit_card' | 'apple_google_pay' | 'debit_card' | 'cash';
 
 export const OrderPaymentPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const { placedOrder, setPaymentMethod } = useOrder();
+  const { placedOrder, setPaymentMethod, paymentMethod } = useOrder();
 
-  const [localMethod, setLocalMethod] = useState<LocalPaymentMethod | null>('credit_card');
+  const [localMethod, setLocalMethod] = useState<LocalPaymentMethod | null>(
+    (paymentMethod as LocalPaymentMethod | null) ?? 'credit_card'
+  );
   const [cardNumber, setCardNumber] = useState('');
   const [expiry, setExpiry] = useState('');
   const [cvc, setCvc] = useState('');
@@ -41,8 +43,13 @@ export const OrderPaymentPage = () => {
   const vat = Math.round(beforeVat * VAT_RATE);
   const total = beforeVat + vat;
 
-  const canSubmit =
-    !!localMethod && !!cardNumber.trim() && !!expiry.trim() && !!cvc.trim() && !!cardholder.trim();
+  const requiresCardDetails =
+    localMethod === 'credit_card' || localMethod === 'debit_card';
+
+  const hasCardDetails =
+    !!cardNumber.trim() && !!expiry.trim() && !!cvc.trim() && !!cardholder.trim();
+
+  const canSubmit = !!localMethod && (!requiresCardDetails || hasCardDetails);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -114,109 +121,134 @@ export const OrderPaymentPage = () => {
             {t('reservation.paymentMethod')}
           </p>
           <div className="mt-2 grid gap-2 sm:grid-cols-3">
-            {(['credit_card', 'apple_google_pay', 'debit_card'] as LocalPaymentMethod[]).map(
-              (method) => {
-                const selected = localMethod === method;
-                const labelKey =
-                  method === 'credit_card'
-                    ? 'order.creditCard'
+            {(
+              ['credit_card', 'debit_card', 'apple_google_pay', 'cash'] as LocalPaymentMethod[]
+            ).map((method) => {
+              const selected = localMethod === method;
+              const labelKey =
+                method === 'credit_card'
+                  ? 'order.creditCard'
+                  : method === 'debit_card'
+                    ? 'order.debitCard'
                     : method === 'apple_google_pay'
                       ? 'order.appleGooglePay'
-                      : 'order.debitCard';
+                      : 'order.cash';
 
-                return (
-                  <button
-                    key={method}
-                    type="button"
-                    onClick={() => setLocalMethod(method)}
-                    className={`flex items-center justify-center rounded-xl border px-3 py-2 text-xs font-medium transition ${
-                      selected
-                        ? 'border-coffee-500 bg-coffee-500/20 text-coffee-600'
-                        : 'border-border-subtle bg-surface-subtle text-text-muted hover:border-border-strong hover:text-text'
-                    }`}
-                    aria-pressed={selected}
-                  >
-                    {t(labelKey)}
-                  </button>
-                );
-              }
-            )}
+              return (
+                <button
+                  key={method}
+                  type="button"
+                  onClick={() => {
+                    setLocalMethod(method);
+                    setPaymentMethod(method);
+                  }}
+                  className={`flex items-center justify-center rounded-xl border px-3 py-2 text-xs font-medium transition ${
+                    selected
+                      ? 'border-coffee-500 bg-coffee-500/20 text-coffee-600'
+                      : 'border-border-subtle bg-surface-subtle text-text-muted hover:border-border-strong hover:text-text'
+                  }`}
+                  aria-pressed={selected}
+                >
+                  {t(labelKey)}
+                </button>
+              );
+            })}
           </div>
         </div>
-
-        {/* Card form */}
-        <div className="space-y-3 rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm">
-          <p className="text-xs font-medium text-text-muted">{t('payment.cardDetails')}</p>
-          <div className="space-y-2">
-            <div>
-              <label className="block text-[11px] font-medium text-text-muted">
-                {t('payment.cardNumber')}
-              </label>
-              <input
-                type="text"
-                inputMode="numeric"
-                autoComplete="cc-number"
-                className="mt-1 h-8 w-full rounded-lg border border-border-subtle bg-bg-soft px-3 text-sm text-text focus:outline-none focus:ring-1 focus:ring-accent"
-                value={cardNumber}
-                onChange={(e) => setCardNumber(e.target.value)}
-              />
-            </div>
-            <div className="flex gap-2">
-              <div className="flex-1">
-                <label className="block text-[11px] font-medium text-text-muted">
-                  {t('payment.expiry')}
-                </label>
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  autoComplete="cc-exp"
-                  className="mt-1 h-8 w-full rounded-lg border border-border-subtle bg-bg-soft px-3 text-sm text-text focus:outline-none focus:ring-1 focus:ring-accent"
-                  value={expiry}
-                  onChange={(e) => setExpiry(e.target.value)}
-                />
+        {/* Conditional payment details UI */}
+        {requiresCardDetails ? (
+          <div className="mt-6 space-y-4">
+            <h3 className="text-sm font-medium text-text">
+              {t('payment.cardDetails')}
+            </h3>
+            <div className="space-y-3 rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm">
+              <div className="space-y-2">
+                <div>
+                  <label className="block text-[11px] font-medium text-text-muted">
+                    {t('payment.cardNumber')}
+                  </label>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    autoComplete="cc-number"
+                    className="mt-1 h-8 w-full rounded-lg border border-border-subtle bg-bg-soft px-3 text-sm text-text focus:outline-none focus:ring-1 focus:ring-accent"
+                    value={cardNumber}
+                    onChange={(e) => setCardNumber(e.target.value)}
+                  />
+                </div>
+                <div className="flex gap-2">
+                  <div className="flex-1">
+                    <label className="block text-[11px] font-medium text-text-muted">
+                      {t('payment.expiry')}
+                    </label>
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      autoComplete="cc-exp"
+                      className="mt-1 h-8 w-full rounded-lg border border-border-subtle bg-bg-soft px-3 text-sm text-text focus:outline-none focus:ring-1 focus:ring-accent"
+                      value={expiry}
+                      onChange={(e) => setExpiry(e.target.value)}
+                    />
+                  </div>
+                  <div className="w-24">
+                    <label className="block text-[11px] font-medium text-text-muted">
+                      {t('payment.cvc')}
+                    </label>
+                    <input
+                      type="password"
+                      inputMode="numeric"
+                      autoComplete="cc-csc"
+                      className="mt-1 h-8 w-full rounded-lg border border-border-subtle bg-bg-soft px-3 text-sm text-text focus:outline-none focus:ring-1 focus:ring-accent"
+                      value={cvc}
+                      onChange={(e) => setCvc(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-[11px] font-medium text-text-muted">
+                    {t('payment.cardholderName')}
+                  </label>
+                  <input
+                    type="text"
+                    autoComplete="cc-name"
+                    className="mt-1 h-8 w-full rounded-lg border border-border-subtle bg-bg-soft px-3 text-sm text-text focus:outline-none focus:ring-1 focus:ring-accent"
+                    value={cardholder}
+                    onChange={(e) => setCardholder(e.target.value)}
+                  />
+                </div>
               </div>
-              <div className="w-24">
-                <label className="block text-[11px] font-medium text-text-muted">{t('payment.cvc')}</label>
-                <input
-                  type="password"
-                  inputMode="numeric"
-                  autoComplete="cc-csc"
-                  className="mt-1 h-8 w-full rounded-lg border border-border-subtle bg-bg-soft px-3 text-sm text-text focus:outline-none focus:ring-1 focus:ring-accent"
-                  value={cvc}
-                  onChange={(e) => setCvc(e.target.value)}
-                />
-              </div>
-            </div>
-            <div>
-              <label className="block text-[11px] font-medium text-text-muted">
-                {t('payment.cardholderName')}
-              </label>
-              <input
-                type="text"
-                autoComplete="cc-name"
-                className="mt-1 h-8 w-full rounded-lg border border-border-subtle bg-bg-soft px-3 text-sm text-text focus:outline-none focus:ring-1 focus:ring-accent"
-                value={cardholder}
-                onChange={(e) => setCardholder(e.target.value)}
-              />
             </div>
           </div>
-        </div>
+        ) : localMethod === 'apple_google_pay' ? (
+          <div className="mt-6 rounded-lg border border-border-subtle bg-bg-soft p-6 text-center">
+            <div className="mb-4 text-4xl">📱</div>
+            <p className="text-text-muted">
+              {t('payment.applePayInstruction')}
+            </p>
+          </div>
+        ) : localMethod === 'cash' ? (
+          <div className="mt-6 rounded-lg border border-border-subtle bg-bg-soft p-4">
+            <p className="text-text-muted">
+              {t('payment.cashInstruction')}
+            </p>
+          </div>
+        ) : null}
 
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-2 text-sm">
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-4">
           <button
             type="button"
             onClick={onBack}
-            className="inline-flex items-center rounded-full border border-border-subtle bg-surface-subtle px-3 py-1.5 text-xs font-medium text-text-muted hover:border-border-strong hover:text-text"
+            className="inline-flex items-center rounded-xl border border-border-subtle bg-surface-subtle px-4 py-2.5 text-sm font-medium text-text-muted hover:border-border-strong hover:text-text"
           >
             {t('reservation.back')}
           </button>
           <button
             type="submit"
             disabled={!canSubmit || submitting}
-            className={`inline-flex items-center rounded-full px-4 py-2 text-xs font-medium transition ${
+            className={`inline-flex items-center rounded-xl px-5 py-2.5 text-sm font-medium transition ${
               canSubmit && !submitting
                 ? 'bg-coffee-500 text-core-white hover:bg-coffee-600'
-                : 'bg-surface-subtle text-text-subtle'
+                : 'bg-surface-subtle text-text-subtle cursor-not-allowed'
             }`}
           >
             {submitting ? '...' : t('order.completePayment')}

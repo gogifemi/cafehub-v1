@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getMockCafesForLanguage } from '../data/mockCafes';
@@ -9,7 +10,11 @@ export const BillPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const { placedOrder, setPaymentMethod } = useOrder();
+  const { placedOrder, setPaymentMethod, paymentMethod } = useOrder();
+
+  const [selectedMethod, setSelectedMethod] = useState<string | null>(
+    paymentMethod ?? 'credit_card'
+  );
 
   const cafes = getMockCafesForLanguage(i18n.language);
   const cafe = cafes.find((c) => c.id === id);
@@ -98,11 +103,21 @@ export const BillPage = () => {
             <button
               key={opt.key}
               type="button"
-              onClick={() => setPaymentMethod(opt.key)}
-              className="flex items-center gap-3 rounded-xl border border-border-subtle bg-bg-soft px-4 py-3 text-left text-sm text-text hover:border-coffee-300"
+              onClick={() => {
+                setSelectedMethod(opt.key);
+                setPaymentMethod(opt.key);
+              }}
+              className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm text-text transition-all ${
+                selectedMethod === opt.key
+                  ? 'border-coffee-500 bg-coffee-50 ring-2 ring-coffee-200 dark:bg-coffee-900/20'
+                  : 'border-border-subtle bg-bg-soft hover:border-coffee-300'
+              }`}
             >
               <span>{opt.icon}</span>
               <span>{opt.label}</span>
+              {selectedMethod === opt.key && (
+                <span className="ml-auto text-coffee-500">✓</span>
+              )}
             </button>
           ))}
         </div>

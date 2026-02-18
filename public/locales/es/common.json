@@ -208,7 +208,9 @@
     "cardNumber": "Número de tarjeta",
     "expiry": "Caducidad (MM/AA)",
     "cardholderName": "Nombre del titular",
-    "cvc": "CVC"
+    "cvc": "CVC",
+    "applePayInstruction": "Pulse \"Completar pago\" abajo para pagar con Apple Pay o Google Pay.",
+    "cashInstruction": "Ha elegido efectivo. Pulse \"Completar pago\" abajo; el personal acudirá a su mesa."
   },
   "actions": {
     "submit": "Submit",

@@ -210,7 +210,9 @@
     "cardNumber": "Card Number",
     "expiry": "Expiry (MM/YY)",
     "cardholderName": "Cardholder Name",
-    "cvc": "CVC"
+    "cvc": "CVC",
+    "applePayInstruction": "Tap \"Complete Payment\" below to pay with Apple Pay or Google Pay.",
+    "cashInstruction": "You selected cash. Tap \"Complete Payment\" below; staff will come to your table."
   },
   "actions": {
     "submit": "Submit",

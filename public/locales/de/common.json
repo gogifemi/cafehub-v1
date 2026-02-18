@@ -208,7 +208,9 @@
     "cardNumber": "Kartennummer",
     "expiry": "Gültig bis (MM/JJ)",
     "cardholderName": "Name des Karteninhabers",
-    "cvc": "CVC"
+    "cvc": "CVC",
+    "applePayInstruction": "Tippen Sie unten auf \"Zahlung abschließen\", um mit Apple Pay oder Google Pay zu bezahlen.",
+    "cashInstruction": "Sie haben Barzahlung gewählt. Tippen Sie unten auf \"Zahlung abschließen\"; das Personal kommt zu Ihrem Tisch."
   },
   "actions": {
     "submit": "Submit",
