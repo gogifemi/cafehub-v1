@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
-type PaymentMethod = 'credit_card' | 'apple_google_pay' | 'debit_card' | null;
+type PaymentMethod = 'credit_card' | 'debit_card' | 'troy' | 'bkm_express_paycell' | 'cash' | null;
 
 export type TableArea = 'window' | 'garden' | 'indoor' | 'outdoor';
 

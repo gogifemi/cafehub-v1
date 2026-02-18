@@ -6,7 +6,7 @@ import { useOrder } from '../context/OrderContext';
 
 const VAT_RATE = 0.1;
 
-type LocalPaymentMethod = 'credit_card' | 'apple_google_pay' | 'debit_card' | 'cash';
+type LocalPaymentMethod = 'credit_card' | 'debit_card' | 'troy' | 'bkm_express_paycell' | 'cash';
 
 export const OrderPaymentPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -44,7 +44,7 @@ export const OrderPaymentPage = () => {
   const total = beforeVat + vat;
 
   const requiresCardDetails =
-    localMethod === 'credit_card' || localMethod === 'debit_card';
+    localMethod === 'credit_card' || localMethod === 'debit_card' || localMethod === 'troy';
 
   const hasCardDetails =
     !!cardNumber.trim() && !!expiry.trim() && !!cvc.trim() && !!cardholder.trim();
@@ -120,9 +120,9 @@ export const OrderPaymentPage = () => {
           <p className="text-xs font-medium text-text-muted">
             {t('reservation.paymentMethod')}
           </p>
-          <div className="mt-2 grid gap-2 sm:grid-cols-3">
+          <div className="mt-2 grid gap-2 sm:grid-cols-2 min-[480px]:grid-cols-3">
             {(
-              ['credit_card', 'debit_card', 'apple_google_pay', 'cash'] as LocalPaymentMethod[]
+              ['credit_card', 'debit_card', 'troy', 'bkm_express_paycell', 'cash'] as LocalPaymentMethod[]
             ).map((method) => {
               const selected = localMethod === method;
               const labelKey =
@@ -130,9 +130,11 @@ export const OrderPaymentPage = () => {
                   ? 'order.creditCard'
                   : method === 'debit_card'
                     ? 'order.debitCard'
-                    : method === 'apple_google_pay'
-                      ? 'order.appleGooglePay'
-                      : 'order.cash';
+                    : method === 'troy'
+                      ? 'order.troy'
+                      : method === 'bkm_express_paycell'
+                        ? 'order.bkmExpressPaycell'
+                        : 'order.cash';
 
               return (
                 <button
@@ -219,11 +221,11 @@ export const OrderPaymentPage = () => {
               </div>
             </div>
           </div>
-        ) : localMethod === 'apple_google_pay' ? (
+        ) : localMethod === 'bkm_express_paycell' ? (
           <div className="mt-6 rounded-lg border border-border-subtle bg-bg-soft p-6 text-center">
             <div className="mb-4 text-4xl">📱</div>
             <p className="text-text-muted">
-              {t('payment.applePayInstruction')}
+              {t('payment.walletInstruction')}
             </p>
           </div>
         ) : localMethod === 'cash' ? (
@@ -245,10 +247,10 @@ export const OrderPaymentPage = () => {
           <button
             type="submit"
             disabled={!canSubmit || submitting}
-            className={`inline-flex items-center rounded-xl px-5 py-2.5 text-sm font-medium transition ${
+            className={`inline-flex items-center justify-center rounded-xl border px-5 py-2.5 text-sm font-medium shadow-sm transition min-h-[44px] ${
               canSubmit && !submitting
-                ? 'bg-coffee-500 text-core-white hover:bg-coffee-600'
-                : 'bg-surface-subtle text-text-subtle cursor-not-allowed'
+                ? 'border-coffee-600 bg-coffee-500 text-core-white hover:bg-coffee-600 hover:shadow-md'
+                : 'border-border-subtle bg-surface-subtle text-text-subtle cursor-not-allowed'
             }`}
           >
             {submitting ? '...' : t('order.completePayment')}

@@ -96,8 +96,9 @@ export const BillPage = () => {
         <div className="grid gap-2">
           {[
             { key: 'credit_card', label: t('order.creditCard'), icon: '💳' },
-            { key: 'apple_google_pay', label: t('order.appleGooglePay'), icon: '📱' },
             { key: 'debit_card', label: t('order.debitCard'), icon: '🏦' },
+            { key: 'troy', label: t('order.troy'), icon: '🔷' },
+            { key: 'bkm_express_paycell', label: t('order.bkmExpressPaycell'), icon: '📱' },
             { key: 'cash', label: t('order.cash'), icon: '💵' }
           ].map((opt) => (
             <button
@@ -141,7 +142,7 @@ export const BillPage = () => {
         <button
           type="button"
           onClick={() => navigate(`/cafe/${id}/order/payment`)}
-          className="flex-1 rounded-xl bg-coffee-500 py-3 font-medium text-core-white hover:bg-coffee-600"
+          className="flex-1 rounded-xl border border-coffee-600 bg-coffee-500 py-3 font-medium text-core-white shadow-sm transition hover:bg-coffee-600 hover:shadow-md"
         >
           {t('order.payNow')}
         </button>

@@ -106,9 +106,11 @@
     "durationMinutes": "{{count}} min",
     "reservationForDate": "Reservation for {{date}}",
     "paymentMethods": {
-      "creditCard": "Credit Card",
-      "appleGooglePay": "Apple Pay / Google Pay",
-      "debitCard": "Debit Card"
+      "creditCard": "Tarjeta de crédito",
+      "debitCard": "Tarjeta de débito",
+      "troy": "Tarjeta TROY",
+      "bkmExpressPaycell": "BKM Express / Paycell",
+      "cash": "Efectivo"
     },
     "backToHome": "← Back"
   },
@@ -179,8 +181,9 @@
     "quantity": "Cantidad",
     "dateTime": "Fecha y hora",
     "creditCard": "Tarjeta de crédito",
-    "appleGooglePay": "Apple Pay / Google Pay",
     "debitCard": "Tarjeta de débito",
+    "troy": "Tarjeta TROY",
+    "bkmExpressPaycell": "BKM Express / Paycell",
     "cash": "Efectivo"
   },
   "cafeDetail": {
@@ -209,7 +212,7 @@
     "expiry": "Caducidad (MM/AA)",
     "cardholderName": "Nombre del titular",
     "cvc": "CVC",
-    "applePayInstruction": "Pulse \"Completar pago\" abajo para pagar con Apple Pay o Google Pay.",
+    "walletInstruction": "Confirme el pago en su aplicación BKM Express o Paycell y luego pulse \"Completar pago\" abajo.",
     "cashInstruction": "Ha elegido efectivo. Pulse \"Completar pago\" abajo; el personal acudirá a su mesa."
   },
   "actions": {

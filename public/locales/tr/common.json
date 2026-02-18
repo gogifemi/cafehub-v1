@@ -107,8 +107,10 @@
     "reservationForDate": "{{date}} tarihli rezervasyon",
     "paymentMethods": {
       "creditCard": "Kredi Kartı",
-      "appleGooglePay": "Apple Pay / Google Pay",
-      "debitCard": "Banka Kartı"
+      "debitCard": "Banka Kartı",
+      "troy": "TROY Kart",
+      "bkmExpressPaycell": "BKM Express / Paycell",
+      "cash": "Nakit"
     },
     "backToHome": "← Geri"
   },
@@ -181,8 +183,9 @@
     "quantity": "Adet",
     "dateTime": "Tarih ve Saat",
     "creditCard": "Kredi Kartı",
-    "appleGooglePay": "Apple Pay / Google Pay",
     "debitCard": "Banka Kartı",
+    "troy": "TROY Kart",
+    "bkmExpressPaycell": "BKM Express / Paycell",
     "cash": "Nakit"
   },
   "cafeDetail": {
@@ -211,7 +214,7 @@
     "expiry": "Son Kullanma (AA/YY)",
     "cardholderName": "Kart Sahibinin Adı",
     "cvc": "CVC",
-    "applePayInstruction": "Ödemeyi tamamlamak için aşağıdaki \"Ödemeyi Tamamla\" butonuna tıklayın. Apple Pay veya Google Pay ile ödeme yapabilirsiniz.",
+    "walletInstruction": "BKM Express veya Paycell ile ödemek için uygulamanızda ödemeyi onaylayın. Ardından aşağıdaki \"Ödemeyi Tamamla\" butonuna tıklayın.",
     "cashInstruction": "Nakit ödeme seçtiniz. Ödemeyi tamamlamak için aşağıdaki \"Ödemeyi Tamamla\" butonuna tıklayın; garson masanıza gelecektir."
   },
   "actions": {

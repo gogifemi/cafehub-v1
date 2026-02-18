@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useReservation } from '../context/ReservationContext';
 
-type LocalPaymentMethod = 'credit_card' | 'apple_google_pay' | 'debit_card';
+type LocalPaymentMethod = 'credit_card' | 'debit_card' | 'troy' | 'bkm_express_paycell' | 'cash';
 
 export const ReservationPaymentPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -29,8 +29,11 @@ export const ReservationPaymentPage = () => {
     navigate(`/cafe/${id}/reserve/summary`, { replace: true });
   }
 
-  const canSubmit =
-    !!localMethod && !!cardNumber.trim() && !!expiry.trim() && !!cvc.trim() && !!cardholder.trim();
+  const requiresCardDetails =
+    localMethod === 'credit_card' || localMethod === 'debit_card' || localMethod === 'troy';
+  const hasCardDetails =
+    !!cardNumber.trim() && !!expiry.trim() && !!cvc.trim() && !!cardholder.trim();
+  const canSubmit = !!localMethod && (!requiresCardDetails || hasCardDetails);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -54,7 +57,7 @@ export const ReservationPaymentPage = () => {
 
       setDetails({
         paymentMethod: localMethod,
-        cardLast4: last4,
+        cardLast4: requiresCardDetails ? last4 : null,
         reservationCode,
         transactionId,
         createdAt: now.toISOString()
@@ -99,38 +102,49 @@ export const ReservationPaymentPage = () => {
           <p className="text-xs font-medium text-text-muted">
             {t('reservation.paymentMethod')}
           </p>
-          <div className="mt-2 grid gap-2 sm:grid-cols-3">
-            {(['credit_card', 'apple_google_pay', 'debit_card'] as LocalPaymentMethod[]).map(
-              (method) => {
-                const selected = localMethod === method;
-                const labelKey =
-                  method === 'credit_card'
-                    ? 'reservation.paymentMethods.creditCard'
-                    : method === 'apple_google_pay'
-                    ? 'reservation.paymentMethods.appleGooglePay'
-                    : 'reservation.paymentMethods.debitCard';
+          <div className="mt-2 grid gap-2 sm:grid-cols-2 min-[480px]:grid-cols-3">
+            {(
+              [
+                'credit_card',
+                'debit_card',
+                'troy',
+                'bkm_express_paycell',
+                'cash'
+              ] as LocalPaymentMethod[]
+            ).map((method) => {
+              const selected = localMethod === method;
+              const labelKey =
+                method === 'credit_card'
+                  ? 'reservation.paymentMethods.creditCard'
+                  : method === 'debit_card'
+                    ? 'reservation.paymentMethods.debitCard'
+                    : method === 'troy'
+                      ? 'reservation.paymentMethods.troy'
+                      : method === 'bkm_express_paycell'
+                        ? 'reservation.paymentMethods.bkmExpressPaycell'
+                        : 'reservation.paymentMethods.cash';
 
-                return (
-                  <button
-                    key={method}
-                    type="button"
-                    onClick={() => setLocalMethod(method)}
-                    className={`flex items-center justify-center rounded-xl border px-3 py-2 text-xs font-medium transition ${
-                      selected
-                        ? 'border-accent bg-accent-soft/20 text-accent-soft'
-                        : 'border-border-subtle bg-surface-subtle text-text-muted hover:border-border-strong hover:text-text'
-                    }`}
-                    aria-pressed={selected}
-                  >
-                    {t(labelKey)}
-                  </button>
-                );
-              }
-            )}
+              return (
+                <button
+                  key={method}
+                  type="button"
+                  onClick={() => setLocalMethod(method)}
+                  className={`flex items-center justify-center rounded-xl border px-3 py-2 text-xs font-medium transition ${
+                    selected
+                      ? 'border-accent bg-accent-soft/20 text-accent-soft'
+                      : 'border-border-subtle bg-surface-subtle text-text-muted hover:border-border-strong hover:text-text'
+                  }`}
+                  aria-pressed={selected}
+                >
+                  {t(labelKey)}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Card form */}
+        {/* Conditional payment details UI */}
+        {requiresCardDetails ? (
         <div className="space-y-3 rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm">
           <p className="text-xs font-medium text-text-muted">{t('payment.cardDetails')}</p>
           <div className="space-y-2">
@@ -187,8 +201,18 @@ export const ReservationPaymentPage = () => {
             </div>
           </div>
         </div>
+        ) : localMethod === 'bkm_express_paycell' ? (
+          <div className="rounded-lg border border-border-subtle bg-bg-soft p-6 text-center">
+            <div className="mb-4 text-4xl">📱</div>
+            <p className="text-text-muted">{t('payment.walletInstruction')}</p>
+          </div>
+        ) : localMethod === 'cash' ? (
+          <div className="rounded-lg border border-border-subtle bg-bg-soft p-4">
+            <p className="text-text-muted">{t('payment.cashInstruction')}</p>
+          </div>
+        ) : null}
 
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-2 text-sm">
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-4">
           <button
             type="button"
             onClick={onBack}

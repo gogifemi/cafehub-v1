@@ -24,20 +24,26 @@ export const ReservationReceiptPage = () => {
   });
   const dateStr = dateFormatter.format(createdAt);
 
-  const maskedCard =
-    state.cardLast4 && state.paymentMethod === 'credit_card'
-      ? `**** **** **** ${state.cardLast4}`
-      : state.cardLast4
-      ? `**** **** **** ${state.cardLast4}`
-      : '**** **** **** 0000';
+  const showCardLast4 =
+    state.cardLast4 &&
+    (state.paymentMethod === 'credit_card' ||
+      state.paymentMethod === 'debit_card' ||
+      state.paymentMethod === 'troy');
+  const maskedCard = showCardLast4
+    ? `**** **** **** ${state.cardLast4}`
+    : '—';
 
   const paymentMethodLabel =
     state.paymentMethod === 'credit_card'
       ? t('reservation.paymentMethods.creditCard')
-      : state.paymentMethod === 'apple_google_pay'
-      ? t('reservation.paymentMethods.appleGooglePay')
       : state.paymentMethod === 'debit_card'
       ? t('reservation.paymentMethods.debitCard')
+      : state.paymentMethod === 'troy'
+      ? t('reservation.paymentMethods.troy')
+      : state.paymentMethod === 'bkm_express_paycell'
+      ? t('reservation.paymentMethods.bkmExpressPaycell')
+      : state.paymentMethod === 'cash'
+      ? t('reservation.paymentMethods.cash')
       : '-';
 
   const reservationCode =
@@ -142,7 +148,8 @@ export const ReservationReceiptPage = () => {
           <div className="space-y-0.5">
             <dt className="font-medium text-text">{t('reservation.paymentMethod')}</dt>
             <dd>
-              {paymentMethodLabel} ({maskedCard})
+              {paymentMethodLabel}
+              {showCardLast4 ? ` (${maskedCard})` : ''}
             </dd>
           </div>
         </dl>
