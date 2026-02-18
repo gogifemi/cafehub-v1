@@ -92,74 +92,78 @@ export const ReservationDetailsPage = () => {
         </h1>
       </header>
 
-      {/* Step 1A - Party Size */}
-      <div className="space-y-2 rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm">
-        <div className="flex items-center gap-2">
-          <label className="block text-xs font-medium text-text-muted">
-            {t('reservation.partySize')}
-          </label>
-          <span
-            className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-border-subtle text-[10px] text-text-subtle"
-            title={t('reservation.partySizeInfo')}
-            aria-label={t('reservation.partySizeInfo')}
-          >
-            ?
-          </span>
+      {/* Step 1A & 1B - Party size and duration side by side */}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        {/* Party Size column */}
+        <div className="space-y-2 rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm">
+          <div className="flex items-center gap-2">
+            <label className="block text-xs font-medium text-text-muted">
+              {t('reservation.partySize')}
+            </label>
+            <span
+              className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-border-subtle text-[10px] text-text-subtle"
+              title={t('reservation.partySizeInfo')}
+              aria-label={t('reservation.partySizeInfo')}
+            >
+              ?
+            </span>
+          </div>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {PARTY_SIZES.map((size) => {
+              const selected = state.partySize === size;
+              return (
+                <button
+                  key={size}
+                  type="button"
+                  onClick={() => handlePartySizeSelect(size)}
+                  className={`flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium transition ${
+                    selected
+                      ? 'border-coffee-500 bg-coffee-500 text-core-white'
+                      : 'border-border-subtle bg-surface text-text-muted hover:border-coffee-300'
+                  }`}
+                  aria-pressed={selected}
+                >
+                  {size}
+                </button>
+              );
+            })}
+          </div>
         </div>
-        <div className="mt-2 flex flex-wrap gap-2">
-          {PARTY_SIZES.map((size) => {
-            const selected = state.partySize === size;
-            return (
-              <button
-                key={size}
-                type="button"
-                onClick={() => handlePartySizeSelect(size)}
-                className={`flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium transition ${
-                  selected
-                    ? 'border-coffee-500 bg-coffee-500 text-core-white'
-                    : 'border-border-subtle bg-surface text-text-muted hover:border-coffee-300'
-                }`}
-                aria-pressed={selected}
-              >
-                {size}
-              </button>
-            );
-          })}
-        </div>
-      </div>
 
-      {/* Step 1B - Duration */}
-      <div className="space-y-2 rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm">
-        <div className="flex items-center gap-2">
-          <label className="block text-xs font-medium text-text-muted">
-            {t('reservation.duration')}
-          </label>
-          <span
-            className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-border-subtle text-[10px] text-text-subtle"
-            title={t('reservation.durationInfo')}
-          >
-            ?
-          </span>
-        </div>
-        <div className="mt-2 flex flex-wrap gap-2">
-          {DURATION_OPTIONS.map((opt) => {
-            const selected = state.durationMinutes === opt.value;
-            return (
-              <button
-                key={opt.value}
-                type="button"
-                onClick={() => handleDurationSelect(opt.value, opt.price)}
-                className={`rounded-full px-3 py-1.5 text-xs font-medium transition ${
-                  selected
-                    ? 'border border-coffee-500 bg-coffee-500/10 text-coffee-500'
-                    : 'border border-border-subtle bg-surface text-text-muted hover:border-coffee-300'
-                }`}
-                aria-pressed={selected}
-              >
-                {t(`reservation.durationOptions.${opt.value}`)}
-              </button>
-            );
-          })}
+        {/* Duration column */}
+        <div className="space-y-2 rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm">
+          <div className="flex items-center gap-2">
+            <label className="block text-xs font-medium text-text-muted">
+              {t('reservation.duration')}
+            </label>
+            <span
+              className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-border-subtle text-[10px] text-text-subtle"
+              title={t('reservation.durationInfo')}
+              aria-label={t('reservation.durationInfo')}
+            >
+              ?
+            </span>
+          </div>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {DURATION_OPTIONS.map((opt) => {
+              const selected = state.durationMinutes === opt.value;
+              return (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onClick={() => handleDurationSelect(opt.value, opt.price)}
+                  className={`rounded-full px-3 py-1.5 text-xs font-medium transition ${
+                    selected
+                      ? 'border border-coffee-500 bg-coffee-500/10 text-coffee-500'
+                      : 'border border-border-subtle bg-surface text-text-muted hover:border-coffee-300'
+                  }`}
+                  aria-pressed={selected}
+                >
+                  {t(`reservation.durationOptions.${opt.value}`)}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
