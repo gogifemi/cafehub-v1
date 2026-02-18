@@ -219,6 +219,38 @@
     "submit": "Submit",
     "cancel": "Cancel",
     "save": "Save"
+  },
+  "auth": {
+    "login": "Log In",
+    "signup": "Sign Up",
+    "logout": "Log Out",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "fullName": "Full Name",
+    "phone": "Phone",
+    "birthDate": "Birth Date",
+    "rememberMe": "Remember Me",
+    "forgotPassword": "Forgot Password",
+    "resetLink": "Send Reset Link",
+    "resetSent": "If an account exists for this email, we've sent a password reset link.",
+    "or": "or",
+    "signInWithGoogle": "Sign in with Google",
+    "signInWithApple": "Sign in with Apple",
+    "signUpWithGoogle": "Sign up with Google",
+    "signUpWithApple": "Sign up with Apple",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?"
+  },
+  "account": {
+    "myAccount": "My Account",
+    "welcome": "Welcome, {{name}}",
+    "memberSince": "Member Since",
+    "tabs": { "profile": "Profile Info", "favorites": "Favorite Cafes", "orders": "Order History", "settings": "Account Settings" },
+    "profile": { "title": "Profile Info", "fullName": "Full Name", "email": "Email", "phone": "Phone", "birthDate": "Birth Date", "save": "Save Changes" },
+    "favorites": { "title": "Favorite Cafes", "empty": "No favorite cafes yet", "browse": "Browse Cafes", "makeReservation": "Make Reservation" },
+    "orders": { "title": "Order History", "date": "Date", "table": "Table No", "total": "Total", "status": "Status", "completed": "Completed", "viewDetails": "View Details", "orderAgain": "Order Again", "downloadPdf": "Download PDF", "empty": "No orders yet", "explore": "Explore Cafes" },
+    "settings": { "title": "Account Settings", "changePassword": "Change Password", "currentPassword": "Current Password", "newPassword": "New Password", "confirmPassword": "Confirm Password", "updatePassword": "Update Password", "notifications": "Notification Preferences", "emailNotifications": "Email Notifications", "smsNotifications": "SMS Notifications", "promotions": "Promotions", "language": "Language", "theme": "Theme", "deleteAccount": "Delete Account", "deleteConfirm": "Are you sure you want to delete your account? This action cannot be undone." }
   }
 }
 

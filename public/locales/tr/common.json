@@ -221,6 +221,82 @@
     "submit": "Gönder",
     "cancel": "İptal",
     "save": "Kaydet"
+  },
+  "auth": {
+    "login": "Giriş Yap",
+    "signup": "Kayıt Ol",
+    "logout": "Çıkış Yap",
+    "email": "E-posta",
+    "password": "Şifre",
+    "confirmPassword": "Şifre Tekrar",
+    "fullName": "Ad Soyad",
+    "phone": "Telefon",
+    "birthDate": "Doğum Tarihi",
+    "rememberMe": "Beni Hatırla",
+    "forgotPassword": "Şifremi Unuttum",
+    "resetLink": "Şifre Sıfırlama Bağlantısı Gönder",
+    "resetSent": "Bu e-posta için bir hesap varsa, şifre sıfırlama bağlantısı gönderdik.",
+    "or": "veya",
+    "signInWithGoogle": "Google ile Giriş Yap",
+    "signInWithApple": "Apple ile Giriş Yap",
+    "signUpWithGoogle": "Google ile Kayıt Ol",
+    "signUpWithApple": "Apple ile Kayıt Ol",
+    "noAccount": "Hesabın yok mu?",
+    "haveAccount": "Zaten hesabın var mı?"
+  },
+  "account": {
+    "myAccount": "Hesabım",
+    "welcome": "Hoş geldiniz, {{name}}",
+    "memberSince": "Üyelik Tarihi",
+    "tabs": {
+      "profile": "Profil Bilgileri",
+      "favorites": "Favori Kafeler",
+      "orders": "Geçmiş Siparişler",
+      "settings": "Hesap Ayarları"
+    },
+    "profile": {
+      "title": "Profil Bilgileri",
+      "fullName": "Ad Soyad",
+      "email": "E-posta",
+      "phone": "Telefon",
+      "birthDate": "Doğum Tarihi",
+      "save": "Bilgileri Kaydet"
+    },
+    "favorites": {
+      "title": "Favori Kafeler",
+      "empty": "Favori kafeniz yok",
+      "browse": "Kafeleri Keşfet",
+      "makeReservation": "Rezervasyon Yap"
+    },
+    "orders": {
+      "title": "Geçmiş Siparişler",
+      "date": "Tarih",
+      "table": "Masa No",
+      "total": "Toplam",
+      "status": "Durum",
+      "completed": "Tamamlandı",
+      "viewDetails": "Detayları Gör",
+      "orderAgain": "Tekrar Sipariş Ver",
+      "downloadPdf": "PDF İndir",
+      "empty": "Henüz siparişiniz yok",
+      "explore": "Kafeleri Keşfet"
+    },
+    "settings": {
+      "title": "Hesap Ayarları",
+      "changePassword": "Şifre Değiştir",
+      "currentPassword": "Mevcut Şifre",
+      "newPassword": "Yeni Şifre",
+      "confirmPassword": "Şifre Tekrar",
+      "updatePassword": "Şifreyi Güncelle",
+      "notifications": "Bildirim Tercihleri",
+      "emailNotifications": "E-posta Bildirimleri",
+      "smsNotifications": "SMS Bildirimleri",
+      "promotions": "Kampanya ve Fırsatlar",
+      "language": "Dil Seçeneği",
+      "theme": "Tema Seçeneği",
+      "deleteAccount": "Hesabı Sil",
+      "deleteConfirm": "Hesabınızı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz."
+    }
   }
 }
 
