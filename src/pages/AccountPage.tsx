@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
+import { getAnimalAvatarById } from '../data/animalAvatars';
 import { AccountProfileTab } from '../components/account/AccountProfileTab';
 import { AccountFavoritesTab } from '../components/account/AccountFavoritesTab';
 import { AccountOrdersTab } from '../components/account/AccountOrdersTab';
@@ -40,9 +41,24 @@ export function AccountPage() {
   return (
     <div className="py-6">
       <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border-2 border-border-subtle bg-surface-subtle text-2xl font-semibold text-accent">
-          {user.avatar ? (
-            <img src={user.avatar} alt="" className="h-full w-full rounded-2xl object-cover" />
+        <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border-2 border-border-subtle bg-surface-subtle text-2xl font-semibold text-accent">
+          {user.avatar?.type === 'upload' && user.avatar.url ? (
+            <img src={user.avatar.url} alt="" className="h-full w-full object-cover" />
+          ) : user.avatar?.type === 'animal' && user.avatar.animalId ? (
+            (() => {
+              const animal = getAnimalAvatarById(user.avatar.animalId!);
+              const Icon = animal?.icon;
+              return Icon ? (
+                <span
+                  className="flex h-full w-full items-center justify-center"
+                  style={{ color: animal.color, backgroundColor: animal.bgColor }}
+                >
+                  <Icon className="h-8 w-8" strokeWidth={1.5} />
+                </span>
+              ) : (
+                initials
+              );
+            })()
           ) : (
             initials
           )}

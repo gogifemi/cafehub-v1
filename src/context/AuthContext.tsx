@@ -2,10 +2,12 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode
 } from 'react';
+import type { AnimalAvatarId } from '../data/animalAvatars';
 
 export interface OrderItem {
   name: string;
@@ -35,11 +37,15 @@ export interface User {
   name: string;
   email: string;
   phone: string | null;
-  avatar: string | null;
   birthDate: string | null;
   memberSince: string;
   favorites: string[];
   orders: PastOrder[];
+  avatar?: {
+    type: 'animal' | 'upload' | 'initials';
+    animalId?: AnimalAvatarId;
+    url?: string;
+  };
 }
 
 interface AuthState {
@@ -61,6 +67,7 @@ interface AuthContextValue extends AuthState {
   addFavorite: (cafeId: string) => void;
   removeFavorite: (cafeId: string) => void;
   updateProfile: (data: Partial<Pick<User, 'name' | 'email' | 'phone' | 'birthDate'>>) => void;
+  updateAvatar: (avatarData: User['avatar']) => void;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -70,7 +77,6 @@ const MOCK_USER: User = {
   name: 'Ahmet Yılmaz',
   email: 'ahmet@email.com',
   phone: '0532 123 4567',
-  avatar: null,
   birthDate: '1990-05-15',
   memberSince: '2025-01-15',
   favorites: ['coffee-sapiens-moda', 'kronotrop-besiktas', 'fazil-bey-kadikoy'],
@@ -216,6 +222,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     []
   );
 
+  const updateAvatar = useCallback((avatarData: User['avatar']) => {
+    setState((prev) =>
+      prev.user ? { ...prev, user: { ...prev.user, avatar: avatarData } } : prev
+    );
+    if (avatarData) {
+      localStorage.setItem('cafehub-avatar', JSON.stringify(avatarData));
+    } else {
+      localStorage.removeItem('cafehub-avatar');
+    }
+  }, []);
+
+  useEffect(() => {
+    const savedAvatar = localStorage.getItem('cafehub-avatar');
+    if (!savedAvatar) return;
+    try {
+      const avatarData = JSON.parse(savedAvatar);
+      setState((prev) =>
+        prev.user ? { ...prev, user: { ...prev.user, avatar: avatarData } } : prev
+      );
+    } catch (e) {
+      console.error('Failed to parse saved avatar');
+    }
+  }, []);
+
   const value = useMemo<AuthContextValue>(
     () => ({
       ...state,
@@ -226,7 +256,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       logout,
       addFavorite,
       removeFavorite,
-      updateProfile
+      updateProfile,
+      updateAvatar
     }),
     [
       state,
@@ -237,7 +268,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       logout,
       addFavorite,
       removeFavorite,
-      updateProfile
+      updateProfile,
+      updateAvatar
     ]
   );
 

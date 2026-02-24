@@ -1,104 +1,155 @@
-export type AnimalAvatarId =
-  | 'cat'
-  | 'dog'
-  | 'rabbit'
-  | 'bird'
-  | 'fox'
-  | 'owl';
+import {
+  Cat,
+  Dog,
+  Rabbit,
+  Bird,
+  Turtle,
+  Rat,
+  Squirrel,
+  type LucideIcon
+} from 'lucide-react';
+
+/* Placeholder: Fox, Bear, Pig, Frog are not in lucide-react 0.575; using Bird for those entries until available. */
+const PlaceholderAnimalIcon = Bird;
 
 export interface AnimalAvatar {
-  id: AnimalAvatarId;
-  /** Translation‑ready display labels */
-  label: {
-    tr: string;
-    en: string;
-  };
-  /** Tailwind text color utility (e.g. text-amber-600) */
-  textColorClass: string;
-  /** Tailwind background color utility (e.g. bg-amber-100) */
-  bgColorClass: string;
-  /**
-   * Name of the Lucide icon component to use for this avatar.
-   * Example usage in UI:
-   *   import { Cat, Dog } from 'lucide-react';
-   *   const ICONS = { Cat, Dog, ... };
-   */
-  iconName: 'Cat' | 'Dog' | 'Rabbit' | 'Bird' | 'Fox' | 'Owl';
+  id: string;
+  icon: LucideIcon;
+  name: string;
+  nameEn: string;
+  color: string; // brand primary or secondary
+  bgColor: string; // lighter version of brand colors
+  description: string;
+  descriptionEn: string;
 }
-
-export const ANIMAL_AVATAR_IDS: AnimalAvatarId[] = [
-  'cat',
-  'dog',
-  'rabbit',
-  'bird',
-  'fox',
-  'owl'
-];
 
 export const animalAvatars: AnimalAvatar[] = [
   {
     id: 'cat',
-    label: {
-      tr: 'Kedi',
-      en: 'Cat'
-    },
-    textColorClass: 'text-amber-700',
-    bgColorClass: 'bg-amber-100',
-    iconName: 'Cat'
+    icon: Cat,
+    name: 'Kedi',
+    nameEn: 'Cat',
+    color: '#ff6b35', // brand primary
+    bgColor: '#fff0e6',
+    description: 'Sıcakkanlı ve samimi',
+    descriptionEn: 'Warm and friendly'
   },
   {
     id: 'dog',
-    label: {
-      tr: 'Köpek',
-      en: 'Dog'
-    },
-    textColorClass: 'text-sky-700',
-    bgColorClass: 'bg-sky-100',
-    iconName: 'Dog'
-  },
-  {
-    id: 'rabbit',
-    label: {
-      tr: 'Tavşan',
-      en: 'Rabbit'
-    },
-    textColorClass: 'text-rose-700',
-    bgColorClass: 'bg-rose-100',
-    iconName: 'Rabbit'
-  },
-  {
-    id: 'bird',
-    label: {
-      tr: 'Kuş',
-      en: 'Bird'
-    },
-    textColorClass: 'text-emerald-700',
-    bgColorClass: 'bg-emerald-100',
-    iconName: 'Bird'
+    icon: Dog,
+    name: 'Köpek',
+    nameEn: 'Dog',
+    color: '#4ecdc4', // brand secondary
+    bgColor: '#e6f9f7',
+    description: 'Sadık ve enerjik',
+    descriptionEn: 'Loyal and energetic'
   },
   {
     id: 'fox',
-    label: {
-      tr: 'Tilki',
-      en: 'Fox'
-    },
-    textColorClass: 'text-orange-700',
-    bgColorClass: 'bg-orange-100',
-    iconName: 'Fox'
+    icon: PlaceholderAnimalIcon,
+    name: 'Tilki',
+    nameEn: 'Fox',
+    color: '#ff6b35',
+    bgColor: '#fff0e6',
+    description: 'Zeki ve kurnaz',
+    descriptionEn: 'Smart and clever'
+  },
+  {
+    id: 'rabbit',
+    icon: Rabbit,
+    name: 'Tavşan',
+    nameEn: 'Rabbit',
+    color: '#4ecdc4',
+    bgColor: '#e6f9f7',
+    description: 'Hızlı ve sevimli',
+    descriptionEn: 'Fast and cute'
+  },
+  {
+    id: 'bird',
+    icon: Bird,
+    name: 'Kuş',
+    nameEn: 'Bird',
+    color: '#ff6b35',
+    bgColor: '#fff0e6',
+    description: 'Özgür ve neşeli',
+    descriptionEn: 'Free and joyful'
   },
   {
     id: 'owl',
-    label: {
-      tr: 'Baykuş',
-      en: 'Owl'
-    },
-    textColorClass: 'text-violet-700',
-    bgColorClass: 'bg-violet-100',
-    iconName: 'Owl'
+    icon: Bird, // Using Bird as placeholder for Owl (no Owl in lucide-react)
+    name: 'Baykuş',
+    nameEn: 'Owl',
+    color: '#4ecdc4',
+    bgColor: '#e6f9f7',
+    description: 'Bilge ve sakin',
+    descriptionEn: 'Wise and calm'
+  },
+  {
+    id: 'squirrel',
+    icon: Squirrel,
+    name: 'Sincap',
+    nameEn: 'Squirrel',
+    color: '#ff6b35',
+    bgColor: '#fff0e6',
+    description: 'Çalışkan ve çevik',
+    descriptionEn: 'Hardworking and agile'
+  },
+  {
+    id: 'bear',
+    icon: PlaceholderAnimalIcon,
+    name: 'Ayı',
+    nameEn: 'Bear',
+    color: '#4ecdc4',
+    bgColor: '#e6f9f7',
+    description: 'Güçlü ve koruyucu',
+    descriptionEn: 'Strong and protective'
+  },
+  {
+    id: 'pig',
+    icon: PlaceholderAnimalIcon,
+    name: 'Domuz',
+    nameEn: 'Pig',
+    color: '#ff6b35',
+    bgColor: '#fff0e6',
+    description: 'Neşeli ve doygun',
+    descriptionEn: 'Joyful and content'
+  },
+  {
+    id: 'frog',
+    icon: PlaceholderAnimalIcon,
+    name: 'Kurbağa',
+    nameEn: 'Frog',
+    color: '#4ecdc4',
+    bgColor: '#e6f9f7',
+    description: 'Eğlenceli ve zıpır',
+    descriptionEn: 'Fun and bouncy'
+  },
+  {
+    id: 'turtle',
+    icon: Turtle,
+    name: 'Kaplumbağa',
+    nameEn: 'Turtle',
+    color: '#ff6b35',
+    bgColor: '#fff0e6',
+    description: 'Sakin ve sabırlı',
+    descriptionEn: 'Calm and patient'
+  },
+  {
+    id: 'rat',
+    icon: Rat,
+    name: 'Sıçan',
+    nameEn: 'Rat',
+    color: '#4ecdc4',
+    bgColor: '#e6f9f7',
+    description: 'Zeki ve uyumlu',
+    descriptionEn: 'Smart and adaptable'
   }
 ];
 
-export function getAnimalAvatarById(id: AnimalAvatarId): AnimalAvatar | undefined {
+export type AnimalAvatarId = (typeof animalAvatars)[number]['id'];
+
+export const ANIMAL_AVATAR_IDS: AnimalAvatarId[] = animalAvatars.map((a) => a.id);
+
+export function getAnimalAvatarById(id: string): AnimalAvatar | undefined {
   return animalAvatars.find((avatar) => avatar.id === id);
 }
-
