@@ -118,8 +118,8 @@ export const ReservationDetailsPage = () => {
                   onClick={() => handlePartySizeSelect(size)}
                   className={`flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium transition ${
                     selected
-                      ? 'border-coffee-500 bg-coffee-500 text-core-white'
-                      : 'border-border-subtle bg-surface text-text-muted hover:border-coffee-300'
+                      ? 'border-accent bg-accent text-core-white'
+                      : 'border-border-subtle bg-surface text-text-muted hover:border-accent'
                   }`}
                   aria-pressed={selected}
                 >
@@ -154,8 +154,8 @@ export const ReservationDetailsPage = () => {
                   onClick={() => handleDurationSelect(opt.value, opt.price)}
                   className={`rounded-full px-3 py-1.5 text-xs font-medium transition ${
                     selected
-                      ? 'border border-coffee-500 bg-coffee-500/10 text-coffee-500'
-                      : 'border border-border-subtle bg-surface text-text-muted hover:border-coffee-300'
+                      ? 'border border-accent bg-accent/10 text-accent'
+                      : 'border border-border-subtle bg-surface text-text-muted hover:border-accent'
                   }`}
                   aria-pressed={selected}
                 >
@@ -310,7 +310,7 @@ export const ReservationDetailsPage = () => {
           disabled={!canProceed}
           className={`inline-flex items-center rounded-full px-4 py-2 text-sm font-medium transition ${
             canProceed
-              ? 'bg-accent text-core-black hover:bg-accent-soft'
+              ? 'bg-accent text-core-white hover:bg-accent-soft'
               : 'bg-surface-subtle text-text-subtle'
           }`}
         >

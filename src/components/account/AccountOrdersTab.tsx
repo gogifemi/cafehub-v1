@@ -24,7 +24,7 @@ export function AccountOrdersTab() {
         </p>
         <Link
           to="/login"
-          className="mt-4 inline-block rounded-lg bg-accent px-6 py-2 text-sm font-medium text-bg hover:bg-accent-soft"
+          className="mt-4 inline-block rounded-lg bg-accent px-6 py-2 text-sm font-medium text-core-white hover:bg-accent-soft"
         >
           {t('account.orders.login', 'Giriş Yap')} / Log In
         </Link>
@@ -41,7 +41,7 @@ export function AccountOrdersTab() {
         <p className="text-sm text-text-muted">{t('account.orders.empty')}</p>
         <Link
           to="/"
-          className="mt-4 inline-block rounded-lg bg-accent px-6 py-2 text-sm font-medium text-bg hover:bg-accent-soft"
+          className="mt-4 inline-block rounded-lg bg-accent px-6 py-2 text-sm font-medium text-core-white hover:bg-accent-soft"
         >
           {t('account.orders.explore')}
         </Link>

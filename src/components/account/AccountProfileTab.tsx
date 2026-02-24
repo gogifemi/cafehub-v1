@@ -74,7 +74,7 @@ export function AccountProfileTab() {
         </div>
         <button
           type="submit"
-          className="rounded-lg bg-accent px-4 py-2.5 font-medium text-bg transition hover:bg-accent-soft"
+          className="rounded-lg bg-accent px-4 py-2.5 font-medium text-core-white transition hover:bg-accent-soft"
         >
           {saved ? '✓ ' : ''}
           {t('account.profile.save')}

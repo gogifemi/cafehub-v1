@@ -117,7 +117,7 @@ export function OrderDetailsModal({ order, onClose, onOrderAgain }: OrderDetails
           <button
             type="button"
             onClick={onOrderAgain}
-            className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-bg transition hover:bg-accent-soft"
+            className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-core-white transition hover:bg-accent-soft"
           >
             {t('account.orders.orderAgain')}
           </button>

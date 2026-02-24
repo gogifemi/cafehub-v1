@@ -146,7 +146,7 @@ export const OrderPaymentPage = () => {
                   }}
                   className={`flex items-center justify-center rounded-xl border px-3 py-2 text-xs font-medium transition ${
                     selected
-                      ? 'border-coffee-500 bg-coffee-500/20 text-coffee-600'
+                      ? 'border-accent bg-accent/20 text-accent'
                       : 'border-border-subtle bg-surface-subtle text-text-muted hover:border-border-strong hover:text-text'
                   }`}
                   aria-pressed={selected}
@@ -249,7 +249,7 @@ export const OrderPaymentPage = () => {
             disabled={!canSubmit || submitting}
             className={`inline-flex items-center justify-center rounded-xl border px-5 py-2.5 text-sm font-medium shadow-sm transition min-h-[44px] ${
               canSubmit && !submitting
-                ? 'border-coffee-600 bg-coffee-500 text-core-white hover:bg-coffee-600 hover:shadow-md'
+                ? 'border-accent-strong bg-accent text-core-white hover:bg-accent-strong hover:shadow-md'
                 : 'border-border-subtle bg-surface-subtle text-text-subtle cursor-not-allowed'
             }`}
           >

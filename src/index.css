@@ -2,114 +2,149 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Design tokens: typography */
+/* CafeHub brand: Inter (content), Montserrat (accents/UI) */
 :root {
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Rounded', 'Segoe UI Rounded',
-    'Segoe UI', sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Montserrat', var(--font-sans);
 
-  /* Core monochrome palette (logo) */
+  /* Core monochrome (logo, button text on accent) */
   --core-black: 0 0% 0%;
   --core-white: 0 0% 100%;
 
-  /* Turkish coffee base palette (browns, creams, spices) */
-  --coffee-espresso: 24 32% 15%; /* deep, almost-black espresso */
-  --coffee-grounds: 26 32% 20%;
-  --coffee-foam: 35 70% 88%;
-  --coffee-bronze: 28 68% 46%;
-  --coffee-cream: 36 80% 92%;
-  --spice-cardamom: 142 40% 45%;
-  --spice-cinnamon: 20 70% 46%;
-  --spice-clove: 18 42% 32%;
-
-  /* Semantic colors – default theme (Turkish coffee) */
-  --color-bg: var(--coffee-espresso);
-  --color-bg-soft: var(--coffee-grounds);
-  --color-surface: var(--coffee-grounds);
-  --color-surface-subtle: var(--spice-clove);
-  --color-surface-elevated: var(--coffee-bronze);
-
-  --color-border-subtle: 24 25% 32%;
-  --color-border: 24 30% 40%;
-  --color-border-strong: 24 35% 50%;
-
-  --color-text: var(--coffee-cream);
-  --color-text-muted: 35 40% 80%;
-  --color-text-subtle: 35 30% 70%;
-  --color-text-accent: var(--coffee-cream);
-
-  --color-accent: var(--coffee-bronze);
-  --color-accent-soft: 32 85% 60%;
-  --color-accent-strong: 28 92% 48%;
-
-  --color-success: var(--spice-cardamom);
-  --color-warning: 35 90% 60%;
-  --color-info: 200 90% 60%;
-
-  --color-ring: var(--color-accent);
-
-  /* Gradient accents used for borders and badges */
-  --color-accent-1: var(--spice-cardamom);
-  --color-accent-2: var(--coffee-bronze);
-  --color-accent-3: var(--spice-cinnamon);
-  --color-accent-4: 0 84% 60%;
-
-  color-scheme: dark;
-}
-
-/* Core monochrome theme – pure black/white */
-:root[data-theme='core'] {
-  --color-bg: 0 0% 4%;
-  --color-bg-soft: 0 0% 8%;
-  --color-surface: 0 0% 6%;
-  --color-surface-subtle: 0 0% 12%;
-  --color-surface-elevated: 0 0% 18%;
+  /* ========== Coffee theme (dark) – Brand dark palette ========== */
+  /* Backgrounds: #1a1a1a, #f7f7f7 text */
+  --color-bg: 0 0% 10%;
+  --color-bg-soft: 0 0% 12%;
+  --color-surface: 0 0% 14%;
+  --color-surface-subtle: 0 0% 18%;
+  --color-surface-elevated: 0 0% 22%;
 
   --color-border-subtle: 0 0% 22%;
   --color-border: 0 0% 32%;
   --color-border-strong: 0 0% 45%;
 
-  --color-text: 0 0% 98%;
-  --color-text-muted: 0 0% 70%;
-  --color-text-subtle: 0 0% 55%;
-  --color-text-accent: 0 0% 100%;
+  --color-text: 0 0% 97%;
+  --color-text-muted: 0 0% 75%;
+  --color-text-subtle: 0 0% 60%;
+  --color-text-accent: 0 0% 97%;
+  --color-heading: 14 100% 93%;
+  --color-subheading: 176 100% 96%;
 
-  --color-accent: 0 0% 100%;
-  --color-accent-soft: 0 0% 85%;
-  --color-accent-strong: 0 0% 100%;
+  /* Primary #ff6b35, Secondary #4ecdc4, Teal dark #1f8e82 */
+  --color-accent: 16 100% 60%;
+  --color-accent-soft: 16 100% 65%;
+  --color-accent-strong: 16 100% 55%;
+  --color-secondary: 176 53% 65%;
+  --color-secondary-dark: 174 64% 34%;
 
-  --color-success: 140 40% 60%;
-  --color-warning: 45 90% 60%;
-  --color-info: 210 90% 60%;
-
+  --color-success: 152 53% 35%;
+  --color-warning: 46 91% 65%;
+  --color-info: 215 37% 52%;
   --color-ring: var(--color-accent);
+
+  /* Status (order flow) */
+  --color-status-order-confirmed: 32 38% 40%;
+  --color-status-order-received: 46 91% 65%;
+  --color-status-being-prepared: 0 0% 50%;
+  --color-status-served: 152 53% 24%;
+  --color-status-payment-received: 215 37% 42%;
+  --color-status-order-cancelled: 210 9% 34%;
+
+  /* Gradient accents (optional badges/borders) */
+  --color-accent-1: 176 53% 65%;
+  --color-accent-2: 16 100% 60%;
+  --color-accent-3: 174 64% 34%;
+  --color-accent-4: 24 66% 29%;
+
+  color-scheme: dark;
 }
 
-/* Explicit Turkish coffee theme override (same as default) */
-:root[data-theme='turkish'] {
-  --color-bg: var(--coffee-espresso);
-  --color-bg-soft: var(--coffee-grounds);
-  --color-surface: var(--coffee-grounds);
-  --color-surface-subtle: var(--spice-clove);
-  --color-surface-elevated: var(--coffee-bronze);
+/* ========== Mono theme (light) – Brand light palette ========== */
+:root[data-theme='core'] {
+  --color-bg: 0 0% 97%;
+  --color-bg-soft: 0 0% 95%;
+  --color-surface: 0 0% 100%;
+  --color-surface-subtle: 0 0% 96%;
+  --color-surface-elevated: 0 0% 98%;
 
-  --color-border-subtle: 24 25% 32%;
-  --color-border: 24 30% 40%;
-  --color-border-strong: 24 35% 50%;
+  --color-border-subtle: 0 0% 88%;
+  --color-border: 0 0% 80%;
+  --color-border-strong: 0 0% 70%;
 
-  --color-text: var(--coffee-cream);
-  --color-text-muted: 35 40% 80%;
-  --color-text-subtle: 35 30% 70%;
-  --color-text-accent: var(--coffee-cream);
+  --color-text: 0 0% 10%;
+  --color-text-muted: 0 0% 35%;
+  --color-text-subtle: 0 0% 45%;
+  --color-text-accent: 0 0% 10%;
+  --color-heading: 24 66% 29%;
+  --color-subheading: 174 64% 34%;
 
-  --color-accent: var(--coffee-bronze);
-  --color-accent-soft: 32 85% 60%;
-  --color-accent-strong: 28 92% 48%;
+  --color-accent: 16 100% 60%;
+  --color-accent-soft: 16 100% 50%;
+  --color-accent-strong: 16 100% 45%;
+  --color-secondary: 176 53% 55%;
+  --color-secondary-dark: 174 64% 34%;
 
-  --color-success: var(--spice-cardamom);
-  --color-warning: 35 90% 60%;
-  --color-info: 200 90% 60%;
-
+  --color-success: 152 53% 28%;
+  --color-warning: 46 91% 45%;
+  --color-info: 215 37% 42%;
   --color-ring: var(--color-accent);
+
+  --color-status-order-confirmed: 32 38% 40%;
+  --color-status-order-received: 46 91% 55%;
+  --color-status-being-prepared: 0 0% 45%;
+  --color-status-served: 152 53% 24%;
+  --color-status-payment-received: 215 37% 42%;
+  --color-status-order-cancelled: 210 9% 34%;
+
+  --color-accent-1: 176 53% 55%;
+  --color-accent-2: 16 100% 60%;
+  --color-accent-3: 174 64% 34%;
+  --color-accent-4: 24 66% 29%;
+
+  color-scheme: light;
+}
+
+/* Explicit Coffee (dark) theme – same as default */
+:root[data-theme='turkish'] {
+  --color-bg: 0 0% 10%;
+  --color-bg-soft: 0 0% 12%;
+  --color-surface: 0 0% 14%;
+  --color-surface-subtle: 0 0% 18%;
+  --color-surface-elevated: 0 0% 22%;
+
+  --color-border-subtle: 0 0% 22%;
+  --color-border: 0 0% 32%;
+  --color-border-strong: 0 0% 45%;
+
+  --color-text: 0 0% 97%;
+  --color-text-muted: 0 0% 75%;
+  --color-text-subtle: 0 0% 60%;
+  --color-text-accent: 0 0% 97%;
+  --color-heading: 14 100% 93%;
+  --color-subheading: 176 100% 96%;
+
+  --color-accent: 16 100% 60%;
+  --color-accent-soft: 16 100% 65%;
+  --color-accent-strong: 16 100% 55%;
+  --color-secondary: 176 53% 65%;
+  --color-secondary-dark: 174 64% 34%;
+
+  --color-success: 152 53% 35%;
+  --color-warning: 46 91% 65%;
+  --color-info: 215 37% 52%;
+  --color-ring: var(--color-accent);
+
+  --color-status-order-confirmed: 32 38% 40%;
+  --color-status-order-received: 46 91% 65%;
+  --color-status-being-prepared: 0 0% 50%;
+  --color-status-served: 152 53% 24%;
+  --color-status-payment-received: 215 37% 42%;
+  --color-status-order-cancelled: 210 9% 34%;
+
+  --color-accent-1: 176 53% 65%;
+  --color-accent-2: 16 100% 60%;
+  --color-accent-3: 174 64% 34%;
+  --color-accent-4: 24 66% 29%;
 
   color-scheme: dark;
 }
@@ -129,13 +164,24 @@ body,
 body {
   margin: 0;
   font-family: var(--font-sans);
+  font-weight: 300;
+  background: hsl(var(--color-bg));
+  color: hsl(var(--color-text));
+}
+
+/* Optional: subtle radial for dark theme only */
+:root[data-theme='turkish'] body {
   background: radial-gradient(
     circle at top,
     hsl(var(--color-bg-soft)) 0,
     hsl(var(--color-bg-soft)) 40%,
     hsl(var(--color-bg)) 100%
   );
-  color: hsl(var(--color-text));
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
 }
 
 .gradient-border {
@@ -157,4 +203,3 @@ body {
   opacity: 0.75;
   z-index: -1;
 }
-

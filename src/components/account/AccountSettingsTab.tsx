@@ -65,7 +65,7 @@ export function AccountSettingsTab() {
             />
             <button
               type="submit"
-              className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-bg transition hover:bg-accent-soft"
+              className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-core-white transition hover:bg-accent-soft"
             >
               {passwordUpdated ? '✓ ' : ''}
               {t('account.settings.updatePassword')}

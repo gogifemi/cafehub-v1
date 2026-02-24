@@ -143,7 +143,7 @@ export function SignupPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-lg bg-accent px-4 py-2.5 font-medium text-bg transition hover:bg-accent-soft disabled:opacity-50"
+          className="w-full rounded-lg bg-accent px-4 py-2.5 font-medium text-core-white transition hover:bg-accent-soft disabled:opacity-50"
         >
           {t('auth.signup')}
         </button>

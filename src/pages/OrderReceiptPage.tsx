@@ -33,7 +33,7 @@ export const OrderReceiptPage = () => {
         <button
           type="button"
           onClick={() => navigate(`/cafe/${id}/menu`)}
-          className="w-full rounded-xl bg-coffee-500 py-3 font-medium text-core-white hover:bg-coffee-600"
+          className="w-full rounded-xl bg-accent py-3 font-medium text-core-white hover:bg-accent-strong"
         >
           {t('menu.title')}
         </button>

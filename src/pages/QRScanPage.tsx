@@ -97,7 +97,7 @@ export const QRScanPage = () => {
           />
           <button
             type="submit"
-            className="rounded-xl bg-accent px-4 py-2 text-sm font-medium text-core-black hover:bg-accent-soft"
+            className="rounded-xl bg-accent px-4 py-2 text-sm font-medium text-core-white hover:bg-accent-soft"
           >
             {t('actions.submit')}
           </button>

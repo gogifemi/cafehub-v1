@@ -86,7 +86,7 @@ export const CafeCard = ({
           <button
             type="button"
             onClick={onReservation}
-            className="w-full rounded-lg bg-accent py-2.5 text-sm font-medium text-bg transition hover:bg-accent-soft"
+            className="w-full rounded-lg bg-accent py-2.5 text-sm font-medium text-core-white transition hover:bg-accent-soft"
           >
             {t('account.favorites.makeReservation')}
           </button>

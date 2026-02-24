@@ -188,7 +188,7 @@ export const ReservationReceiptPage = () => {
         <button
           type="button"
           onClick={onHome}
-          className="inline-flex items-center rounded-full bg-accent px-4 py-2 text-xs font-medium text-core-black hover:bg-accent-soft"
+          className="inline-flex items-center rounded-full bg-accent px-4 py-2 text-xs font-medium text-core-white hover:bg-accent-soft"
         >
           {t('reservation.returnHome')}
         </button>

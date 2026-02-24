@@ -23,7 +23,7 @@ export function AccountFavoritesTab() {
           <p className="text-text-muted">{t('account.favorites.empty')}</p>
           <Link
             to="/"
-            className="mt-4 inline-block rounded-lg bg-accent px-4 py-2.5 font-medium text-bg transition hover:bg-accent-soft"
+            className="mt-4 inline-block rounded-lg bg-accent px-4 py-2.5 font-medium text-core-white transition hover:bg-accent-soft"
           >
             {t('account.favorites.browse')}
           </Link>

@@ -87,7 +87,7 @@ export const CartDrawer = ({
                       <button
                         type="button"
                         onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
-                        className="flex h-7 w-7 items-center justify-center rounded-full border border-border-subtle bg-surface text-text hover:border-coffee-300"
+                        className="flex h-7 w-7 items-center justify-center rounded-full border border-border-subtle bg-surface text-text hover:border-accent"
                         aria-label={t('order.decreaseQuantity')}
                       >
                         −
@@ -96,7 +96,7 @@ export const CartDrawer = ({
                       <button
                         type="button"
                         onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
-                        className="flex h-7 w-7 items-center justify-center rounded-full border border-border-subtle bg-surface text-text hover:border-coffee-300"
+                        className="flex h-7 w-7 items-center justify-center rounded-full border border-border-subtle bg-surface text-text hover:border-accent"
                         aria-label={t('order.increaseQuantity')}
                       >
                         +
@@ -138,7 +138,7 @@ export const CartDrawer = ({
                 onPlaceOrder();
                 onClose();
               }}
-              className="mt-4 w-full rounded-xl bg-coffee-500 py-3 font-medium text-core-white hover:bg-coffee-600"
+              className="mt-4 w-full rounded-xl bg-accent py-3 font-medium text-core-white hover:bg-accent-strong"
             >
               {t('order.placeOrder')}
             </button>

@@ -20,7 +20,7 @@ export const Navbar = () => {
             />
           </div>
           <div>
-            <p className="text-sm font-semibold tracking-tight text-text">
+            <p className="font-heading text-sm font-bold tracking-tight text-text-heading">
               {t('nav.brandTitle')}
             </p>
             <p className="text-xs text-text-muted">{t('nav.brandTagline')}</p>

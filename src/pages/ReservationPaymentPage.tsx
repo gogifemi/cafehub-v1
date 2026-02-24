@@ -225,7 +225,7 @@ export const ReservationPaymentPage = () => {
             disabled={!canSubmit || submitting}
             className={`inline-flex items-center rounded-full px-4 py-2 text-xs font-medium transition ${
               canSubmit && !submitting
-                ? 'bg-accent text-core-black hover:bg-accent-soft'
+                ? 'bg-accent text-core-white hover:bg-accent-soft'
                 : 'bg-surface-subtle text-text-subtle'
             }`}
           >

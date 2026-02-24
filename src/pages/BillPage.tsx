@@ -48,7 +48,7 @@ export const BillPage = () => {
             {t('order.bill')}
           </h1>
           {order?.tableNumber && (
-            <span className="rounded-full bg-coffee-500/20 px-2.5 py-0.5 text-xs font-medium text-coffee-600">
+            <span className="rounded-full bg-accent/20 px-2.5 py-0.5 text-xs font-medium text-accent">
               {t('menu.tableNo')} {order.tableNumber}
             </span>
           )}
@@ -110,14 +110,14 @@ export const BillPage = () => {
               }}
               className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm text-text transition-all ${
                 selectedMethod === opt.key
-                  ? 'border-coffee-500 bg-coffee-50 ring-2 ring-coffee-200 dark:bg-coffee-900/20'
-                  : 'border-border-subtle bg-bg-soft hover:border-coffee-300'
+                  ? 'border-accent bg-accent/10 ring-2 ring-accent/30'
+                  : 'border-border-subtle bg-bg-soft hover:border-accent'
               }`}
             >
               <span>{opt.icon}</span>
               <span>{opt.label}</span>
               {selectedMethod === opt.key && (
-                <span className="ml-auto text-coffee-500">✓</span>
+                <span className="ml-auto text-accent">✓</span>
               )}
             </button>
           ))}
@@ -142,7 +142,7 @@ export const BillPage = () => {
         <button
           type="button"
           onClick={() => navigate(`/cafe/${id}/order/payment`)}
-          className="flex-1 rounded-xl border border-coffee-600 bg-coffee-500 py-3 font-medium text-core-white shadow-sm transition hover:bg-coffee-600 hover:shadow-md"
+          className="flex-1 rounded-xl border border-accent-strong bg-accent py-3 font-medium text-core-white shadow-sm transition hover:bg-accent-strong hover:shadow-md"
         >
           {t('order.payNow')}
         </button>

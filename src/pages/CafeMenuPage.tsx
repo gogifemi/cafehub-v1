@@ -112,7 +112,7 @@ export const CafeMenuPage = () => {
       </button>
 
       {tableState && (
-        <div className="rounded-xl border border-coffee-500/30 bg-coffee-500/10 px-4 py-2 text-sm text-coffee-700">
+        <div className="rounded-xl border border-accent/30 bg-accent/10 px-4 py-2 text-sm text-accent-strong">
           ✓ {t('qrApproval.approved')}
         </div>
       )}
@@ -125,19 +125,19 @@ export const CafeMenuPage = () => {
               {t('menu.title')}
             </h1>
             {displayTableNumber && (
-              <span className="rounded-full bg-coffee-500/20 px-2.5 py-0.5 text-xs font-medium text-coffee-600">
+              <span className="rounded-full bg-accent/20 px-2.5 py-0.5 text-xs font-medium text-accent">
                 {t('menu.tableNo')} {displayTableNumber}
               </span>
             )}
             <button
               type="button"
               onClick={() => setCartOpen(true)}
-              className="relative ml-auto rounded-full border border-border-subtle bg-surface p-2 text-text-muted hover:border-coffee-300 hover:text-text"
+              className="relative ml-auto rounded-full border border-border-subtle bg-surface p-2 text-text-muted hover:border-accent hover:text-text"
               aria-label={t('order.cart')}
             >
               🛒
               {cartCount > 0 && (
-                <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-coffee-500 text-[10px] font-medium text-core-white">
+                <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[10px] font-medium text-core-white">
                   {cartCount}
                 </span>
               )}
@@ -153,8 +153,8 @@ export const CafeMenuPage = () => {
           onClick={() => setActiveTab('all')}
           className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition ${
             activeTab === 'all'
-              ? 'bg-coffee-500 text-core-white'
-              : 'border border-border-subtle bg-surface text-text-muted hover:border-coffee-300'
+              ? 'bg-accent text-core-white'
+              : 'border border-border-subtle bg-surface text-text-muted hover:border-accent'
           }`}
         >
           {t('menu.categories.all')}
@@ -166,8 +166,8 @@ export const CafeMenuPage = () => {
             onClick={() => setActiveTab(key)}
             className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition ${
               activeTab === key
-                ? 'bg-coffee-500 text-core-white'
-                : 'border border-border-subtle bg-surface text-text-muted hover:border-coffee-300'
+                ? 'bg-accent text-core-white'
+                : 'border border-border-subtle bg-surface text-text-muted hover:border-accent'
             }`}
           >
             {CATEGORY_ICONS[key]} {t(`menu.categories.${key}`)}
@@ -185,7 +185,7 @@ export const CafeMenuPage = () => {
             return (
               <article
                 key={itemId}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-border-subtle bg-bg-soft text-[11px] shadow-sm transition hover:border-coffee-300 hover:shadow-md"
+                className="group flex flex-col overflow-hidden rounded-2xl border border-border-subtle bg-bg-soft text-[11px] shadow-sm transition hover:border-accent hover:shadow-md"
               >
                 {/* Image / visual area */}
                 <div
@@ -205,13 +205,13 @@ export const CafeMenuPage = () => {
                         {item.description}
                       </p>
                     </div>
-                    <span className="ml-1 shrink-0 text-[11px] font-semibold text-coffee-500 sm:text-xs">
+                    <span className="ml-1 shrink-0 text-[11px] font-semibold text-accent sm:text-xs">
                       {item.price} TL
                     </span>
                   </div>
 
                   {item.popular && (
-                    <div className="inline-flex items-center gap-1 self-start rounded-full bg-coffee-500/10 px-2 py-0.5 text-[10px] font-medium text-coffee-600">
+                    <div className="inline-flex items-center gap-1 self-start rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-medium text-accent">
                       🔥 <span>Popüler</span>
                     </div>
                   )}
@@ -221,7 +221,7 @@ export const CafeMenuPage = () => {
                       <button
                         type="button"
                         onClick={() => handleAdd(item, item.categoryKey)}
-                        className="inline-flex w-full items-center justify-center gap-1 rounded-full border border-coffee-500 bg-coffee-500/10 px-3 py-1.5 text-[11px] font-medium text-coffee-600 transition hover:bg-coffee-500/20"
+                        className="inline-flex w-full items-center justify-center gap-1 rounded-full border border-accent bg-accent/10 px-3 py-1.5 text-[11px] font-medium text-accent transition hover:bg-accent/20"
                       >
                         ☕ {t('order.add')}
                       </button>
@@ -231,7 +231,7 @@ export const CafeMenuPage = () => {
                           <button
                             type="button"
                             onClick={() => updateQuantity(itemId, qty - 1)}
-                            className="flex h-7 w-7 items-center justify-center rounded-full border border-border-subtle bg-surface text-xs text-text transition hover:border-coffee-300"
+                            className="flex h-7 w-7 items-center justify-center rounded-full border border-border-subtle bg-surface text-xs text-text transition hover:border-accent"
                           >
                             −
                           </button>
@@ -241,7 +241,7 @@ export const CafeMenuPage = () => {
                           <button
                             type="button"
                             onClick={() => updateQuantity(itemId, qty + 1)}
-                            className="flex h-7 w-7 items-center justify-center rounded-full border border-border-subtle bg-surface text-xs text-text transition hover:border-coffee-300"
+                            className="flex h-7 w-7 items-center justify-center rounded-full border border-border-subtle bg-surface text-xs text-text transition hover:border-accent"
                           >
                             +
                           </button>

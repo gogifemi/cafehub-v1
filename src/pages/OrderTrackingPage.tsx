@@ -70,7 +70,7 @@ export const OrderTrackingPage = () => {
                     isCancelled && index > STATUS_ORDER.indexOf(orderStatus)
                       ? 'border-border-subtle bg-surface text-text-muted'
                       : isDone
-                        ? 'border-coffee-500 bg-coffee-500 text-core-white'
+                        ? 'border-accent bg-accent text-core-white'
                         : 'border-border-subtle bg-surface text-text-muted'
                   }`}
                 >
@@ -95,7 +95,7 @@ export const OrderTrackingPage = () => {
       {orderStatus !== 'cancelled' && (
         <div className="h-2 overflow-hidden rounded-full bg-surface-subtle">
           <div
-            className="h-full bg-coffee-500 transition-all duration-500"
+            className="h-full bg-accent transition-all duration-500"
             style={{
               width: `${((STATUS_ORDER.indexOf(orderStatus) + 1) / STATUS_ORDER.length) * 100}%`
             }}
@@ -125,7 +125,7 @@ export const OrderTrackingPage = () => {
         <button
           type="button"
           onClick={() => navigate(`/cafe/${id}/bill`)}
-          className="w-full rounded-xl border border-coffee-500/50 bg-coffee-500/10 py-3 font-medium text-coffee-600 hover:bg-coffee-500/20"
+          className="w-full rounded-xl border border-accent/50 bg-accent/10 py-3 font-medium text-accent hover:bg-accent/20"
         >
           {t('order.bill')}
         </button>

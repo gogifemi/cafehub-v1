@@ -47,7 +47,7 @@ export const OrderSummaryPage = () => {
             {t('order.orderSummary')}
           </h1>
           {tableNumber && (
-            <span className="rounded-full bg-coffee-500/20 px-2.5 py-0.5 text-xs font-medium text-coffee-600">
+            <span className="rounded-full bg-accent/20 px-2.5 py-0.5 text-xs font-medium text-accent">
               {t('menu.tableNo')} {tableNumber}
             </span>
           )}
@@ -111,7 +111,7 @@ export const OrderSummaryPage = () => {
           type="button"
           onClick={handleConfirm}
           disabled={cartItems.length === 0}
-          className="flex-1 rounded-xl bg-coffee-500 py-3 font-medium text-core-white hover:bg-coffee-600 disabled:opacity-50"
+          className="flex-1 rounded-xl bg-accent py-3 font-medium text-core-white hover:bg-accent-strong disabled:opacity-50"
         >
           {t('order.confirmOrder')}
         </button>
