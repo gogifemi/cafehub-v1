@@ -7,12 +7,30 @@
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-heading: 'Montserrat', var(--font-sans);
 
+  /* Brand kit – hex reference (use semantic --color-* in themes below) */
+  --brand-primary: #ff7518;
+  --brand-secondary: #18a2ff;
+  --brand-background: #fafafa;
+  --brand-background-dark: #1a1a1a;
+  --brand-text: #200000;
+  --brand-text-dark: #fafafa;
+  --brand-heading: #ff7518;
+  --brand-heading-dark: #ffd1b3;
+  --brand-subheading: #18a2ff;
+  --brand-subheading-dark: #e0ecff;
+  --status-waiting: #bb6e48;
+  --status-received: #706455;
+  --status-preparing: #797979;
+  --status-served: #3a5284;
+  --status-payment: #7a333b;
+  --status-cancelled: #3d3e3e;
+
   /* Core monochrome (logo, button text on accent) */
   --core-black: 0 0% 0%;
   --core-white: 0 0% 100%;
 
-  /* ========== Coffee theme (dark) – Brand dark palette ========== */
-  /* Backgrounds: #1a1a1a, #f7f7f7 text */
+  /* ========== Coffee theme (dark) – Brand kit dark palette ========== */
+  /* Backgrounds: #1a1a1a, text #fafafa, heading #ffd1b3, subheading #e0ecff */
   --color-bg: 0 0% 10%;
   --color-bg-soft: 0 0% 12%;
   --color-surface: 0 0% 14%;
@@ -23,88 +41,88 @@
   --color-border: 0 0% 32%;
   --color-border-strong: 0 0% 45%;
 
-  --color-text: 0 0% 97%;
+  --color-text: 0 0% 98%;
   --color-text-muted: 0 0% 75%;
   --color-text-subtle: 0 0% 60%;
-  --color-text-accent: 0 0% 97%;
-  --color-heading: 14 100% 93%;
-  --color-subheading: 176 100% 96%;
+  --color-text-accent: 0 0% 98%;
+  --color-heading: 24 100% 86%;
+  --color-subheading: 224 100% 94%;
 
-  /* Primary #ff6b35, Secondary #4ecdc4, Teal dark #1f8e82 */
-  --color-accent: 16 100% 60%;
-  --color-accent-soft: 16 100% 65%;
-  --color-accent-strong: 16 100% 55%;
-  --color-secondary: 176 53% 65%;
-  --color-secondary-dark: 174 64% 34%;
+  /* Primary #ff7518, Secondary #18a2ff (brand kit) */
+  --color-accent: 24 100% 55%;
+  --color-accent-soft: 24 100% 65%;
+  --color-accent-strong: 24 100% 50%;
+  --color-secondary: 204 100% 55%;
+  --color-secondary-dark: 204 100% 45%;
 
   --color-success: 152 53% 35%;
   --color-warning: 46 91% 65%;
   --color-info: 215 37% 52%;
   --color-ring: var(--color-accent);
 
-  /* Status (order flow) */
-  --color-status-order-confirmed: 32 38% 40%;
-  --color-status-order-received: 46 91% 65%;
-  --color-status-being-prepared: 0 0% 50%;
-  --color-status-served: 152 53% 24%;
-  --color-status-payment-received: 215 37% 42%;
-  --color-status-order-cancelled: 210 9% 34%;
+  /* Status (order flow) – brand kit */
+  --color-status-order-confirmed: 21 44% 51%;
+  --color-status-order-received: 27 14% 39%;
+  --color-status-being-prepared: 0 0% 47%;
+  --color-status-served: 217 39% 37%;
+  --color-status-payment-received: 354 40% 34%;
+  --color-status-order-cancelled: 180 1% 24%;
 
   /* Gradient accents (optional badges/borders) */
-  --color-accent-1: 176 53% 65%;
-  --color-accent-2: 16 100% 60%;
-  --color-accent-3: 174 64% 34%;
-  --color-accent-4: 24 66% 29%;
+  --color-accent-1: 204 100% 55%;
+  --color-accent-2: 24 100% 55%;
+  --color-accent-3: 217 39% 37%;
+  --color-accent-4: 354 40% 34%;
 
   color-scheme: dark;
 }
 
-/* ========== Mono theme (light) – Brand light palette ========== */
+/* ========== Mono theme (light) – Brand kit light palette ========== */
 :root[data-theme='core'] {
-  --color-bg: 0 0% 97%;
-  --color-bg-soft: 0 0% 95%;
+  --color-bg: 0 0% 98%;
+  --color-bg-soft: 0 0% 96%;
   --color-surface: 0 0% 100%;
-  --color-surface-subtle: 0 0% 96%;
-  --color-surface-elevated: 0 0% 98%;
+  --color-surface-subtle: 0 0% 98%;
+  --color-surface-elevated: 0 0% 100%;
 
   --color-border-subtle: 0 0% 88%;
   --color-border: 0 0% 80%;
   --color-border-strong: 0 0% 70%;
 
-  --color-text: 0 0% 10%;
+  --color-text: 0 100% 6%;
   --color-text-muted: 0 0% 35%;
   --color-text-subtle: 0 0% 45%;
-  --color-text-accent: 0 0% 10%;
-  --color-heading: 24 66% 29%;
-  --color-subheading: 174 64% 34%;
+  --color-text-accent: 0 100% 6%;
+  --color-heading: 24 100% 55%;
+  --color-subheading: 204 100% 55%;
 
-  --color-accent: 16 100% 60%;
-  --color-accent-soft: 16 100% 50%;
-  --color-accent-strong: 16 100% 45%;
-  --color-secondary: 176 53% 55%;
-  --color-secondary-dark: 174 64% 34%;
+  --color-accent: 24 100% 55%;
+  --color-accent-soft: 24 100% 50%;
+  --color-accent-strong: 24 100% 45%;
+  --color-secondary: 204 100% 55%;
+  --color-secondary-dark: 204 100% 45%;
 
   --color-success: 152 53% 28%;
   --color-warning: 46 91% 45%;
   --color-info: 215 37% 42%;
   --color-ring: var(--color-accent);
 
-  --color-status-order-confirmed: 32 38% 40%;
-  --color-status-order-received: 46 91% 55%;
+  --color-status-order-confirmed: 21 44% 51%;
+  --color-status-order-received: 27 14% 39%;
   --color-status-being-prepared: 0 0% 45%;
-  --color-status-served: 152 53% 24%;
-  --color-status-payment-received: 215 37% 42%;
-  --color-status-order-cancelled: 210 9% 34%;
+  --color-status-served: 217 39% 37%;
+  --color-status-payment-received: 354 40% 34%;
+  --color-status-order-cancelled: 180 1% 24%;
 
-  --color-accent-1: 176 53% 55%;
-  --color-accent-2: 16 100% 60%;
-  --color-accent-3: 174 64% 34%;
-  --color-accent-4: 24 66% 29%;
+  --color-accent-1: 204 100% 55%;
+  --color-accent-2: 24 100% 55%;
+  --color-accent-3: 217 39% 37%;
+  --color-accent-4: 354 40% 34%;
 
   color-scheme: light;
 }
 
-/* Explicit Coffee (dark) theme – same as default */
+/* Explicit Coffee (dark) theme – brand kit dark palette */
 :root[data-theme='turkish'] {
   --color-bg: 0 0% 10%;
   --color-bg-soft: 0 0% 12%;
@@ -116,35 +134,35 @@
   --color-border: 0 0% 32%;
   --color-border-strong: 0 0% 45%;
 
-  --color-text: 0 0% 97%;
+  --color-text: 0 0% 98%;
   --color-text-muted: 0 0% 75%;
   --color-text-subtle: 0 0% 60%;
-  --color-text-accent: 0 0% 97%;
-  --color-heading: 14 100% 93%;
-  --color-subheading: 176 100% 96%;
+  --color-text-accent: 0 0% 98%;
+  --color-heading: 24 100% 86%;
+  --color-subheading: 224 100% 94%;
 
-  --color-accent: 16 100% 60%;
-  --color-accent-soft: 16 100% 65%;
-  --color-accent-strong: 16 100% 55%;
-  --color-secondary: 176 53% 65%;
-  --color-secondary-dark: 174 64% 34%;
+  --color-accent: 24 100% 55%;
+  --color-accent-soft: 24 100% 65%;
+  --color-accent-strong: 24 100% 50%;
+  --color-secondary: 204 100% 55%;
+  --color-secondary-dark: 204 100% 45%;
 
   --color-success: 152 53% 35%;
   --color-warning: 46 91% 65%;
   --color-info: 215 37% 52%;
   --color-ring: var(--color-accent);
 
-  --color-status-order-confirmed: 32 38% 40%;
-  --color-status-order-received: 46 91% 65%;
-  --color-status-being-prepared: 0 0% 50%;
-  --color-status-served: 152 53% 24%;
-  --color-status-payment-received: 215 37% 42%;
-  --color-status-order-cancelled: 210 9% 34%;
+  --color-status-order-confirmed: 21 44% 51%;
+  --color-status-order-received: 27 14% 39%;
+  --color-status-being-prepared: 0 0% 47%;
+  --color-status-served: 217 39% 37%;
+  --color-status-payment-received: 354 40% 34%;
+  --color-status-order-cancelled: 180 1% 24%;
 
-  --color-accent-1: 176 53% 65%;
-  --color-accent-2: 16 100% 60%;
-  --color-accent-3: 174 64% 34%;
-  --color-accent-4: 24 66% 29%;
+  --color-accent-1: 204 100% 55%;
+  --color-accent-2: 24 100% 55%;
+  --color-accent-3: 217 39% 37%;
+  --color-accent-4: 354 40% 34%;
 
   color-scheme: dark;
 }
