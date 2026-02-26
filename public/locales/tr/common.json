@@ -222,6 +222,11 @@
     "cancel": "İptal",
     "save": "Kaydet"
   },
+  "common": {
+    "or": "veya",
+    "save": "Kaydet",
+    "cancel": "İptal"
+  },
   "auth": {
     "login": "Giriş Yap",
     "signup": "Kayıt Ol",
@@ -260,7 +265,12 @@
       "email": "E-posta",
       "phone": "Telefon",
       "birthDate": "Doğum Tarihi",
-      "save": "Bilgileri Kaydet"
+      "save": "Bilgileri Kaydet",
+      "changeAvatar": "Avatarı Değiştir",
+      "avatarHint": "Hayvan avatarı seç veya fotoğraf yükle",
+      "chooseAnimal": "Avatar Seç",
+      "uploadPhoto": "Fotoğraf Yükle",
+      "uploadHint": "Kendi fotoğrafını kullan"
     },
     "favorites": {
       "title": "Favori Kafeler",

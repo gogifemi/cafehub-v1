@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Check, ChevronLeft, ChevronRight, X, Upload } from 'lucide-react';
 import { animalAvatars, type AnimalAvatarId } from '../../data/animalAvatars';
 import { useAuth } from '../../context/AuthContext';
+import { ModalPortal } from '../layout/ModalPortal';
 
 interface AvatarPickerProps {
   onClose: () => void;
@@ -49,10 +50,11 @@ export function AvatarPicker({ onClose }: AvatarPickerProps) {
   const isTurkish = i18n.language === 'tr';
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-2xl rounded-2xl border border-secondary/20 bg-bg p-6 shadow-xl">
-        {/* Header */}
-        <div className="mb-4 flex items-center justify-between">
+    <ModalPortal>
+      <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 p-4">
+        <div className="w-full max-w-2xl rounded-2xl border border-secondary/20 bg-bg p-6 shadow-xl">
+          {/* Header */}
+          <div className="mb-4 flex items-center justify-between">
           <h2 className="font-heading text-xl font-bold text-text-heading">
             {t('account.profile.chooseAnimal') || 'Avatar Seç'}
           </h2>
@@ -64,10 +66,10 @@ export function AvatarPicker({ onClose }: AvatarPickerProps) {
           >
             <X className="h-5 w-5 text-text" />
           </button>
-        </div>
+          </div>
 
-        {/* Upload Option */}
-        <button
+          {/* Upload Option */}
+          <button
           type="button"
           onClick={handleUpload}
           className="mb-6 flex w-full items-center gap-3 rounded-lg border border-secondary/30 p-4 transition-all hover:border-secondary/60 hover:bg-white/5"
@@ -83,9 +85,9 @@ export function AvatarPicker({ onClose }: AvatarPickerProps) {
               {t('account.profile.uploadHint') || 'Kendi fotoğrafını kullan'}
             </p>
           </div>
-        </button>
+          </button>
 
-        <div className="relative mb-4">
+          <div className="relative mb-4">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-secondary/20" />
           </div>
@@ -94,12 +96,11 @@ export function AvatarPicker({ onClose }: AvatarPickerProps) {
               {t('common.or') || 'veya'}
             </span>
           </div>
-        </div>
+          </div>
 
-        {/* Animal Grid */}
-        <div className="grid grid-cols-4 gap-4">
+          {/* Animal Grid */}
+          <div className="grid grid-cols-4 gap-4">
           {currentAvatars.map((animal) => {
-            const Icon = animal.icon;
             const isSelected = selectedId === animal.id;
 
             return (
@@ -113,13 +114,16 @@ export function AvatarPicker({ onClose }: AvatarPickerProps) {
                     : 'hover:scale-105 hover:bg-white/5'
                 }`}
               >
-                <div
-                  className="mb-2 flex h-16 w-16 items-center justify-center rounded-xl"
-                  style={{ backgroundColor: animal.bgColor }}
-                >
-                  <Icon style={{ color: animal.color }} className="h-8 w-8" strokeWidth={1.5} />
+                <div className="mb-2 h-16 w-16 overflow-hidden rounded-xl bg-surface-subtle">
+                  <img
+                    src={animal.imageUrl}
+                    alt={isTurkish ? animal.name : animal.nameEn}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
-                <span className="text-xs font-medium text-text">{isTurkish ? animal.name : animal.nameEn}</span>
+                <span className="text-xs font-medium text-text">
+                  {isTurkish ? animal.name : animal.nameEn}
+                </span>
                 <span className="text-[10px] text-text-muted">
                   {isTurkish ? animal.description : animal.descriptionEn}
                 </span>
@@ -133,11 +137,11 @@ export function AvatarPicker({ onClose }: AvatarPickerProps) {
               </button>
             );
           })}
-        </div>
+          </div>
 
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="mt-6 flex items-center justify-center gap-4">
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="mt-6 flex items-center justify-center gap-4">
             <button
               type="button"
               onClick={() => setPage((p) => Math.max(0, p - 1))}
@@ -159,11 +163,11 @@ export function AvatarPicker({ onClose }: AvatarPickerProps) {
             >
               <ChevronRight className="h-5 w-5" />
             </button>
-          </div>
-        )}
+            </div>
+          )}
 
-        {/* Footer Buttons */}
-        <div className="mt-6 flex gap-3">
+          {/* Footer Buttons */}
+          <div className="mt-6 flex gap-3">
           <button
             type="button"
             onClick={onClose}
@@ -179,8 +183,9 @@ export function AvatarPicker({ onClose }: AvatarPickerProps) {
           >
             {t('common.save') || 'Kaydet'}
           </button>
+          </div>
         </div>
       </div>
-    </div>
+    </ModalPortal>
   );
 }

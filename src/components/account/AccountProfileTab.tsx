@@ -29,13 +29,13 @@ export function AccountProfileTab() {
     if (user?.avatar?.type === 'animal' && user.avatar.animalId) {
       const animal = getAnimalAvatarById(user.avatar.animalId);
       if (animal) {
-        const Icon = animal.icon;
         return (
-          <div
-            className="flex h-20 w-20 items-center justify-center rounded-2xl"
-            style={{ backgroundColor: animal.bgColor }}
-          >
-            <Icon style={{ color: animal.color }} className="h-10 w-10" strokeWidth={1.5} />
+          <div className="h-20 w-20 overflow-hidden rounded-2xl bg-surface-subtle">
+            <img
+              src={animal.imageUrl}
+              alt={animal.name}
+              className="h-full w-full object-cover"
+            />
           </div>
         );
       }

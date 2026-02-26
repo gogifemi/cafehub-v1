@@ -47,14 +47,12 @@ export function AccountPage() {
           ) : user.avatar?.type === 'animal' && user.avatar.animalId ? (
             (() => {
               const animal = getAnimalAvatarById(user.avatar.animalId!);
-              const Icon = animal?.icon;
-              return Icon ? (
-                <span
-                  className="flex h-full w-full items-center justify-center"
-                  style={{ color: animal.color, backgroundColor: animal.bgColor }}
-                >
-                  <Icon className="h-8 w-8" strokeWidth={1.5} />
-                </span>
+              return animal ? (
+                <img
+                  src={animal.imageUrl}
+                  alt={animal.name}
+                  className="h-full w-full object-cover"
+                />
               ) : (
                 initials
               );

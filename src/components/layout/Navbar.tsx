@@ -9,7 +9,7 @@ export const Navbar = () => {
   const { isAuthenticated, logout } = useAuth();
 
   return (
-    <header className="border-b border-border bg-bg/80 backdrop-blur">
+    <header className="border-b border-border bg-bg">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link to="/" className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-accent via-accent-soft to-accent-strong shadow-lg shadow-accent/40">
