@@ -7,6 +7,10 @@
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-heading: 'Montserrat', var(--font-sans);
 
+  /* Font weights (brand kit) */
+  --font-weight-body: 400; /* Inter Regular (light mode) */
+  --font-weight-heading: 700; /* Montserrat Bold */
+
   /* Brand kit – hex reference (use semantic --color-* in themes below) */
   --brand-primary: #ff7518;
   --brand-secondary: #18a2ff;
@@ -167,6 +171,28 @@
   color-scheme: dark;
 }
 
+/* Match font weights to color scheme when no explicit theme is set */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --font-weight-body: 300; /* Inter Light */
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --font-weight-body: 400; /* Inter Regular */
+  }
+}
+
+/* Theme toggle overrides */
+[data-theme='turkish'] {
+  --font-weight-body: 300; /* dark mode */
+}
+
+[data-theme='core'] {
+  --font-weight-body: 400; /* light mode */
+}
+
 *,
 *::before,
 *::after {
@@ -182,7 +208,7 @@ body,
 body {
   margin: 0;
   font-family: var(--font-sans);
-  font-weight: 300;
+  font-weight: var(--font-weight-body);
   background: hsl(var(--color-bg));
   color: hsl(var(--color-text));
 }
@@ -199,7 +225,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  font-weight: 700;
+  font-weight: var(--font-weight-heading);
 }
 
 .gradient-border {
