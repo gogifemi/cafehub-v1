@@ -1,6 +1,7 @@
 import type { Cafe } from '../../types/cafe';
 import { CafeCard } from './CafeCard';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../context/AuthContext';
 
 interface CafeListProps {
   cafes: Cafe[];
@@ -8,6 +9,9 @@ interface CafeListProps {
 
 export const CafeList = ({ cafes }: CafeListProps) => {
   const { t } = useTranslation();
+  const { user, isAuthenticated, addFavorite, removeFavorite } = useAuth();
+
+  const favoriteIds = user?.favorites ?? [];
 
   if (!cafes.length) {
     return (
@@ -20,7 +24,22 @@ export const CafeList = ({ cafes }: CafeListProps) => {
   return (
     <section className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {cafes.map((cafe) => (
-        <CafeCard key={cafe.id} cafe={cafe} />
+        <CafeCard
+          key={cafe.id}
+          cafe={cafe}
+          isFavorite={favoriteIds.includes(cafe.id)}
+          onToggleFavorite={
+            isAuthenticated && user
+              ? () => {
+                  if (favoriteIds.includes(cafe.id)) {
+                    removeFavorite(cafe.id);
+                  } else {
+                    addFavorite(cafe.id);
+                  }
+                }
+              : undefined
+          }
+        />
       ))}
     </section>
   );

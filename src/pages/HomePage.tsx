@@ -42,10 +42,6 @@ export const HomePage = () => {
             {t('home.heroSubtitle')}
           </p>
         </div>
-        <div className="rounded-xl border border-status-info/30 bg-status-info/10 px-3 py-2 text-xs text-status-info">
-          <p className="font-medium">{t('home.badgeTitle')}</p>
-          <p className="text-status-info/80">{t('home.badgeBody')}</p>
-        </div>
       </div>
 
       <SearchBar query={query} onQueryChange={setQuery} city={city} onCityChange={setCity} />

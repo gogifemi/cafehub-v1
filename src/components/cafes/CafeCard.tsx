@@ -2,6 +2,7 @@ import type { Cafe } from '../../types/cafe';
 import { Rating } from './Rating';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { Heart } from 'lucide-react';
 
 interface CafeCardProps {
   cafe: Cafe;
@@ -53,7 +54,9 @@ export const CafeCard = ({
               <button
                 type="button"
                 onClick={handleToggleFavorite}
-                className="shrink-0 rounded p-1 text-status-warning transition hover:scale-110"
+                className={`shrink-0 rounded p-1 transition hover:scale-110 ${
+                  isFavorite ? 'text-[#ff6b35]' : 'text-text-subtle hover:text-[#ff6b35]'
+                }`}
                 aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
               >
                 {isFavorite ? '❤️' : '🤍'}
@@ -129,6 +132,22 @@ export const CafeCard = ({
         </div>
 
         <div className="flex flex-col items-end gap-1">
+          {onToggleFavorite && (
+            <button
+              type="button"
+              onClick={handleToggleFavorite}
+              className={`flex h-6 w-6 items-center justify-center rounded-full -mr-1 transition ${
+                isFavorite ? 'text-[#ff6b35]' : 'text-text-subtle hover:text-[#ff6b35]'
+              }`}
+              aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+            >
+              <Heart
+                className="h-4 w-4 transition-transform group-hover:scale-110"
+                strokeWidth={1.8}
+                fill={isFavorite ? 'currentColor' : 'none'}
+              />
+            </button>
+          )}
           <Rating value={cafe.rating} />
           <span className="text-[11px] text-text-subtle">
             {t('cafes.reviews', {

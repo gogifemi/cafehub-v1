@@ -1,13 +1,16 @@
 import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Heart } from 'lucide-react';
 import { getMockCafesForLanguage } from '../data/mockCafes';
 import { Rating } from '../components/cafes/Rating';
+import { useAuth } from '../context/AuthContext';
 
 export const CafeDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const { user, isAuthenticated, addFavorite, removeFavorite } = useAuth();
 
   const cafes = useMemo(() => getMockCafesForLanguage(i18n.language), [i18n.language]);
   const cafe = cafes.find((c) => c.id === id);
@@ -66,6 +69,17 @@ export const CafeDetailPage = () => {
     navigate(`/cafe/${cafe.id}/reserve`);
   };
 
+  const isFavorite = !!user?.favorites.includes(cafe.id);
+
+  const onToggleFavorite = () => {
+    if (!isAuthenticated || !user) return;
+    if (isFavorite) {
+      removeFavorite(cafe.id);
+    } else {
+      addFavorite(cafe.id);
+    }
+  };
+
   return (
     <section className="space-y-6">
       {/* Back button */}
@@ -81,9 +95,29 @@ export const CafeDetailPage = () => {
       <header className="space-y-3 rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm shadow-black/40">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-1.5">
-            <h1 className="text-xl font-semibold tracking-tight text-text sm:text-2xl">
-              {cafe.name}
-            </h1>
+            <div className="flex items-center gap-3">
+              <h1 className="text-xl font-semibold tracking-tight text-text sm:text-2xl">
+                {cafe.name}
+              </h1>
+              {isAuthenticated && user && (
+                <button
+                  type="button"
+                  onClick={onToggleFavorite}
+                  className={`rounded-full border bg-surface-subtle p-2 transition ${
+                    isFavorite
+                      ? 'border-[#ff6b35] text-[#ff6b35]'
+                      : 'border-border-subtle text-text-subtle hover:border-[#ff6b35] hover:text-[#ff6b35]'
+                  }`}
+                  aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+                >
+                  <Heart
+                    className="h-4 w-4"
+                    strokeWidth={1.8}
+                    fill={isFavorite ? 'currentColor' : 'none'}
+                  />
+                </button>
+              )}
+            </div>
             <div className="flex flex-wrap items-center gap-2 text-xs text-text-muted">
               <div className="inline-flex items-center gap-2 rounded-full bg-surface-subtle px-2.5 py-1">
                 <Rating value={cafe.rating} />
