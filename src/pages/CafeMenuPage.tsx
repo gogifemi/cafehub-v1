@@ -117,7 +117,16 @@ export const CafeMenuPage = () => {
   const cartCount = cartItems.reduce((s, i) => s + i.quantity, 0);
 
   const itemsForTab: MenuItemWithCategory[] =
-    activeTab === 'all' ? getAllMenuItems() : menuItems[activeTab].map((item) => ({ ...item, categoryKey: activeTab }));
+    activeTab === 'all'
+      ? getAllMenuItems()
+      : menuItems[activeTab].map((item) => ({ ...item, categoryKey: activeTab }));
+
+  const handleViewDetails = (event: React.MouseEvent, item: MenuItemWithCategory) => {
+    if ((event.target as HTMLElement).closest('button')) return;
+
+    const itemId = getItemId(item.categoryKey, item.name);
+    navigate(`/cafe/${id}/menu/${itemId}`);
+  };
 
   const getQuantity = (categoryKey: MenuCategoryKey, name: string) => {
     const itemId = getItemId(categoryKey, name);
@@ -164,7 +173,10 @@ export const CafeMenuPage = () => {
             >
               <ShoppingCart className="h-4 w-4" />
               {cartCount > 0 && (
-                <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[10px] font-medium text-core-white">
+                <span
+                  className="absolute flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[10px] font-medium text-core-white"
+                  style={{ right: '-0.5rem', top: '-0.5rem' }}
+                >
                   {cartCount}
                 </span>
               )}
@@ -197,7 +209,10 @@ export const CafeMenuPage = () => {
                 : 'border border-border-subtle bg-surface text-text-muted hover:border-accent'
             }`}
           >
-            {CATEGORY_ICONS[key]} {t(`menu.categories.${key}`)}
+            <span className="inline-flex items-center gap-1">
+              {CATEGORY_ICONS[key]}
+              <span>{t(`menu.categories.${key}`)}</span>
+            </span>
           </button>
         ))}
       </div>
@@ -213,6 +228,15 @@ export const CafeMenuPage = () => {
               <article
                 key={itemId}
                 className="group flex flex-col overflow-hidden rounded-2xl border border-border-subtle bg-bg-soft text-[11px] shadow-sm transition hover:border-accent hover:shadow-md"
+                role="button"
+                tabIndex={0}
+                onClick={(event) => handleViewDetails(event, item)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    handleViewDetails(event as unknown as React.MouseEvent, item);
+                  }
+                }}
               >
                 {/* Image / visual area */}
                 <div

@@ -10,6 +10,7 @@ import { CafeDetailPage } from './pages/CafeDetailPage';
 import { QRScanPage } from './pages/QRScanPage';
 import { QRApprovalPage } from './pages/QRApprovalPage';
 import { CafeMenuPage } from './pages/CafeMenuPage';
+import { MenuItemDetailPage } from './pages/MenuItemDetailPage';
 import { OrderProvider } from './context/OrderContext';
 import { OrderSummaryPage } from './pages/OrderSummaryPage';
 import { OrderTrackingPage } from './pages/OrderTrackingPage';
@@ -40,6 +41,7 @@ function App() {
                 <Route path="/cafe/:id/scan" element={<QRScanPage />} />
                 <Route path="/cafe/:id/scan/approval" element={<QRApprovalPage />} />
                 <Route path="/cafe/:id/menu" element={<CafeMenuPage />} />
+                <Route path="/cafe/:id/menu/:itemId" element={<MenuItemDetailPage />} />
                 <Route path="/cafe/:id/order/summary" element={<OrderSummaryPage />} />
                 <Route path="/cafe/:id/order/tracking" element={<OrderTrackingPage />} />
                 <Route path="/cafe/:id/order/payment" element={<OrderPaymentPage />} />

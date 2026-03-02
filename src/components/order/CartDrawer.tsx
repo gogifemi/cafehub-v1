@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Trash2, X } from 'lucide-react';
 import type { CartItem } from '../../context/OrderContext';
+import { ModalPortal } from '../layout/ModalPortal';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -32,9 +33,9 @@ export const CartDrawer = ({
   if (!isOpen) return null;
 
   return (
-    <>
+    <ModalPortal>
       <div
-        className="fixed inset-0 z-40 bg-core-black/50"
+        className="fixed inset-0 z-[9998] bg-core-black/50"
         onClick={onClose}
         onKeyDown={(e) => e.key === 'Escape' && onClose()}
         role="button"
@@ -42,7 +43,7 @@ export const CartDrawer = ({
         aria-label={t('order.closeCart')}
       />
       <aside
-        className="fixed right-0 top-0 z-50 flex h-full w-full max-w-md flex-col bg-bg shadow-xl sm:max-w-sm"
+        className="fixed right-0 top-0 z-[9999] flex h-full w-full max-w-md flex-col bg-bg shadow-xl sm:max-w-sm"
         aria-modal="true"
         aria-label={t('order.cart')}
       >
@@ -146,6 +147,6 @@ export const CartDrawer = ({
           </div>
         )}
       </aside>
-    </>
+    </ModalPortal>
   );
 };

@@ -106,7 +106,10 @@ export function AccountPage() {
                 : 'text-text-muted hover:text-text'
             }`}
           >
-            {icon} {t(labelKey)}
+            <span className="inline-flex items-center gap-1">
+              {icon}
+              <span>{t(labelKey)}</span>
+            </span>
           </button>
         ))}
       </nav>
