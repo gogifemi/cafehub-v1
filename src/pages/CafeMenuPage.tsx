@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type ReactNode } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getMockCafesForLanguage } from '../data/mockCafes';
@@ -11,14 +11,23 @@ import {
 } from '../data/mockMenuItems';
 import { useOrder } from '../context/OrderContext';
 import { CartDrawer } from '../components/order/CartDrawer';
+import {
+  CakeSlice,
+  Coffee,
+  Croissant,
+  CupSoda,
+  Flame,
+  ShoppingCart,
+  UtensilsCrossed
+} from 'lucide-react';
 
-const CATEGORY_ICONS: Record<MenuCategoryKey, string> = {
-  coffees: '☕',
-  hotDrinks: '🔥',
-  coldDrinks: '🥤',
-  desserts: '🍰',
-  breakfast: '🥐',
-  meals: '🍽️'
+const CATEGORY_ICONS: Record<MenuCategoryKey, ReactNode> = {
+  coffees: <Coffee className="h-3 w-3" />,
+  hotDrinks: <Flame className="h-3 w-3" />,
+  coldDrinks: <CupSoda className="h-3 w-3" />,
+  desserts: <CakeSlice className="h-3 w-3" />,
+  breakfast: <Croissant className="h-3 w-3" />,
+  meals: <UtensilsCrossed className="h-3 w-3" />
 };
 
 type MenuTab = 'all' | MenuCategoryKey;
@@ -35,21 +44,39 @@ function getItemId(categoryKey: MenuCategoryKey, name: string): string {
 
 function getCardImageStyles(
   categoryKey: MenuCategoryKey
-): { background: string; emoji: string } {
+): { background: string; icon: ReactNode } {
   switch (categoryKey) {
     case 'coffees':
-      return { background: 'bg-amber-800/30', emoji: '☕' };
+      return {
+        background: 'bg-amber-800/30',
+        icon: <Coffee className="h-10 w-10 sm:h-12 sm:w-12 text-accent" />
+      };
     case 'hotDrinks':
-      return { background: 'bg-orange-800/30', emoji: '🫖' };
+      return {
+        background: 'bg-orange-800/30',
+        icon: <Flame className="h-10 w-10 sm:h-12 sm:w-12 text-accent" />
+      };
     case 'coldDrinks':
-      return { background: 'bg-blue-800/30', emoji: '🥤' };
+      return {
+        background: 'bg-blue-800/30',
+        icon: <CupSoda className="h-10 w-10 sm:h-12 sm:w-12 text-accent" />
+      };
     case 'desserts':
-      return { background: 'bg-rose-800/30', emoji: '🍰' };
+      return {
+        background: 'bg-rose-800/30',
+        icon: <CakeSlice className="h-10 w-10 sm:h-12 sm:w-12 text-accent" />
+      };
     case 'breakfast':
-      return { background: 'bg-yellow-800/30', emoji: '🍳' };
+      return {
+        background: 'bg-yellow-800/30',
+        icon: <Croissant className="h-10 w-10 sm:h-12 sm:w-12 text-accent" />
+      };
     case 'meals':
     default:
-      return { background: 'bg-emerald-800/30', emoji: '🥪' };
+      return {
+        background: 'bg-emerald-800/30',
+        icon: <UtensilsCrossed className="h-10 w-10 sm:h-12 sm:w-12 text-accent" />
+      };
   }
 }
 
@@ -135,7 +162,7 @@ export const CafeMenuPage = () => {
               className="relative ml-auto rounded-full border border-border-subtle bg-surface p-2 text-text-muted hover:border-accent hover:text-text"
               aria-label={t('order.cart')}
             >
-              🛒
+              <ShoppingCart className="h-4 w-4" />
               {cartCount > 0 && (
                 <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[10px] font-medium text-core-white">
                   {cartCount}
@@ -181,7 +208,7 @@ export const CafeMenuPage = () => {
           {itemsForTab.map((item) => {
             const qty = getQuantity(item.categoryKey, item.name);
             const itemId = getItemId(item.categoryKey, item.name);
-            const { background, emoji } = getCardImageStyles(item.categoryKey);
+            const { background, icon } = getCardImageStyles(item.categoryKey);
             return (
               <article
                 key={itemId}
@@ -191,7 +218,7 @@ export const CafeMenuPage = () => {
                 <div
                   className={`flex h-36 w-full items-center justify-center ${background}`}
                 >
-                  <span className="text-3xl sm:text-4xl">{emoji}</span>
+                  {icon}
                 </div>
 
                 {/* Content – previous text-centric design */}
@@ -212,7 +239,8 @@ export const CafeMenuPage = () => {
 
                   {item.popular && (
                     <div className="inline-flex items-center gap-1 self-start rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-medium text-accent">
-                      🔥 <span>Popüler</span>
+                      <Flame className="h-3 w-3" />
+                      <span>Popüler</span>
                     </div>
                   )}
 
@@ -223,7 +251,8 @@ export const CafeMenuPage = () => {
                         onClick={() => handleAdd(item, item.categoryKey)}
                         className="inline-flex w-full items-center justify-center gap-1 rounded-full border border-accent bg-accent/10 px-3 py-1.5 text-[11px] font-medium text-accent transition hover:bg-accent/20"
                       >
-                        ☕ {t('order.add')}
+                        <Coffee className="h-3 w-3" />
+                        {t('order.add')}
                       </button>
                     ) : (
                       <div className="flex items-center justify-between gap-1">

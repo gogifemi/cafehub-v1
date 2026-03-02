@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { Search } from 'lucide-react';
 
 interface SearchBarProps {
   query: string;
@@ -24,7 +25,7 @@ export const SearchBar = ({ query, onQueryChange, city, onCityChange }: SearchBa
           {t('search.label')}
         </label>
         <div className="mt-1.5 flex items-center gap-2 rounded-xl border border-border bg-bg-soft px-3 py-2 focus-within:border-accent focus-within:ring-1 focus-within:ring-accent/60">
-          <span className="text-text-subtle">🔍</span>
+          <Search className="h-4 w-4 text-text-subtle" />
           <input
             type="text"
             className="h-7 w-full border-none bg-transparent text-sm text-text placeholder:text-text-subtle focus:outline-none focus:ring-0"

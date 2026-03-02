@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Mail, Smartphone } from 'lucide-react';
 import { useReservation } from '../context/ReservationContext';
 import { getMockCafesForLanguage } from '../data/mockCafes';
 
@@ -155,8 +156,14 @@ export const ReservationReceiptPage = () => {
         </dl>
 
         <div className="space-y-1 pt-2">
-          <p>{t('reservation.receiptSent')}</p>
-          <p>{t('reservation.viewInApp')}</p>
+          <p className="inline-flex items-center gap-1">
+            <Mail className="h-4 w-4 text-text-muted" />
+            <span>{t('reservation.receiptSent')}</span>
+          </p>
+          <p className="inline-flex items-center gap-1">
+            <Smartphone className="h-4 w-4 text-text-muted" />
+            <span>{t('reservation.viewInApp')}</span>
+          </p>
         </div>
       </div>
 

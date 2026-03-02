@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getMockCafesForLanguage } from '../data/mockCafes';
 import { useOrder } from '../context/OrderContext';
+import { Banknote, CreditCard, Landmark, Smartphone } from 'lucide-react';
 
 const VAT_RATE = 0.1;
 
@@ -94,13 +95,33 @@ export const BillPage = () => {
       <div className="rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm">
         <h2 className="mb-3 text-sm font-medium text-text-muted">{t('reservation.paymentMethod')}</h2>
         <div className="grid gap-2">
-          {[
-            { key: 'credit_card', label: t('order.creditCard'), icon: '💳' },
-            { key: 'debit_card', label: t('order.debitCard'), icon: '🏦' },
-            { key: 'troy', label: t('order.troy'), icon: '🔷' },
-            { key: 'bkm_express_paycell', label: t('order.bkmExpressPaycell'), icon: '📱' },
-            { key: 'cash', label: t('order.cash'), icon: '💵' }
-          ].map((opt) => (
+          {([
+            {
+              key: 'credit_card',
+              label: t('order.creditCard'),
+              icon: <CreditCard className="h-4 w-4" />
+            },
+            {
+              key: 'debit_card',
+              label: t('order.debitCard'),
+              icon: <Landmark className="h-4 w-4" />
+            },
+            {
+              key: 'troy',
+              label: t('order.troy'),
+              icon: <CreditCard className="h-4 w-4" />
+            },
+            {
+              key: 'bkm_express_paycell',
+              label: t('order.bkmExpressPaycell'),
+              icon: <Smartphone className="h-4 w-4" />
+            },
+            {
+              key: 'cash',
+              label: t('order.cash'),
+              icon: <Banknote className="h-4 w-4" />
+            }
+          ] as { key: string; label: string; icon: ReactNode }[]).map((opt) => (
             <button
               key={opt.key}
               type="button"

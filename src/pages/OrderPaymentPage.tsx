@@ -1,6 +1,7 @@
 import { FormEvent, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Smartphone } from 'lucide-react';
 import { getMockCafesForLanguage } from '../data/mockCafes';
 import { useOrder } from '../context/OrderContext';
 
@@ -223,7 +224,7 @@ export const OrderPaymentPage = () => {
           </div>
         ) : localMethod === 'bkm_express_paycell' ? (
           <div className="mt-6 rounded-lg border border-border-subtle bg-bg-soft p-6 text-center">
-            <div className="mb-4 text-4xl">📱</div>
+            <Smartphone className="mx-auto mb-4 h-10 w-10 text-text-muted" />
             <p className="text-text-muted">
               {t('payment.walletInstruction')}
             </p>

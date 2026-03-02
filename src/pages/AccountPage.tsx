@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
@@ -7,14 +7,31 @@ import { AccountProfileTab } from '../components/account/AccountProfileTab';
 import { AccountFavoritesTab } from '../components/account/AccountFavoritesTab';
 import { AccountOrdersTab } from '../components/account/AccountOrdersTab';
 import { AccountSettingsTab } from '../components/account/AccountSettingsTab';
+import { Heart, ReceiptText, Settings, User } from 'lucide-react';
 
 type AccountTab = 'profile' | 'favorites' | 'orders' | 'settings';
 
-const TABS: { id: AccountTab; labelKey: string; icon: string }[] = [
-  { id: 'profile', labelKey: 'account.tabs.profile', icon: '👤' },
-  { id: 'favorites', labelKey: 'account.tabs.favorites', icon: '❤️' },
-  { id: 'orders', labelKey: 'account.tabs.orders', icon: '🧾' },
-  { id: 'settings', labelKey: 'account.tabs.settings', icon: '⚙️' }
+const TABS: { id: AccountTab; labelKey: string; icon: ReactNode }[] = [
+  {
+    id: 'profile',
+    labelKey: 'account.tabs.profile',
+    icon: <User className="h-4 w-4" />
+  },
+  {
+    id: 'favorites',
+    labelKey: 'account.tabs.favorites',
+    icon: <Heart className="h-4 w-4" />
+  },
+  {
+    id: 'orders',
+    labelKey: 'account.tabs.orders',
+    icon: <ReceiptText className="h-4 w-4" />
+  },
+  {
+    id: 'settings',
+    labelKey: 'account.tabs.settings',
+    icon: <Settings className="h-4 w-4" />
+  }
 ];
 
 export function AccountPage() {

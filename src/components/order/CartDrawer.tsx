@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { Trash2, X } from 'lucide-react';
 import type { CartItem } from '../../context/OrderContext';
 
 interface CartDrawerProps {
@@ -53,7 +54,7 @@ export const CartDrawer = ({
             className="rounded-full p-2 text-text-muted hover:bg-surface-subtle hover:text-text"
             aria-label={t('actions.cancel')}
           >
-            ✕
+            <X className="h-4 w-4" />
           </button>
         </div>
         {tableNumber && (
@@ -79,7 +80,7 @@ export const CartDrawer = ({
                       className="shrink-0 rounded p-1 text-text-muted hover:bg-surface-subtle hover:text-text"
                       aria-label={t('order.remove')}
                     >
-                      🗑️
+                      <Trash2 className="h-4 w-4" />
                     </button>
                   </div>
                   <div className="flex items-center justify-between text-sm">

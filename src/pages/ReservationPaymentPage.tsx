@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Smartphone } from 'lucide-react';
 import { useReservation } from '../context/ReservationContext';
 
 type LocalPaymentMethod = 'credit_card' | 'debit_card' | 'troy' | 'bkm_express_paycell' | 'cash';
@@ -203,7 +204,7 @@ export const ReservationPaymentPage = () => {
         </div>
         ) : localMethod === 'bkm_express_paycell' ? (
           <div className="rounded-lg border border-border-subtle bg-bg-soft p-6 text-center">
-            <div className="mb-4 text-4xl">📱</div>
+            <Smartphone className="mx-auto mb-4 h-10 w-10 text-text-muted" />
             <p className="text-text-muted">{t('payment.walletInstruction')}</p>
           </div>
         ) : localMethod === 'cash' ? (

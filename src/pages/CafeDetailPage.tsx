@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Heart } from 'lucide-react';
+import { Camera, CalendarDays, Heart, MapPin } from 'lucide-react';
 import { getMockCafesForLanguage } from '../data/mockCafes';
 import { Rating } from '../components/cafes/Rating';
 import { useAuth } from '../context/AuthContext';
@@ -126,7 +126,7 @@ export const CafeDetailPage = () => {
                 </span>
               </div>
               <span className="inline-flex items-center gap-1 rounded-full bg-surface-subtle px-2.5 py-1">
-                <span className="text-text-subtle">📍</span>
+                <MapPin className="h-3 w-3 text-text-subtle" />
                 <span className="text-xs text-text-muted">
                   {cafe.address}, {cafe.city}
                 </span>
@@ -151,7 +151,7 @@ export const CafeDetailPage = () => {
                 onClick={() => navigate(`/cafe/${id}/scan`)}
                 className="inline-flex items-center gap-1 rounded-full border border-border-subtle bg-surface-subtle px-3 py-1.5 text-xs font-medium text-text-muted hover:border-border-strong hover:text-text"
               >
-                <span>📷</span>
+                <Camera className="h-4 w-4" />
                 <span>{t('cafeDetail.scanQr')}</span>
               </button>
               <button
@@ -159,7 +159,7 @@ export const CafeDetailPage = () => {
                 onClick={onReserve}
                 className="inline-flex items-center gap-1 rounded-full bg-accent px-3 py-1.5 text-xs font-medium text-core-white hover:bg-accent-soft"
               >
-                <span>📅</span>
+                <CalendarDays className="h-4 w-4" />
                 <span>{t('cafeDetail.makeReservation')}</span>
               </button>
             </div>

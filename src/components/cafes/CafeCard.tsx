@@ -2,7 +2,7 @@ import type { Cafe } from '../../types/cafe';
 import { Rating } from './Rating';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { Heart } from 'lucide-react';
+import { Footprints, Heart } from 'lucide-react';
 
 interface CafeCardProps {
   cafe: Cafe;
@@ -54,12 +54,16 @@ export const CafeCard = ({
               <button
                 type="button"
                 onClick={handleToggleFavorite}
-                className={`shrink-0 rounded p-1 transition hover:scale-110 ${
+                className={`flex h-6 w-6 items-center justify-center rounded-full transition hover:scale-110 ${
                   isFavorite ? 'text-[#ff6b35]' : 'text-text-subtle hover:text-[#ff6b35]'
                 }`}
                 aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
               >
-                {isFavorite ? '❤️' : '🤍'}
+                <Heart
+                  className="h-4 w-4"
+                  strokeWidth={1.8}
+                  fill={isFavorite ? 'currentColor' : 'none'}
+                />
               </button>
             )}
           </div>
@@ -122,7 +126,7 @@ export const CafeCard = ({
               {cafe.isOpenNow ? t('cafes.openNow') : t('cafes.closed')}
             </span>
             <span className="inline-flex items-center gap-1 rounded-full bg-surface-subtle px-2.5 py-0.5">
-              <span className="text-text-subtle">🚶</span>
+              <Footprints className="h-3 w-3 text-text-subtle" />
               {t('cafes.distance', { minutes: cafe.distanceMinutesWalk })}
             </span>
             <span className="inline-flex items-center gap-1 rounded-full bg-surface-subtle px-2.5 py-0.5">
