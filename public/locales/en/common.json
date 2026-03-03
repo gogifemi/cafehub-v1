@@ -251,6 +251,7 @@
     "tabs": {
       "profile": "Profile Info",
       "favorites": "Favorite Cafes",
+      "reservations": "Reservations",
       "orders": "Order History",
       "settings": "Account Settings"
     },
@@ -280,6 +281,29 @@
       "downloadPdf": "Download PDF",
       "empty": "No orders yet",
       "explore": "Explore Cafes"
+    },
+    "reservations": {
+      "title": "Reservations",
+      "empty": "You don’t have any reservations yet",
+      "explore": "Explore Cafes",
+      "recentReservation": "Most recent",
+      "activeBadge": "Active reservation",
+      "cancel": "Cancel",
+      "complete": "Complete",
+      "cancelConfirmTitle": "Cancel this reservation?",
+      "cancelConfirmBody": "This action cannot be undone and your reservation will be marked as \"Cancelled\".",
+      "cancelConfirmYes": "Yes, cancel it",
+      "cancelConfirmNo": "Keep reservation",
+      "status": {
+        "pending": "Pending",
+        "completed": "Completed",
+        "notCompleted": "Not completed",
+        "cancelled": "Cancelled"
+      },
+      "viewReceipt": "View Receipt",
+      "bookAgain": "Book Again",
+      "loginRequired": "Please log in to see your reservations",
+      "unknownCafe": "Cafe"
     },
     "settings": {
       "title": "Account Settings",

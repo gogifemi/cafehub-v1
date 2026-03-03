@@ -190,12 +190,16 @@ export const ReservationDetailsPage = () => {
               const isSelected = state.tableId === table.id;
               const isOccupied = table.status === 'occupied';
               const partySize = state.partySize ?? 1;
+
+              // Only tables with capacity == partySize or partySize + 1 are selectable.
               const sizeTooSmall = table.capacity < partySize;
+              const sizeTooLarge = table.capacity > partySize + 1;
+              const notSuitable = sizeTooSmall || sizeTooLarge;
 
               const left = (table.position.x / floorPlan.gridSize.cols) * 100;
               const top = (table.position.y / floorPlan.gridSize.rows) * 100;
 
-              const disabled = isOccupied || sizeTooSmall;
+              const disabled = isOccupied || notSuitable;
 
               return (
                 <button
@@ -215,7 +219,7 @@ export const ReservationDetailsPage = () => {
                       ? 'border-emerald-500 bg-emerald-500 text-core-white'
                       : isOccupied
                       ? 'border-red-500 bg-red-500 text-core-white'
-                      : sizeTooSmall
+                      : notSuitable
                       ? 'border-core-black bg-core-black text-core-white'
                       : 'border-border-subtle bg-surface text-text'
                   } disabled:opacity-60`}
@@ -240,7 +244,11 @@ export const ReservationDetailsPage = () => {
             const isSelected = state.tableId === table.id;
             const isOccupied = table.status === 'occupied';
             const partySize = state.partySize ?? 1;
+
+            // Only tables with capacity == partySize or partySize + 1 are selectable.
             const sizeTooSmall = table.capacity < partySize;
+            const sizeTooLarge = table.capacity > partySize + 1;
+            const notSuitable = sizeTooSmall || sizeTooLarge;
 
             let bg = 'bg-surface';
             let border = 'border-border-subtle';
@@ -256,14 +264,14 @@ export const ReservationDetailsPage = () => {
               border = 'border-red-500';
               text = 'text-core-white';
               cursor = 'cursor-not-allowed';
-            } else if (sizeTooSmall) {
+            } else if (notSuitable) {
               bg = 'bg-core-black';
               border = 'border-core-black';
               text = 'text-core-white';
               cursor = 'cursor-not-allowed';
             }
 
-            const disabled = isOccupied || sizeTooSmall;
+            const disabled = isOccupied || notSuitable;
 
             return (
               <button

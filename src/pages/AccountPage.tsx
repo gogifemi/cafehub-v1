@@ -1,4 +1,5 @@
-import { useState, type ReactNode } from 'react';
+import { useState, type ReactNode, useEffect } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
@@ -7,9 +8,10 @@ import { AccountProfileTab } from '../components/account/AccountProfileTab';
 import { AccountFavoritesTab } from '../components/account/AccountFavoritesTab';
 import { AccountOrdersTab } from '../components/account/AccountOrdersTab';
 import { AccountSettingsTab } from '../components/account/AccountSettingsTab';
-import { Heart, ReceiptText, Settings, User } from 'lucide-react';
+import { CalendarClock, Heart, ReceiptText, Settings, User } from 'lucide-react';
+import { AccountReservationsTab } from '../components/account/AccountReservationsTab';
 
-type AccountTab = 'profile' | 'favorites' | 'orders' | 'settings';
+type AccountTab = 'profile' | 'favorites' | 'orders' | 'reservations' | 'settings';
 
 const TABS: { id: AccountTab; labelKey: string; icon: ReactNode }[] = [
   {
@@ -21,6 +23,11 @@ const TABS: { id: AccountTab; labelKey: string; icon: ReactNode }[] = [
     id: 'favorites',
     labelKey: 'account.tabs.favorites',
     icon: <Heart className="h-4 w-4" />
+  },
+  {
+    id: 'reservations',
+    labelKey: 'account.tabs.reservations',
+    icon: <CalendarClock className="h-4 w-4" />
   },
   {
     id: 'orders',
@@ -38,6 +45,25 @@ export function AccountPage() {
   const { t } = useTranslation();
   const { user, isAuthenticated } = useAuth();
   const [tab, setTab] = useState<AccountTab>('profile');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  // Sync tab state from URL on first render and when query changes
+  useEffect(() => {
+    const tabFromUrl = searchParams.get('tab') as AccountTab | null;
+    if (tabFromUrl && TABS.some((tDef) => tDef.id === tabFromUrl) && tabFromUrl !== tab) {
+      setTab(tabFromUrl);
+    }
+  }, [searchParams, tab]);
+
+  // Keep URL in sync when tab changes (for deep-links like "Rezervasyonlarım")
+  const handleTabChange = (nextTab: AccountTab) => {
+    setTab(nextTab);
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set('tab', nextTab);
+    // Ensure we stay on /account while updating query params
+    navigate({ pathname: '/account', search: newParams.toString() }, { replace: true });
+  };
 
   if (!isAuthenticated || !user) {
     return <Navigate to="/login" replace />;
@@ -105,7 +131,7 @@ export function AccountPage() {
             type="button"
             role="tab"
             aria-selected={tab === id}
-            onClick={() => setTab(id)}
+            onClick={() => handleTabChange(id)}
             className={`shrink-0 rounded-t-lg px-4 py-2.5 text-sm font-medium transition ${
               tab === id
                 ? 'border border-border-subtle border-b-surface bg-surface text-accent'
@@ -124,6 +150,7 @@ export function AccountPage() {
         {tab === 'profile' && <AccountProfileTab />}
         {tab === 'favorites' && <AccountFavoritesTab />}
         {tab === 'orders' && <AccountOrdersTab />}
+        {tab === 'reservations' && <AccountReservationsTab />}
         {tab === 'settings' && <AccountSettingsTab />}
       </div>
     </div>

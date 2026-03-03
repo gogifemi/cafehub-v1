@@ -78,7 +78,7 @@ export const ReservationReceiptPage = () => {
   };
 
   const onMyReservations = () => {
-    navigate('/');
+    navigate('/account?tab=reservations');
   };
 
   return (

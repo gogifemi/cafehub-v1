@@ -256,6 +256,7 @@
     "tabs": {
       "profile": "Profil Bilgileri",
       "favorites": "Favori Kafeler",
+      "reservations": "Rezervasyonlarım",
       "orders": "Geçmiş Siparişler",
       "settings": "Hesap Ayarları"
     },
@@ -290,6 +291,29 @@
       "downloadPdf": "PDF İndir",
       "empty": "Henüz siparişiniz yok",
       "explore": "Kafeleri Keşfet"
+    },
+    "reservations": {
+      "title": "Rezervasyonlarım",
+      "empty": "Henüz bir rezervasyonunuz yok",
+      "explore": "Kafeleri Keşfet",
+      "recentReservation": "Son rezervasyon",
+      "activeBadge": "AKTİF REZERVASYON",
+      "cancel": "İptal Et",
+      "complete": "Tamamla",
+      "cancelConfirmTitle": "Rezervasyonu iptal etmek istiyor musunuz?",
+      "cancelConfirmBody": "Bu işlem geri alınamaz ve rezervasyon durumunuz \"İptal edildi\" olarak işaretlenecek.",
+      "cancelConfirmYes": "Evet, iptal et",
+      "cancelConfirmNo": "Vazgeç",
+      "status": {
+        "pending": "Bekliyor",
+        "completed": "TAMAMLANDI",
+        "notCompleted": "TAMAMLANMADI",
+        "cancelled": "İPTAL EDİLDİ"
+      },
+      "viewReceipt": "Makbuzu Görüntüle",
+      "bookAgain": "Tekrar Rezervasyon Yap",
+      "loginRequired": "Rezervasyonlarınızı görmek için giriş yapın",
+      "unknownCafe": "Kafe"
     },
     "settings": {
       "title": "Hesap Ayarları",

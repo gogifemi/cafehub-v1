@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getMockCafesForLanguage } from '../data/mockCafes';
-import type { TableArea } from '../context/ReservationContext';
+import { useReservation, type TableArea } from '../context/ReservationContext';
 
 const APPROVAL_DELAY_MS = 3000;
 
@@ -24,6 +24,7 @@ export const QRApprovalPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t, i18n } = useTranslation();
+  const { markReservationCompletedForTable } = useReservation();
 
   const state = location.state as TableState | null;
   const table = state ?? { tableLabel: '1', capacity: 2, area: 'window' as TableArea };
@@ -34,13 +35,15 @@ export const QRApprovalPage = () => {
   useEffect(() => {
     if (!id) return;
     const timer = setTimeout(() => {
+      // When staff approves / QR is confirmed, mark the matching reservation as completed.
+      markReservationCompletedForTable(id, table.tableLabel);
       navigate(`/cafe/${id}/menu`, {
         state: table,
         replace: true
       });
     }, APPROVAL_DELAY_MS);
     return () => clearTimeout(timer);
-  }, [id, navigate, table]);
+  }, [id, markReservationCompletedForTable, navigate, table]);
 
   if (!id) return null;
 

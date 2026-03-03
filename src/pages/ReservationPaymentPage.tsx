@@ -2,7 +2,7 @@ import { FormEvent, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Smartphone } from 'lucide-react';
-import { useReservation } from '../context/ReservationContext';
+import { useReservation, type ReservationRecord } from '../context/ReservationContext';
 
 type LocalPaymentMethod = 'credit_card' | 'debit_card' | 'troy' | 'bkm_express_paycell' | 'cash';
 
@@ -10,7 +10,7 @@ export const ReservationPaymentPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { state, setDetails } = useReservation();
+  const { state, setDetails, addReservation } = useReservation();
 
   const [localMethod, setLocalMethod] = useState<LocalPaymentMethod | null>(
     (state.paymentMethod as LocalPaymentMethod | null) ?? 'credit_card'
@@ -55,14 +55,41 @@ export const ReservationPaymentPage = () => {
       const randomCode = Math.floor(1000 + Math.random() * 9000);
       const reservationCode = `CAFE-${yyyy}-${mm}-${dd}-${randomCode}`;
       const transactionId = `TRX-${Math.floor(100000000 + Math.random() * 900000000)}`;
+      const createdAt = now.toISOString();
 
+      const paymentMethodToSave = localMethod;
+      const cardLast4ToSave = requiresCardDetails ? last4 : null;
+
+      // Update current flow state
       setDetails({
-        paymentMethod: localMethod,
-        cardLast4: requiresCardDetails ? last4 : null,
+        paymentMethod: paymentMethodToSave,
+        cardLast4: cardLast4ToSave,
         reservationCode,
         transactionId,
-        createdAt: now.toISOString()
+        createdAt,
+        status: 'pending'
       });
+
+      // Append to reservation history so it appears under "Rezervasyonlarım"
+      const record: ReservationRecord = {
+        id: transactionId,
+        cafeId: state.cafeId,
+        partySize: state.partySize,
+        durationMinutes: state.durationMinutes,
+        tableId: state.tableId,
+        tableLabel: state.tableLabel,
+        tableArea: state.tableArea,
+        notes: state.notes,
+        totalPrice: state.totalPrice,
+        paymentMethod: paymentMethodToSave,
+        cardLast4: cardLast4ToSave,
+        reservationCode,
+        transactionId,
+        createdAt,
+        status: 'pending'
+      };
+
+      addReservation(record);
 
       setSubmitting(false);
       navigate(`/cafe/${id}/reservation/receipt`);

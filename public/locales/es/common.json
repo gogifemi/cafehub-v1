@@ -1,6 +1,6 @@
 {
   "nav": {
-    "brandTitle": "CafeHub",
+    "brandTitle": "cafehub",
     "brandTagline": "Find your next favorite spot",
     "nearbyGems": "Nearby gems",
     "mapSoon": "Map (soon)",
@@ -9,7 +9,7 @@
     "browse": "Browse",
     "addCafe": "Add cafe",
     "about": "About",
-    "logoAlt": "Logo CafeHub"
+    "logoAlt": "CafeHub logo"
   },
   "home": {
     "heroTitle": "Find your next cafe",
@@ -60,7 +60,7 @@
     "step3": "Payment",
     "step4": "Payment Confirmation",
     "partySize": "Party Size",
-    "partySizeInfo": "Para grupos de más de 10 personas, indíquelo en las notas de la reserva o llámenos.",
+    "partySizeInfo": "For groups larger than 10 people, please specify in the reservation notes or call us.",
     "duration": "Reservation Duration",
     "durationOptions": {
       "20": "20 min - 15 TL",
@@ -70,7 +70,7 @@
     "durationInfo": "You pay 15 TL for 20 minutes, 20 TL for 35 minutes, and 40 TL for 55 minutes. For 55-minute reservations, 40 TL is added to your bill after the reservation is completed.",
     "tableSelection": "Table Selection",
     "tableInfo": "White tables: available, reddish tables: occupied, black tables: cannot be selected for this party size, green table: selected table.",
-    "capacityPeople": "{{count}} personas",
+    "capacityPeople": "{{count}} people",
     "notes": "Special Requests",
     "notesPlaceholder": "Birthday celebration, special requests...",
     "next": "Next →",
@@ -106,85 +106,87 @@
     "durationMinutes": "{{count}} min",
     "reservationForDate": "Reservation for {{date}}",
     "paymentMethods": {
-      "creditCard": "Tarjeta de crédito",
-      "debitCard": "Tarjeta de débito",
-      "troy": "Tarjeta TROY",
+      "creditCard": "Credit Card",
+      "debitCard": "Debit Card",
+      "troy": "TROY Card",
       "bkmExpressPaycell": "BKM Express / Paycell",
-      "cash": "Efectivo"
+      "cash": "Cash"
     },
     "backToHome": "← Back"
   },
   "qrScan": {
-    "title": "Escanear código QR",
-    "instructions": "Escanee el código QR de su mesa",
-    "enterManually": "Introducir código QR manualmente",
-    "back": "← Atrás"
+    "title": "Scan QR Code",
+    "instructions": "Scan the QR code on your table",
+    "enterManually": "Enter QR code manually",
+    "back": "← Back"
   },
   "qrApproval": {
-    "tableNo": "Mesa nº",
-    "capacity": "Capacidad",
-    "location": "Ubicación",
-    "waiting": "Esperando aprobación...",
-    "staffApproving": "El personal del café está aprobando su mesa...",
-    "approved": "¡Mesa aprobada!",
-    "back": "← Atrás"
+    "tableNo": "Table No",
+    "capacity": "Capacity",
+    "location": "Location",
+    "waiting": "Waiting for approval...",
+    "staffApproving": "Cafe staff is approving your table...",
+    "approved": "Table approved!",
+    "back": "← Back"
   },
   "menu": {
-    "title": "Menú",
-    "back": "← Atrás",
-    "all": "Todos",
-    "coffees": "Cafés",
-    "brews": "Cafés filtrados",
-    "breakfast": "Desayuno",
-    "desserts": "Postres",
-    "coldDrinks": "Bebidas frías",
-    "food": "Comida",
-    "tableNo": "Mesa nº"
+    "title": "Menu",
+    "back": "← Back",
+    "categories": {
+      "all": "All",
+      "coffees": "Coffees",
+      "hotDrinks": "Hot Drinks",
+      "coldDrinks": "Cold Drinks",
+      "desserts": "Desserts",
+      "breakfast": "Breakfast",
+      "meals": "Meals"
+    },
+    "tableNo": "Table No"
   },
   "order": {
-    "add": "Añadir",
-    "remove": "Quitar",
-    "cart": "Mi carrito",
-    "closeCart": "Cerrar carrito",
-    "decreaseQuantity": "Reducir cantidad",
-    "increaseQuantity": "Aumentar cantidad",
-    "emptyCart": "Su carrito está vacío",
+    "add": "Add",
+    "remove": "Remove",
+    "cart": "My Cart",
+    "closeCart": "Close cart",
+    "decreaseQuantity": "Decrease quantity",
+    "increaseQuantity": "Increase quantity",
+    "emptyCart": "Your cart is empty",
     "subtotal": "Subtotal",
-    "serviceFee": "Servicio",
-    "vat": "IVA",
+    "serviceFee": "Service Fee",
+    "vat": "VAT",
     "total": "Total",
-    "placeOrder": "Hacer pedido",
-    "orderNotes": "Notas del pedido",
-    "notesPlaceholder": "Peticiones especiales...",
-    "confirmOrder": "Confirmar pedido",
-    "returnToCart": "Volver al carrito",
-    "orderSummary": "Resumen del pedido",
-    "orderReceived": "¡Pedido recibido!",
-    "orderId": "Nº de pedido",
+    "placeOrder": "Place Order",
+    "orderNotes": "Order notes",
+    "notesPlaceholder": "Special requests...",
+    "confirmOrder": "Confirm Order",
+    "returnToCart": "Return to Cart",
+    "orderSummary": "Order Summary",
+    "orderReceived": "Order Received!",
+    "orderId": "Order ID",
     "status": {
-      "received": "Pedido recibido",
-      "preparing": "Preparando",
-      "ready": "Listo",
-      "delivered": "Entregado",
-      "cancelled": "Cancelado"
+      "received": "Order Received",
+      "preparing": "Preparing",
+      "ready": "Ready",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
     },
-    "requestHelp": "Pedir ayuda",
-    "callWaiter": "Llamar al camarero",
-    "cancelOrder": "Cancelar pedido",
-    "bill": "Cuenta",
-    "splitBill": "Dividir cuenta",
-    "payNow": "Pagar ahora",
-    "paymentTitle": "Pago",
-    "completePayment": "Completar pago",
-    "paymentSuccess": "¡Pago realizado!",
-    "paymentSuccessMessage": "Su cuenta ha sido pagada. Gracias por su pedido.",
-    "quantity": "Cantidad",
-    "dateTime": "Fecha y hora",
-    "creditCard": "Tarjeta de crédito",
-    "debitCard": "Tarjeta de débito",
-    "troy": "Tarjeta TROY",
+    "requestHelp": "Request Help",
+    "callWaiter": "Call Waiter",
+    "cancelOrder": "Cancel Order",
+    "bill": "Bill",
+    "splitBill": "Split Bill",
+    "payNow": "Pay Now",
+    "paymentTitle": "Payment",
+    "completePayment": "Complete Payment",
+    "paymentSuccess": "Payment Successful!",
+    "paymentSuccessMessage": "Your bill has been paid. Thank you for your order.",
+    "quantity": "Quantity",
+    "dateTime": "Date & Time",
+    "creditCard": "Credit Card",
+    "debitCard": "Debit Card",
+    "troy": "TROY Card",
     "bkmExpressPaycell": "BKM Express / Paycell",
-    "cash": "Efectivo"
+    "cash": "Cash"
   },
   "cafeDetail": {
     "scanQr": "Scan QR Code",
@@ -198,22 +200,22 @@
     "photos": "Photos",
     "amenities": "Amenities",
     "viewDetails": "View Details",
-    "cafeNotFound": "Café no encontrado.",
+    "cafeNotFound": "Cafe not found.",
     "amenityWifi": "Wi‑Fi",
-    "amenityQuietArea": "Zona tranquila",
-    "amenityOutlets": "Enchufes",
-    "categoryDesserts": "Postres",
-    "categorySpecialtyCoffee": "Café especial",
-    "reviewSample2": "Gran café y personal amable. Wi‑Fi estable."
+    "amenityQuietArea": "Quiet area",
+    "amenityOutlets": "Power outlets",
+    "categoryDesserts": "Desserts",
+    "categorySpecialtyCoffee": "Specialty coffee",
+    "reviewSample2": "Great coffee and friendly staff. Wi‑Fi is stable."
   },
   "payment": {
-    "cardDetails": "Datos de la tarjeta",
-    "cardNumber": "Número de tarjeta",
-    "expiry": "Caducidad (MM/AA)",
-    "cardholderName": "Nombre del titular",
+    "cardDetails": "Card details",
+    "cardNumber": "Card Number",
+    "expiry": "Expiry (MM/YY)",
+    "cardholderName": "Cardholder Name",
     "cvc": "CVC",
-    "walletInstruction": "Confirme el pago en su aplicación BKM Express o Paycell y luego pulse \"Completar pago\" abajo.",
-    "cashInstruction": "Ha elegido efectivo. Pulse \"Completar pago\" abajo; el personal acudirá a su mesa."
+    "walletInstruction": "Confirm the payment in your BKM Express or Paycell app, then tap \"Complete Payment\" below.",
+    "cashInstruction": "You selected cash. Tap \"Complete Payment\" below; staff will come to your table."
   },
   "actions": {
     "submit": "Submit",
@@ -246,11 +248,66 @@
     "myAccount": "My Account",
     "welcome": "Welcome, {{name}}",
     "memberSince": "Member Since",
-    "tabs": { "profile": "Profile Info", "favorites": "Favorite Cafes", "orders": "Order History", "settings": "Account Settings" },
-    "profile": { "title": "Profile Info", "fullName": "Full Name", "email": "Email", "phone": "Phone", "birthDate": "Birth Date", "save": "Save Changes" },
-    "favorites": { "title": "Favorite Cafes", "empty": "No favorite cafes yet", "browse": "Browse Cafes", "makeReservation": "Make Reservation" },
-    "orders": { "title": "Order History", "date": "Date", "table": "Table No", "total": "Total", "status": "Status", "completed": "Completed", "viewDetails": "View Details", "orderAgain": "Order Again", "downloadPdf": "Download PDF", "empty": "No orders yet", "explore": "Explore Cafes" },
-    "settings": { "title": "Account Settings", "changePassword": "Change Password", "currentPassword": "Current Password", "newPassword": "New Password", "confirmPassword": "Confirm Password", "updatePassword": "Update Password", "notifications": "Notification Preferences", "emailNotifications": "Email Notifications", "smsNotifications": "SMS Notifications", "promotions": "Promotions", "language": "Language", "theme": "Theme", "deleteAccount": "Delete Account", "deleteConfirm": "Are you sure you want to delete your account? This action cannot be undone." }
+    "tabs": {
+      "profile": "Profile Info",
+      "favorites": "Favorite Cafes",
+      "reservations": "Reservations",
+      "orders": "Order History",
+      "settings": "Account Settings"
+    },
+    "profile": {
+      "title": "Profile Info",
+      "fullName": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "birthDate": "Birth Date",
+      "save": "Save Changes"
+    },
+    "favorites": {
+      "title": "Favorite Cafes",
+      "empty": "No favorite cafes yet",
+      "browse": "Browse Cafes",
+      "makeReservation": "Make Reservation"
+    },
+    "orders": {
+      "title": "Order History",
+      "date": "Date",
+      "table": "Table No",
+      "total": "Total",
+      "status": "Status",
+      "completed": "Completed",
+      "viewDetails": "View Details",
+      "orderAgain": "Order Again",
+      "downloadPdf": "Download PDF",
+      "empty": "No orders yet",
+      "explore": "Explore Cafes"
+    },
+    "reservations": {
+      "title": "Reservations",
+      "empty": "You don’t have any reservations yet",
+      "explore": "Explore Cafes",
+      "recentReservation": "This is your most recent reservation.",
+      "viewReceipt": "View Receipt",
+      "bookAgain": "Book Again",
+      "loginRequired": "Please log in to see your reservations",
+      "unknownCafe": "Cafe"
+    },
+    "settings": {
+      "title": "Account Settings",
+      "changePassword": "Change Password",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password",
+      "updatePassword": "Update Password",
+      "notifications": "Notification Preferences",
+      "emailNotifications": "Email Notifications",
+      "smsNotifications": "SMS Notifications",
+      "promotions": "Promotions",
+      "language": "Language",
+      "theme": "Theme",
+      "deleteAccount": "Delete Account",
+      "deleteConfirm": "Are you sure you want to delete your account? This action cannot be undone."
+    }
   }
 }
 
