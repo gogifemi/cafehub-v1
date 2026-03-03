@@ -49,6 +49,17 @@ export function AccountPage() {
     .join('')
     .toUpperCase()
     .slice(0, 2);
+
+  const currentAnimal =
+    user.avatar?.type === 'animal' && user.avatar.animalId
+      ? getAnimalAvatarById(user.avatar.animalId)
+      : null;
+
+  const isRoundAvatar =
+    (user.avatar?.type === 'animal' && currentAnimal?.style === 'yuvarlak') ||
+    user.avatar?.type === 'upload';
+
+  const avatarShapeClass = isRoundAvatar ? 'rounded-full' : 'rounded-2xl';
   const memberSinceFormatted = new Date(user.memberSince).toLocaleDateString(undefined, {
     year: 'numeric',
     month: 'long',
@@ -58,22 +69,17 @@ export function AccountPage() {
   return (
     <div className="py-6">
       <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-        <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border-2 border-border-subtle bg-surface-subtle text-2xl font-semibold text-accent">
+        <div
+          className={`flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden border-2 border-border-subtle bg-surface-subtle text-2xl font-semibold text-accent ${avatarShapeClass}`}
+        >
           {user.avatar?.type === 'upload' && user.avatar.url ? (
             <img src={user.avatar.url} alt="" className="h-full w-full object-cover" />
-          ) : user.avatar?.type === 'animal' && user.avatar.animalId ? (
-            (() => {
-              const animal = getAnimalAvatarById(user.avatar.animalId!);
-              return animal ? (
-                <img
-                  src={animal.imageUrl}
-                  alt={animal.name}
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                initials
-              );
-            })()
+          ) : user.avatar?.type === 'animal' && currentAnimal ? (
+            <img
+              src={currentAnimal.imageUrl}
+              alt={currentAnimal.name}
+              className="h-full w-full object-cover"
+            />
           ) : (
             initials
           )}

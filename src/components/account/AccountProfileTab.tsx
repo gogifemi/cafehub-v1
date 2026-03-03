@@ -26,19 +26,23 @@ export function AccountProfileTab() {
   };
 
   const renderAvatarPreview = () => {
-    if (user?.avatar?.type === 'animal' && user.avatar.animalId) {
-      const animal = getAnimalAvatarById(user.avatar.animalId);
-      if (animal) {
-        return (
-          <div className="h-20 w-20 overflow-hidden rounded-2xl bg-surface-subtle">
-            <img
-              src={animal.imageUrl}
-              alt={animal.name}
-              className="h-full w-full object-cover"
-            />
-          </div>
-        );
-      }
+    const animal =
+      user?.avatar?.type === 'animal' && user.avatar.animalId
+        ? getAnimalAvatarById(user.avatar.animalId)
+        : null;
+
+    const isRoundAvatar =
+      (user?.avatar?.type === 'animal' && animal?.style === 'yuvarlak') ||
+      user?.avatar?.type === 'upload';
+
+    const shapeClass = isRoundAvatar ? 'rounded-full' : 'rounded-2xl';
+
+    if (animal && user?.avatar?.type === 'animal') {
+      return (
+        <div className={`h-20 w-20 overflow-hidden bg-surface-subtle ${shapeClass}`}>
+          <img src={animal.imageUrl} alt={animal.name} className="h-full w-full object-cover" />
+        </div>
+      );
     }
 
     if (user?.avatar?.type === 'upload' && user.avatar.url) {
@@ -46,13 +50,15 @@ export function AccountProfileTab() {
         <img
           src={user.avatar.url}
           alt={user.name}
-          className="h-20 w-20 rounded-2xl object-cover"
+          className={`h-20 w-20 object-cover ${shapeClass}`}
         />
       );
     }
 
     return (
-      <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-secondary">
+      <div
+        className={`flex h-20 w-20 items-center justify-center bg-gradient-to-br from-accent to-secondary ${shapeClass}`}
+      >
         <span className="font-heading text-2xl font-bold text-core-white">{getInitials()}</span>
       </div>
     );

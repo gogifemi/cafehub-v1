@@ -72,6 +72,8 @@ interface AuthContextValue extends AuthState {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
+const USER_STORAGE_KEY = 'cafehub-user';
+
 const MOCK_USER: User = {
   id: 'user-1',
   name: 'Ahmet Yılmaz',
@@ -143,9 +145,33 @@ const MOCK_USER: User = {
 };
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<AuthState>({
-    user: MOCK_USER,
-    isAuthenticated: true
+  const [state, setState] = useState<AuthState>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const savedUser = localStorage.getItem(USER_STORAGE_KEY);
+        if (savedUser) {
+          const parsed = JSON.parse(savedUser) as User;
+          return { user: parsed, isAuthenticated: true };
+        }
+
+        // One-time migration: pull avatar from old key into user
+        const savedAvatar = localStorage.getItem('cafehub-avatar');
+        if (savedAvatar) {
+          const avatarData = JSON.parse(savedAvatar) as User['avatar'];
+          const migratedUser: User = { ...MOCK_USER, avatar: avatarData };
+          localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(migratedUser));
+          localStorage.removeItem('cafehub-avatar');
+          return { user: migratedUser, isAuthenticated: true };
+        }
+      } catch (e) {
+        console.error('Failed to parse saved user or avatar');
+      }
+    }
+
+    return {
+      user: MOCK_USER,
+      isAuthenticated: true
+    };
   });
 
   const login = useCallback(async (_email: string, _password: string, _remember?: boolean) => {
@@ -226,25 +252,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setState((prev) =>
       prev.user ? { ...prev, user: { ...prev.user, avatar: avatarData } } : prev
     );
-    if (avatarData) {
-      localStorage.setItem('cafehub-avatar', JSON.stringify(avatarData));
-    } else {
-      localStorage.removeItem('cafehub-avatar');
-    }
   }, []);
 
   useEffect(() => {
-    const savedAvatar = localStorage.getItem('cafehub-avatar');
-    if (!savedAvatar) return;
-    try {
-      const avatarData = JSON.parse(savedAvatar);
-      setState((prev) =>
-        prev.user ? { ...prev, user: { ...prev.user, avatar: avatarData } } : prev
-      );
-    } catch (e) {
-      console.error('Failed to parse saved avatar');
+    if (typeof window === 'undefined') return;
+    if (state.user) {
+      try {
+        localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(state.user));
+      } catch (e) {
+        console.error('Failed to save user');
+      }
+    } else {
+      localStorage.removeItem(USER_STORAGE_KEY);
     }
-  }, []);
+  }, [state.user]);
 
   const value = useMemo<AuthContextValue>(
     () => ({
