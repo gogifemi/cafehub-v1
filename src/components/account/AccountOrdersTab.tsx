@@ -6,11 +6,13 @@ import type { PastOrder } from '../../context/AuthContext';
 import { OrderCard } from './OrderCard';
 import { OrderDetailsModal } from './OrderDetailsModal';
 import { useOrder } from '../../context/OrderContext';
+import { useTableSession } from '../../context/TableSessionContext';
 
 export function AccountOrdersTab() {
   const { t } = useTranslation();
   const { user, isAuthenticated } = useAuth();
-  const { placedOrder, orderStatus } = useOrder();
+  const { placedOrder, orderStatus, resetOrder } = useOrder();
+  const { clearSession } = useTableSession();
   const [selectedOrder, setSelectedOrder] = useState<PastOrder | null>(null);
   const navigate = useNavigate();
 
@@ -36,6 +38,12 @@ export function AccountOrdersTab() {
   }
 
   const orders = user.orders || [];
+
+  const handleLeaveTable = () => {
+    clearSession();
+    resetOrder();
+    navigate('/');
+  };
 
   // Active order = one with the same id as the currently placed order
   const activeOrderId = placedOrder?.orderId ?? null;
@@ -75,9 +83,14 @@ export function AccountOrdersTab() {
             order={order}
             isActive={order.id === activeOrderId}
             status={order.id === activeOrderId ? orderStatus : 'completed'}
+            onLeaveTable={order.id === activeOrderId && orderStatus === 'payment_received' ? handleLeaveTable : undefined}
             onViewDetails={() => {
               if (order.id === activeOrderId && order.cafeId) {
-                navigate(`/cafe/${order.cafeId}/order/tracking`);
+                if (orderStatus === 'payment_received') {
+                  navigate(`/cafe/${order.cafeId}/order/receipt`);
+                } else {
+                  navigate(`/cafe/${order.cafeId}/order/tracking`);
+                }
               } else {
                 setSelectedOrder(order);
               }

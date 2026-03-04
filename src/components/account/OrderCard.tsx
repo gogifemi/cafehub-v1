@@ -7,9 +7,10 @@ interface OrderCardProps {
   onViewDetails: () => void;
   isActive?: boolean;
   status?: OrderStatus | 'completed';
+  onLeaveTable?: () => void;
 }
 
-export function OrderCard({ order, onViewDetails, isActive = false, status = 'completed' }: OrderCardProps) {
+export function OrderCard({ order, onViewDetails, isActive = false, status = 'completed', onLeaveTable }: OrderCardProps) {
   const { t } = useTranslation();
 
   const formatDate = (dateStr: string) =>
@@ -22,19 +23,13 @@ export function OrderCard({ order, onViewDetails, isActive = false, status = 'co
     status === 'completed' ? 'completed' : status;
 
   const statusColors: Record<string, { bg: string; text: string }> = {
-    // 1. order received
     received: { bg: '#706455', text: '#ffffff' },
-    // 2. waiting confirmation (not currently used as a distinct status)
     waiting_confirmation: { bg: '#8b5846', text: '#ffffff' },
-    // 3. being prepared
     preparing: { bg: '#797979', text: '#ffffff' },
-    // 4. ready for service
     ready: { bg: '#3c5d3f', text: '#ffffff' },
-    // 5. served
     delivered: { bg: '#3a6864', text: '#ffffff' },
-    // 6. payment received (used for completed historical orders)
+    payment_received: { bg: '#1a333c', text: '#ffffff' },
     completed: { bg: '#1a333c', text: '#ffffff' },
-    // 7. order canceled
     cancelled: { bg: '#363a3a', text: '#ffffff' }
   };
 
@@ -43,6 +38,11 @@ export function OrderCard({ order, onViewDetails, isActive = false, status = 'co
     text: '#ffffff'
   };
 
+  // Active order pill stays fixed; only the status pill uses the status color
+  const activeBadgeStyle = { bg: '#706455', text: '#ffffff' };
+
+  const isPaidButTableOccupied = isActive && effectiveStatus === 'payment_received';
+
   const cardClasses = isActive
     ? 'border-accent bg-accent-soft/10 shadow-md'
     : 'border-border-subtle bg-surface shadow-sm';
@@ -50,15 +50,16 @@ export function OrderCard({ order, onViewDetails, isActive = false, status = 'co
   return (
     <div className={`rounded-xl border p-4 transition ${cardClasses}`}>
       <div className="flex flex-wrap items-start justify-between gap-3">
-        <div className="flex items-start gap-3">
-          {order.cafeImage && (
-            <img
-              src={order.cafeImage}
-              alt={order.cafeName}
-              className="h-12 w-12 rounded-lg object-cover"
-            />
-          )}
-          <div>
+        <div className="flex flex-1 items-start gap-3 min-w-0">
+          <div className="min-w-0 flex-1">
+            {order.cafeImage && (
+              <img
+                src={order.cafeImage}
+                alt={order.cafeName}
+                className="h-12 w-12 rounded-lg object-cover"
+              />
+            )}
+            <div>
             <h3 className="font-medium text-text">{order.cafeName}</h3>
             <p className="mt-0.5 text-sm text-text-muted">
               {t('account.orders.date')}: {formatDate(order.date)}
@@ -70,13 +71,16 @@ export function OrderCard({ order, onViewDetails, isActive = false, status = 'co
             <div className="mt-1 flex flex-wrap gap-2">
               {isActive && (
                 <span className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
-                  style={{ backgroundColor: activeStatusStyle.bg, color: activeStatusStyle.text }}
+                  style={{ backgroundColor: activeBadgeStyle.bg, color: activeBadgeStyle.text }}
                 >
                   {t('account.orders.activeBadge', 'Aktif sipariş')}
                 </span>
               )}
               {isActive && effectiveStatus !== 'completed' && (
-                <span className="inline-flex items-center rounded-full bg-surface-subtle px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-text-subtle">
+                <span
+                  className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
+                  style={{ backgroundColor: activeStatusStyle.bg, color: activeStatusStyle.text }}
+                >
                   {t(`order.status.${effectiveStatus}`)}
                 </span>
               )}
@@ -89,14 +93,26 @@ export function OrderCard({ order, onViewDetails, isActive = false, status = 'co
               )}
             </div>
           </div>
+          </div>
         </div>
-        <button
-          type="button"
-          onClick={onViewDetails}
-          className="rounded-lg border border-border-subtle bg-surface-subtle px-3 py-1.5 text-sm font-medium text-text transition hover:bg-surface"
-        >
-          {t('account.orders.viewDetails')}
-        </button>
+        <div className="flex shrink-0 flex-col gap-2">
+          <button
+            type="button"
+            onClick={onViewDetails}
+            className="rounded-lg border border-border-subtle bg-surface-subtle px-3 py-1.5 text-sm font-medium text-text transition hover:bg-surface"
+          >
+            {t('account.orders.viewDetails')}
+          </button>
+          {isPaidButTableOccupied && onLeaveTable && (
+            <button
+              type="button"
+              onClick={onLeaveTable}
+              className="rounded-lg border border-border-subtle bg-surface-subtle px-3 py-1.5 text-sm font-medium text-text transition hover:bg-surface"
+            >
+              {t('account.orders.leaveTable', 'Masadan Kalk')}
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

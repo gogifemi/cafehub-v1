@@ -12,12 +12,19 @@ export const OrderReceiptPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const { placedOrder, paymentMethod, resetOrder } = useOrder();
+  const { placedOrder, paymentMethod, resetOrder, updateOrderStatus } = useOrder();
   const { clearSession } = useTableSession();
   const { user, addOrder } = useAuth();
 
   const cafes = getMockCafesForLanguage(i18n.language);
   const cafe = cafes.find((c) => c.id === id);
+
+  // Mark order as payment received so table stays occupied until "Leave table"
+  useEffect(() => {
+    if (placedOrder) {
+      updateOrderStatus('payment_received');
+    }
+  }, [placedOrder, updateOrderStatus]);
 
   useEffect(() => {
     if (!id || !placedOrder || !user) return;

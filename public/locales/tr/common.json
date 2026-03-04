@@ -168,6 +168,7 @@
       "preparing": "Hazırlanıyor",
       "ready": "Servise hazır",
       "delivered": "Servis edildi",
+      "payment_received": "Ödeme alındı",
       "cancelled": "Sipariş iptal edildi"
     },
     "requestHelp": "Yardım İste",
@@ -180,6 +181,7 @@
     "completePayment": "Ödemeyi Tamamla",
     "paymentSuccess": "Ödeme Başarılı!",
     "paymentSuccessMessage": "Hesabınız ödendi. Bizi tercih ettiğiniz için teşekkür ederiz.",
+    "leaveTable": "Masadan Kalk",
     "quantity": "Adet",
     "dateTime": "Tarih ve Saat",
     "creditCard": "Kredi Kartı",
@@ -286,6 +288,7 @@
       "total": "Toplam",
       "status": "Durum",
       "completed": "Tamamlandı",
+      "leaveTable": "Masadan Kalk",
       "viewDetails": "Detayları Gör",
       "orderAgain": "Tekrar Sipariş Ver",
       "downloadPdf": "PDF İndir",

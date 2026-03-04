@@ -14,6 +14,7 @@ export type OrderStatus =
   | 'preparing'
   | 'ready'
   | 'delivered'
+  | 'payment_received'
   | 'cancelled';
 
 export interface PlacedOrder {

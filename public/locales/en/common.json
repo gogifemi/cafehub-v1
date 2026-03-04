@@ -168,6 +168,7 @@
       "preparing": "Preparing",
       "ready": "Ready",
       "delivered": "Delivered",
+      "payment_received": "Payment received",
       "cancelled": "Cancelled"
     },
     "requestHelp": "Request Help",
@@ -180,6 +181,7 @@
     "completePayment": "Complete Payment",
     "paymentSuccess": "Payment Successful!",
     "paymentSuccessMessage": "Your bill has been paid. Thank you for your order.",
+    "leaveTable": "Leave table",
     "quantity": "Quantity",
     "dateTime": "Date & Time",
     "creditCard": "Credit Card",
@@ -276,6 +278,7 @@
       "total": "Total",
       "status": "Status",
       "completed": "Completed",
+      "leaveTable": "Leave table",
       "viewDetails": "View Details",
       "orderAgain": "Order Again",
       "downloadPdf": "Download PDF",
