@@ -3,8 +3,10 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getMockCafesForLanguage } from '../data/mockCafes';
 import { useReservation, type TableArea } from '../context/ReservationContext';
+import { useTableSession } from '../context/TableSessionContext';
 
 const APPROVAL_DELAY_MS = 3000;
+const TABLE_SESSION_DURATION_MS = 3 * 60 * 60 * 1000;
 
 interface TableState {
   tableLabel: string;
@@ -25,6 +27,7 @@ export const QRApprovalPage = () => {
   const location = useLocation();
   const { t, i18n } = useTranslation();
   const { markReservationCompletedForTable } = useReservation();
+   const { setSession } = useTableSession();
 
   const state = location.state as TableState | null;
   const table = state ?? { tableLabel: '1', capacity: 2, area: 'window' as TableArea };
@@ -37,13 +40,28 @@ export const QRApprovalPage = () => {
     const timer = setTimeout(() => {
       // When staff approves / QR is confirmed, mark the matching reservation as completed.
       markReservationCompletedForTable(id, table.tableLabel);
+      const scannedAt = new Date();
+      const expiresAt = new Date(scannedAt.getTime() + TABLE_SESSION_DURATION_MS);
+      setSession({
+        cafeId: id,
+        cafeName: cafe?.name ?? '',
+        tableId: '',
+        tableNumber: table.tableLabel,
+        tableArea: table.area,
+        scannedAt,
+        expiresAt,
+        isActive: true,
+        cart: [],
+        orderId: undefined,
+        specialInstructions: ''
+      });
       navigate(`/cafe/${id}/menu`, {
         state: table,
         replace: true
       });
     }, APPROVAL_DELAY_MS);
     return () => clearTimeout(timer);
-  }, [id, markReservationCompletedForTable, navigate, table]);
+  }, [id, markReservationCompletedForTable, navigate, table, cafe, setSession]);
 
   if (!id) return null;
 

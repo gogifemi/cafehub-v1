@@ -1,15 +1,18 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import type { PastOrder } from '../../context/AuthContext';
 import { OrderCard } from './OrderCard';
 import { OrderDetailsModal } from './OrderDetailsModal';
+import { useOrder } from '../../context/OrderContext';
 
 export function AccountOrdersTab() {
   const { t } = useTranslation();
   const { user, isAuthenticated } = useAuth();
+  const { placedOrder, orderStatus } = useOrder();
   const [selectedOrder, setSelectedOrder] = useState<PastOrder | null>(null);
+  const navigate = useNavigate();
 
   // Not logged in - show message instead of blank
   if (!isAuthenticated || !user) {
@@ -34,6 +37,18 @@ export function AccountOrdersTab() {
 
   const orders = user.orders || [];
 
+  // Active order = one with the same id as the currently placed order
+  const activeOrderId = placedOrder?.orderId ?? null;
+
+  // Active first, then by date (newest first)
+  const sortedOrders = useMemo(() => {
+    return [...orders].sort((a, b) => {
+      if (a.id === activeOrderId) return -1;
+      if (b.id === activeOrderId) return 1;
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
+  }, [orders, activeOrderId]);
+
   // Empty state
   if (orders.length === 0) {
     return (
@@ -54,11 +69,19 @@ export function AccountOrdersTab() {
     <div>
       <h2 className="mb-4 text-lg font-semibold text-text">{t('account.orders.title')}</h2>
       <div className="space-y-4">
-        {orders.map((order) => (
+        {sortedOrders.map((order) => (
           <OrderCard
             key={order.id}
             order={order}
-            onViewDetails={() => setSelectedOrder(order)}
+            isActive={order.id === activeOrderId}
+            status={order.id === activeOrderId ? orderStatus : 'completed'}
+            onViewDetails={() => {
+              if (order.id === activeOrderId && order.cafeId) {
+                navigate(`/cafe/${order.cafeId}/order/tracking`);
+              } else {
+                setSelectedOrder(order);
+              }
+            }}
           />
         ))}
       </div>

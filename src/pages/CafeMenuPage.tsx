@@ -11,6 +11,7 @@ import {
 } from '../data/mockMenuItems';
 import { useOrder } from '../context/OrderContext';
 import { CartDrawer } from '../components/order/CartDrawer';
+import { useTableSession } from '../context/TableSessionContext';
 import {
   CakeSlice,
   Coffee,
@@ -96,21 +97,69 @@ export const CafeMenuPage = () => {
     addToCart,
     removeFromCart,
     updateQuantity,
+    clearCart,
     serviceFeeRate
   } = useOrder();
+  const { session, isValid, setSession } = useTableSession();
 
   const cafes = getMockCafesForLanguage(i18n.language);
   const cafe = cafes.find((c) => c.id === id);
 
   useEffect(() => {
-    if (id && tableState?.tableLabel) {
+    if (!id) return;
+    if (tableState?.tableLabel) {
       setTable(id, tableState.tableLabel);
+      return;
     }
-  }, [id, tableState?.tableLabel, setTable]);
+    if (!tableNumber && session && isValid && session.cafeId === id) {
+      setTable(id, String(session.tableNumber));
+    }
+  }, [id, tableState?.tableLabel, setTable, tableNumber, session, isValid]);
+
+  useEffect(() => {
+    if (!id || !session || !isValid || session.cafeId !== id) return;
+    if (!cartItems.length && (!session.cart || !session.cart.length)) return;
+
+    const mapped = cartItems.map((item) => ({
+      id: item.id,
+      menuItemId: item.id,
+      name: item.name,
+      nameEn: item.name,
+      price: item.price,
+      quantity: item.quantity,
+      notes: item.notes
+    }));
+
+    setSession((prev) => {
+      if (!prev || prev.cafeId !== id) return prev;
+      return {
+        ...prev,
+        cart: mapped
+      };
+    });
+  }, [id, cartItems, isValid, session, setSession]);
+
+  useEffect(() => {
+    if (!id || !session || !isValid || session.cafeId !== id) return;
+    if (!session.cart || session.cart.length === 0) return;
+    if (cartItems.length > 0) return;
+
+    clearCart();
+    session.cart.forEach((item) => {
+      const menuItemId = item.menuItemId || item.id;
+      addToCart({ name: item.name, price: item.price }, item.quantity, menuItemId);
+    });
+  }, [id, session, isValid, cartItems.length, clearCart, addToCart]);
 
   if (!id) return null;
 
-  const displayTableNumber = tableNumber || tableState?.tableLabel || '';
+  const hasValidSessionForCafe = isValid && session?.cafeId === id;
+  const displayTableNumber =
+    tableNumber ||
+    tableState?.tableLabel ||
+    (hasValidSessionForCafe && session
+      ? String(session.tableNumber)
+      : '');
   const subtotal = cartItems.reduce((s, i) => s + i.price * i.quantity, 0);
   const serviceFee = Math.round(subtotal * serviceFeeRate);
   const total = subtotal + serviceFee;
@@ -147,7 +196,7 @@ export const CafeMenuPage = () => {
         {t('menu.back')}
       </button>
 
-      {tableState && (
+      {(tableState || hasValidSessionForCafe) && (
         <div className="rounded-xl border border-accent/30 bg-accent/10 px-4 py-2 text-sm text-accent-strong">
           ✓ {t('qrApproval.approved')}
         </div>

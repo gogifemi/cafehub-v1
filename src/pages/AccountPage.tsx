@@ -140,7 +140,11 @@ export function AccountPage() {
           >
             <span className="inline-flex items-center gap-1">
               {icon}
-              <span>{t(labelKey)}</span>
+              <span>
+                {id === 'orders'
+                  ? t(labelKey, 'Orders')
+                  : t(labelKey)}
+              </span>
             </span>
           </button>
         ))}

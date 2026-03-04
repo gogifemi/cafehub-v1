@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useCallback, useMemo, useState } from 'react';
+import React, { createContext, useContext, useCallback, useMemo, useState, useEffect } from 'react';
 
 export interface CartItem {
   id: string;
@@ -49,6 +49,7 @@ interface OrderContextValue extends OrderState {
   setTable: (cafeId: string, tableNumber: string, tableId?: string) => void;
   setSpecialInstructions: (notes: string) => void;
   placeOrder: () => PlacedOrder | null;
+  placeOrderFromItems: (items: CartItem[], tableNumber: string) => PlacedOrder | null;
   updateOrderStatus: (status: OrderStatus) => void;
   cancelOrder: () => void;
   setPaymentMethod: (method: string | null) => void;
@@ -69,13 +70,37 @@ const defaultState: OrderState = {
 };
 
 const OrderContext = createContext<OrderContextValue | undefined>(undefined);
+const STORAGE_KEY = 'cafehub-order';
+
+function loadInitialState(): OrderState {
+  if (typeof window === 'undefined') return defaultState;
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) return defaultState;
+    const parsed = JSON.parse(raw) as OrderState;
+    return {
+      ...defaultState,
+      ...parsed
+    };
+  } catch {
+    return defaultState;
+  }
+}
 
 function generateOrderId(): string {
   return String(1000 + Math.floor(Math.random() * 9000));
 }
 
 export const OrderProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [state, setState] = useState<OrderState>(defaultState);
+  const [state, setState] = useState<OrderState>(() => loadInitialState());
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch {
+      // ignore storage errors
+    }
+  }, [state]);
 
   const addToCart = useCallback(
     (item: { name: string; price: number }, quantity: number, itemId: string) => {
@@ -164,6 +189,38 @@ export const OrderProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return order;
   }, []);
 
+  const placeOrderFromItems = useCallback(
+    (items: CartItem[], tableNumber: string): PlacedOrder | null => {
+      if (items.length === 0) return null;
+      let created: PlacedOrder | null = null;
+      setState((prev) => {
+        const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
+        const serviceFee = Math.round(subtotal * prev.serviceFeeRate);
+        const total = subtotal + serviceFee;
+        created = {
+          orderId: generateOrderId(),
+          tableNumber,
+          items: [...items],
+          status: 'received',
+          specialInstructions: prev.specialInstructions,
+          subtotal,
+          serviceFee,
+          total,
+          createdAt: new Date().toISOString()
+        };
+        return {
+          ...prev,
+          cartItems: [],
+          orderId: created.orderId,
+          placedOrder: created,
+          orderStatus: 'received'
+        };
+      });
+      return created;
+    },
+    []
+  );
+
   const updateOrderStatus = useCallback((status: OrderStatus) => {
     setState((prev) => ({
       ...prev,
@@ -202,6 +259,7 @@ export const OrderProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       setTable,
       setSpecialInstructions,
       placeOrder,
+      placeOrderFromItems,
       updateOrderStatus,
       cancelOrder,
       setPaymentMethod,
@@ -216,6 +274,7 @@ export const OrderProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       setTable,
       setSpecialInstructions,
       placeOrder,
+      placeOrderFromItems,
       updateOrderStatus,
       cancelOrder,
       setPaymentMethod,

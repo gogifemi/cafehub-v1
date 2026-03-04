@@ -68,6 +68,7 @@ interface AuthContextValue extends AuthState {
   removeFavorite: (cafeId: string) => void;
   updateProfile: (data: Partial<Pick<User, 'name' | 'email' | 'phone' | 'birthDate'>>) => void;
   updateAvatar: (avatarData: User['avatar']) => void;
+  addOrder: (order: PastOrder) => void;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -254,6 +255,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     );
   }, []);
 
+  const addOrder = useCallback((order: PastOrder) => {
+    setState((prev) => {
+      if (!prev.user) return prev;
+      const existing = prev.user.orders || [];
+      if (existing.some((o) => o.id === order.id)) {
+        return prev;
+      }
+      return {
+        ...prev,
+        user: {
+          ...prev.user,
+          orders: [order, ...existing]
+        }
+      };
+    });
+  }, []);
+
   useEffect(() => {
     if (typeof window === 'undefined') return;
     if (state.user) {
@@ -278,7 +296,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       addFavorite,
       removeFavorite,
       updateProfile,
-      updateAvatar
+      updateAvatar,
+      addOrder
     }),
     [
       state,
@@ -290,7 +309,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       addFavorite,
       removeFavorite,
       updateProfile,
-      updateAvatar
+      updateAvatar,
+      addOrder
     ]
   );
 

@@ -3,10 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { ThemeToggle } from './ThemeToggle';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useAuth } from '../../context/AuthContext';
+import { useTableSession } from '../../context/TableSessionContext';
 
 export const Navbar = () => {
   const { t } = useTranslation();
   const { isAuthenticated, logout } = useAuth();
+  const { session, isValid } = useTableSession();
+  const hasActiveSession = isValid && session?.isActive;
 
   return (
     <header className="border-b border-border bg-bg">
@@ -35,6 +38,14 @@ export const Navbar = () => {
             <button className="rounded-full border border-border-subtle bg-surface px-3 py-1 text-text-muted transition hover:border-border-strong hover:text-text">
               {t('nav.mapSoon')}
             </button>
+            {hasActiveSession && session && (
+              <Link
+                to={`/cafe/${session.cafeId}/menu`}
+                className="rounded-full border border-accent bg-accent px-3 py-1 text-core-white transition hover:bg-accent-strong"
+              >
+                {t('nav.returnToTable', { defaultValue: 'Return to table' })}
+              </Link>
+            )}
             <Link
               to="/account"
               className="rounded-full border border-border-subtle bg-surface px-3 py-1 text-text-muted transition hover:border-border-strong hover:text-text"

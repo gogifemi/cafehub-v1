@@ -257,7 +257,7 @@
       "profile": "Profil Bilgileri",
       "favorites": "Favori Kafeler",
       "reservations": "Rezervasyonlarım",
-      "orders": "Geçmiş Siparişler",
+      "orders": "Siparişler",
       "settings": "Hesap Ayarları"
     },
     "profile": {
@@ -280,7 +280,7 @@
       "makeReservation": "Rezervasyon Yap"
     },
     "orders": {
-      "title": "Geçmiş Siparişler",
+      "title": "Siparişler",
       "date": "Tarih",
       "table": "Masa No",
       "total": "Toplam",

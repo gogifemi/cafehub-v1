@@ -1,13 +1,19 @@
 import { useTranslation } from 'react-i18next';
 import { Trash2, X } from 'lucide-react';
-import type { CartItem } from '../../context/OrderContext';
 import { ModalPortal } from '../layout/ModalPortal';
+
+interface CartDrawerItem {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
 
 interface CartDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   tableNumber: string;
-  items: CartItem[];
+  items: CartDrawerItem[];
   subtotal: number;
   serviceFee: number;
   total: number;

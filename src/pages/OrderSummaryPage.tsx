@@ -2,6 +2,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getMockCafesForLanguage } from '../data/mockCafes';
 import { useOrder } from '../context/OrderContext';
+import { useAuth } from '../context/AuthContext';
+
+const VAT_RATE = 0.1;
 
 export const OrderSummaryPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -15,6 +18,7 @@ export const OrderSummaryPage = () => {
     placeOrder,
     serviceFeeRate
   } = useOrder();
+  const { user, addOrder } = useAuth();
 
   const cafes = getMockCafesForLanguage(i18n.language);
   const cafe = cafes.find((c) => c.id === id);
@@ -25,7 +29,36 @@ export const OrderSummaryPage = () => {
 
   const handleConfirm = () => {
     const order = placeOrder();
-    if (order) navigate(`/cafe/${id}/order/tracking`);
+    if (!order) return;
+
+    if (id && user) {
+      const beforeVat = order.subtotal + order.serviceFee;
+      const vat = Math.round(beforeVat * VAT_RATE);
+      const numericTable = Number(order.tableNumber) || Number(tableNumber) || 0;
+
+      addOrder({
+        id: order.orderId,
+        cafeId: id,
+        cafeName: cafe?.name ?? '',
+        cafeImage: undefined,
+        date: order.createdAt,
+        tableNumber: numericTable,
+        total: order.total + vat,
+        status: 'completed',
+        items: order.items.map((item) => ({
+          name: item.name,
+          quantity: item.quantity,
+          unitPrice: item.price
+        })),
+        paymentMethod: 'Online',
+        cardLast4: null,
+        subtotal: order.subtotal,
+        serviceFee: order.serviceFee,
+        vat
+      });
+    }
+
+    navigate(`/cafe/${id}/order/tracking`);
   };
 
   if (!id) return null;
