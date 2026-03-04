@@ -164,11 +164,11 @@
     "orderReceived": "Siparişiniz Alındı!",
     "orderId": "Sipariş No",
     "status": {
-      "received": "Sipariş Alındı",
+      "received": "Sipariş alındı",
       "preparing": "Hazırlanıyor",
-      "ready": "Hazır",
-      "delivered": "Teslim Edildi",
-      "cancelled": "İptal Edildi"
+      "ready": "Servise hazır",
+      "delivered": "Servis edildi",
+      "cancelled": "Sipariş iptal edildi"
     },
     "requestHelp": "Yardım İste",
     "callWaiter": "Garson Çağır",
@@ -256,7 +256,7 @@
     "tabs": {
       "profile": "Profil Bilgileri",
       "favorites": "Favori Kafeler",
-      "reservations": "Rezervasyonlarım",
+      "reservations": "Rezervasyonlar",
       "orders": "Siparişler",
       "settings": "Hesap Ayarları"
     },

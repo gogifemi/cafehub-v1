@@ -18,12 +18,34 @@ export function OrderCard({ order, onViewDetails, isActive = false, status = 'co
       timeStyle: 'short'
     });
 
+  const effectiveStatus: OrderStatus | 'completed' =
+    status === 'completed' ? 'completed' : status;
+
+  const statusColors: Record<string, { bg: string; text: string }> = {
+    // 1. order received
+    received: { bg: '#706455', text: '#ffffff' },
+    // 2. waiting confirmation (not currently used as a distinct status)
+    waiting_confirmation: { bg: '#8b5846', text: '#ffffff' },
+    // 3. being prepared
+    preparing: { bg: '#797979', text: '#ffffff' },
+    // 4. ready for service
+    ready: { bg: '#3c5d3f', text: '#ffffff' },
+    // 5. served
+    delivered: { bg: '#3a6864', text: '#ffffff' },
+    // 6. payment received (used for completed historical orders)
+    completed: { bg: '#1a333c', text: '#ffffff' },
+    // 7. order canceled
+    cancelled: { bg: '#363a3a', text: '#ffffff' }
+  };
+
+  const activeStatusStyle = statusColors[effectiveStatus] ?? {
+    bg: '#706455',
+    text: '#ffffff'
+  };
+
   const cardClasses = isActive
     ? 'border-accent bg-accent-soft/10 shadow-md'
     : 'border-border-subtle bg-surface shadow-sm';
-
-  const effectiveStatus: OrderStatus | 'completed' =
-    status === 'completed' ? 'completed' : status;
 
   return (
     <div className={`rounded-xl border p-4 transition ${cardClasses}`}>
@@ -47,7 +69,9 @@ export function OrderCard({ order, onViewDetails, isActive = false, status = 'co
             </p>
             <div className="mt-1 flex flex-wrap gap-2">
               {isActive && (
-                <span className="inline-flex items-center rounded-full bg-accent px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-core-white">
+                <span className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
+                  style={{ backgroundColor: activeStatusStyle.bg, color: activeStatusStyle.text }}
+                >
                   {t('account.orders.activeBadge', 'Aktif sipariş')}
                 </span>
               )}
@@ -57,7 +81,9 @@ export function OrderCard({ order, onViewDetails, isActive = false, status = 'co
                 </span>
               )}
               {!isActive && (
-                <span className="inline-block rounded-full bg-status-success/20 px-2 py-0.5 text-xs text-status-success">
+                <span className="inline-block rounded-full px-2 py-0.5 text-xs font-semibold uppercase tracking-wide"
+                  style={{ backgroundColor: statusColors.completed.bg, color: statusColors.completed.text }}
+                >
                   {t('account.orders.completed')}
                 </span>
               )}
