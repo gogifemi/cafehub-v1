@@ -15,6 +15,9 @@ export const ThemeToggle = () => {
 
     setTheme(initial);
     document.documentElement.dataset.theme = initial;
+    window.dispatchEvent(
+      new CustomEvent('cafehub-theme-changed', { detail: { theme: initial } })
+    );
   }, []);
 
   const toggleTheme = () => {
@@ -22,6 +25,7 @@ export const ThemeToggle = () => {
     setTheme(next);
     document.documentElement.dataset.theme = next;
     window.localStorage.setItem(STORAGE_KEY, next);
+    window.dispatchEvent(new CustomEvent('cafehub-theme-changed', { detail: { theme: next } }));
   };
 
   const isCore = theme === 'core';

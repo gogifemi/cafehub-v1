@@ -38,6 +38,11 @@ export const OrderTrackingPage = () => {
 
   const orderId = placedOrder?.orderId ?? '—';
   const tableNumber = placedOrder?.tableNumber ?? '';
+  const subtotal = placedOrder
+    ? placedOrder.items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    : 0;
+  const serviceFee = placedOrder?.serviceFee ?? 0;
+  const total = placedOrder?.total ?? subtotal + serviceFee;
 
   return (
     <section className="space-y-6">
@@ -55,6 +60,43 @@ export const OrderTrackingPage = () => {
           </p>
         )}
       </header>
+
+      {/* Ordered items summary */}
+      {placedOrder && (
+        <div className="rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm">
+          <h2 className="mb-3 text-sm font-medium text-text-muted">
+            {t('order.orderSummary')}
+          </h2>
+          <ul className="space-y-2 text-sm">
+            {placedOrder.items.map((item) => (
+              <li key={item.id} className="flex justify-between">
+                <span className="text-text">
+                  {item.name} × {item.quantity}
+                </span>
+                <span className="font-medium text-text">
+                  {item.price * item.quantity} TL
+                </span>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-3 space-y-1 text-sm">
+            <div className="flex justify-between text-text-muted">
+              <span>{t('order.subtotal')}</span>
+              <span>{subtotal} TL</span>
+            </div>
+            {serviceFee > 0 && (
+              <div className="flex justify-between text-text-muted">
+                <span>{t('order.serviceFee')}</span>
+                <span>{serviceFee} TL</span>
+              </div>
+            )}
+            <div className="flex justify-between font-semibold text-text">
+              <span>{t('order.total')}</span>
+              <span>{total} TL</span>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Status timeline */}
       <div className="rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm">

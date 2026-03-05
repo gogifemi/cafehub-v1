@@ -15,9 +15,9 @@ type AccountTab = 'profile' | 'favorites' | 'orders' | 'reservations' | 'setting
 
 const TABS: { id: AccountTab; labelKey: string; icon: ReactNode }[] = [
   {
-    id: 'profile',
-    labelKey: 'account.tabs.profile',
-    icon: <User className="h-4 w-4" />
+    id: 'orders',
+    labelKey: 'account.tabs.orders',
+    icon: <ReceiptText className="h-4 w-4" />
   },
   {
     id: 'favorites',
@@ -30,9 +30,9 @@ const TABS: { id: AccountTab; labelKey: string; icon: ReactNode }[] = [
     icon: <CalendarClock className="h-4 w-4" />
   },
   {
-    id: 'orders',
-    labelKey: 'account.tabs.orders',
-    icon: <ReceiptText className="h-4 w-4" />
+    id: 'profile',
+    labelKey: 'account.tabs.profile',
+    icon: <User className="h-4 w-4" />
   },
   {
     id: 'settings',
@@ -44,7 +44,7 @@ const TABS: { id: AccountTab; labelKey: string; icon: ReactNode }[] = [
 export function AccountPage() {
   const { t } = useTranslation();
   const { user, isAuthenticated } = useAuth();
-  const [tab, setTab] = useState<AccountTab>('profile');
+  const [tab, setTab] = useState<AccountTab>('orders');
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 

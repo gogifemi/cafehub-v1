@@ -13,7 +13,7 @@ export const OrderReceiptPage = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const { placedOrder, paymentMethod, resetOrder, updateOrderStatus } = useOrder();
-  const { clearSession } = useTableSession();
+  const { clearSession, clearCart } = useTableSession();
   const { user, addOrder } = useAuth();
 
   const cafes = getMockCafesForLanguage(i18n.language);
@@ -25,6 +25,12 @@ export const OrderReceiptPage = () => {
       updateOrderStatus('payment_received');
     }
   }, [placedOrder, updateOrderStatus]);
+
+  // Clear the active cart after successful payment,
+  // while keeping the table session active so the guest can reorder.
+  useEffect(() => {
+    clearCart();
+  }, [clearCart]);
 
   useEffect(() => {
     if (!id || !placedOrder || !user) return;

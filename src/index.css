@@ -83,8 +83,9 @@
 
 /* ========== Mono theme (light) – Brand kit light palette ========== */
 :root[data-theme='core'] {
-  --color-bg: 0 0% 98%;
-  --color-bg-soft: 0 0% 96%;
+  /* Background tuned to #eaeaea */
+  --color-bg: 0 0% 92%;
+  --color-bg-soft: 0 0% 95%;
   --color-surface: 0 0% 100%;
   --color-surface-subtle: 0 0% 98%;
   --color-surface-elevated: 0 0% 100%;

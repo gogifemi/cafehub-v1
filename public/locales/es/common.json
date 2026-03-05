@@ -4,7 +4,7 @@
     "brandTagline": "Find your next favorite spot",
     "nearbyGems": "Nearby gems",
     "mapSoon": "Map (soon)",
-    "favoritesSoon": "Favorites (soon)",
+    "favoritesSoon": "My favorites",
     "home": "Home",
     "browse": "Browse",
     "addCafe": "Add cafe",
@@ -158,6 +158,9 @@
     "placeOrder": "Place Order",
     "orderNotes": "Order notes",
     "notesPlaceholder": "Special requests...",
+    "addItemNote": "Add note",
+    "editItemNote": "Edit note",
+    "itemNotePlaceholder": "Add a special note for this item",
     "confirmOrder": "Confirm Order",
     "returnToCart": "Return to Cart",
     "orderSummary": "Order Summary",
@@ -168,6 +171,7 @@
       "preparing": "Preparing",
       "ready": "Ready",
       "delivered": "Delivered",
+      "payment_received": "Payment received",
       "cancelled": "Cancelled"
     },
     "requestHelp": "Request Help",
@@ -180,6 +184,7 @@
     "completePayment": "Complete Payment",
     "paymentSuccess": "Payment Successful!",
     "paymentSuccessMessage": "Your bill has been paid. Thank you for your order.",
+    "leaveTable": "Leave table",
     "quantity": "Quantity",
     "dateTime": "Date & Time",
     "creditCard": "Credit Card",
@@ -276,6 +281,7 @@
       "total": "Total",
       "status": "Status",
       "completed": "Completed",
+      "leaveTable": "Leave table",
       "viewDetails": "View Details",
       "orderAgain": "Order Again",
       "downloadPdf": "Download PDF",
@@ -286,7 +292,20 @@
       "title": "Reservations",
       "empty": "You don’t have any reservations yet",
       "explore": "Explore Cafes",
-      "recentReservation": "This is your most recent reservation.",
+      "recentReservation": "Most recent",
+      "activeBadge": "Active reservation",
+      "cancel": "Cancel",
+      "complete": "Complete",
+      "cancelConfirmTitle": "Cancel this reservation?",
+      "cancelConfirmBody": "This action cannot be undone and your reservation will be marked as \"Cancelled\".",
+      "cancelConfirmYes": "Yes, cancel it",
+      "cancelConfirmNo": "Keep reservation",
+      "status": {
+        "pending": "Pending",
+        "completed": "Completed",
+        "notCompleted": "Not completed",
+        "cancelled": "Cancelled"
+      },
       "viewReceipt": "View Receipt",
       "bookAgain": "Book Again",
       "loginRequired": "Please log in to see your reservations",
@@ -310,4 +329,3 @@
     }
   }
 }
-
