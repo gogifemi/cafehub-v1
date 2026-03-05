@@ -10,6 +10,12 @@ export interface Cafe {
   priceLevel: '$' | '$$' | '$$$';
   address: string;
   city: string;
+  /**
+   * Optional approximate coordinates used by the map experience
+   * to place a marker for the cafe.
+   */
+  lat?: number;
+  lng?: number;
   distanceMinutesWalk: number;
   isOpenNow: boolean;
   tags: string[];
