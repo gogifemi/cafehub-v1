@@ -12,19 +12,36 @@ interface AvatarPickerProps {
 export function AvatarPicker({ onClose }: AvatarPickerProps) {
   const { t, i18n } = useTranslation();
   const { user, updateAvatar } = useAuth();
-  const [selectedId, setSelectedId] = useState<AnimalAvatarId | null>(
-    user?.avatar?.type === 'animal' ? (user.avatar.animalId ?? null) : null
+
+  const initialSelectedId =
+    user?.avatar?.type === 'animal' ? (user.avatar.animalId ?? null) : null;
+
+  const initialStyleFromUser =
+    user?.avatar?.type === 'animal' && user.avatar.animalId
+      ? animalAvatars.find((a) => a.id === user.avatar.animalId)?.style
+      : undefined;
+
+  const [selectedId, setSelectedId] = useState<AnimalAvatarId | null>(initialSelectedId);
+  const [activeShape, setActiveShape] = useState<'kare' | 'yuvarlak'>(
+    initialStyleFromUser ?? 'kare'
   );
   const [page, setPage] = useState(0);
   const itemsPerPage = 8;
 
+  const filteredAvatars = animalAvatars.filter((a) => a.style === activeShape);
+
   const start = page * itemsPerPage;
   const end = start + itemsPerPage;
-  const currentAvatars = animalAvatars.slice(start, end);
-  const totalPages = Math.ceil(animalAvatars.length / itemsPerPage);
+  const currentAvatars = filteredAvatars.slice(start, end);
+  const totalPages = Math.ceil(filteredAvatars.length / itemsPerPage);
 
   const handleSelect = (id: AnimalAvatarId) => {
     setSelectedId(id);
+  };
+
+  const handleChangeShape = (shape: 'kare' | 'yuvarlak') => {
+    setActiveShape(shape);
+    setPage(0);
   };
 
   const handleSave = () => {
@@ -98,10 +115,43 @@ export function AvatarPicker({ onClose }: AvatarPickerProps) {
           </div>
           </div>
 
+          {/* Shape Tabs */}
+          <div className="mb-4 flex justify-center">
+            <div className="inline-flex rounded-full bg-surface-subtle p-1">
+              <button
+                type="button"
+                onClick={() => handleChangeShape('kare')}
+                className={`rounded-full px-4 py-1.5 text-xs font-medium transition ${
+                  activeShape === 'kare'
+                    ? 'bg-accent text-core-white shadow-sm'
+                    : 'text-text-muted hover:text-text'
+                }`}
+              >
+                {t('account.profile.squareAvatars', 'Kare')}
+              </button>
+              <button
+                type="button"
+                onClick={() => handleChangeShape('yuvarlak')}
+                className={`rounded-full px-4 py-1.5 text-xs font-medium transition ${
+                  activeShape === 'yuvarlak'
+                    ? 'bg-accent text-core-white shadow-sm'
+                    : 'text-text-muted hover:text-text'
+                }`}
+              >
+                {t('account.profile.circleAvatars', 'Yuvarlak')}
+              </button>
+            </div>
+          </div>
+
           {/* Animal Grid */}
           <div className="grid grid-cols-4 gap-4">
           {currentAvatars.map((animal) => {
             const isSelected = selectedId === animal.id;
+
+            const wrapperShapeClass =
+              animal.style === 'yuvarlak' ? 'rounded-full' : 'rounded-xl';
+            const wrapperBgClass =
+              animal.style === 'yuvarlak' ? 'bg-transparent' : 'bg-surface-subtle';
 
             return (
               <button
@@ -114,7 +164,9 @@ export function AvatarPicker({ onClose }: AvatarPickerProps) {
                     : 'hover:scale-105 hover:bg-white/5'
                 }`}
               >
-                <div className="mb-2 h-16 w-16 overflow-hidden rounded-xl bg-surface-subtle">
+                <div
+                  className={`mb-2 h-16 w-16 overflow-hidden ${wrapperShapeClass} ${wrapperBgClass}`}
+                >
                   <img
                     src={animal.imageUrl}
                     alt={isTurkish ? animal.name : animal.nameEn}

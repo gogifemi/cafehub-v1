@@ -70,16 +70,23 @@ export function OrderDetailsModal({ order, onClose, onOrderAgain }: OrderDetails
 
         <div className="mt-4 border-t border-border-subtle pt-4">
           <h3 className="text-sm font-medium text-text-muted">{t('order.orderSummary')}</h3>
-          <ul className="mt-2 space-y-1">
-            {order.items.map((item, i) => (
-              <li key={i} className="flex justify-between text-sm text-text">
+        <ul className="mt-2 space-y-1">
+          {order.items.map((item, i) => (
+            <li key={i} className="space-y-0.5 text-sm text-text">
+              <div className="flex justify-between">
                 <span>
                   {item.name} × {item.quantity}
                 </span>
                 <span>{(item.unitPrice * item.quantity).toFixed(2)} TL</span>
-              </li>
-            ))}
-          </ul>
+              </div>
+              {item.notes && (
+                <p className="text-xs text-text-muted">
+                  {item.notes}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
         </div>
 
         <div className="mt-3 space-y-1 border-t border-border-subtle pt-3 text-sm">
@@ -100,6 +107,12 @@ export function OrderDetailsModal({ order, onClose, onOrderAgain }: OrderDetails
             <span>{order.total.toFixed(2)} TL</span>
           </div>
         </div>
+
+        {order.orderNotes && (
+          <p className="mt-3 text-sm text-text-muted">
+            {t('order.orderNotes')}: {order.orderNotes}
+          </p>
+        )}
 
         <p className="mt-3 text-sm text-text-muted">
           {t('reservation.paymentMethod')}: {order.paymentMethod}

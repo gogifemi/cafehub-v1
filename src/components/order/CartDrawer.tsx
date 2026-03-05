@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Trash2, X } from 'lucide-react';
 import { ModalPortal } from '../layout/ModalPortal';
@@ -7,6 +8,7 @@ interface CartDrawerItem {
   name: string;
   price: number;
   quantity: number;
+  notes?: string;
 }
 
 interface CartDrawerProps {
@@ -19,6 +21,7 @@ interface CartDrawerProps {
   total: number;
   onRemove: (itemId: string) => void;
   onUpdateQuantity: (itemId: string, quantity: number) => void;
+  onUpdateItemNotes?: (itemId: string, notes: string) => void;
   onPlaceOrder: () => void;
 }
 
@@ -32,9 +35,11 @@ export const CartDrawer = ({
   total,
   onRemove,
   onUpdateQuantity,
+  onUpdateItemNotes,
   onPlaceOrder
 }: CartDrawerProps) => {
   const { t } = useTranslation();
+  const [openNotesFor, setOpenNotesFor] = useState<string | null>(null);
 
   if (!isOpen) return null;
 
@@ -117,6 +122,43 @@ export const CartDrawer = ({
                       </span>
                     </div>
                   </div>
+                  {onUpdateItemNotes && (
+                    <div className="mt-1 space-y-1 text-xs">
+                      {openNotesFor === item.id ? (
+                        <>
+                          <textarea
+                            className="w-full rounded-lg border border-border-subtle bg-bg-soft px-2 py-1 text-xs text-text placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-accent"
+                            rows={2}
+                            placeholder={t('order.itemNotePlaceholder', 'Bu ürün için özel not ekleyin')}
+                            value={item.notes ?? ''}
+                            onChange={(e) => onUpdateItemNotes(item.id, e.target.value)}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setOpenNotesFor(null)}
+                            className="text-[11px] font-medium text-text-muted hover:text-text"
+                          >
+                            {t('actions.cancel')}
+                          </button>
+                        </>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => setOpenNotesFor(item.id)}
+                          className="text-[11px] font-medium text-accent hover:text-accent-strong"
+                        >
+                          {item.notes
+                            ? t('order.editItemNote', 'Notu düzenle')
+                            : t('order.addItemNote', 'Not ekle')}
+                        </button>
+                      )}
+                      {item.notes && openNotesFor !== item.id && (
+                        <p className="text-[11px] text-text-muted line-clamp-2">
+                          {item.notes}
+                        </p>
+                      )}
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>

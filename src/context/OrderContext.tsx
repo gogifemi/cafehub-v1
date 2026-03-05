@@ -46,6 +46,7 @@ interface OrderContextValue extends OrderState {
   addToCart: (item: { name: string; price: number }, quantity: number, itemId: string) => void;
   removeFromCart: (itemId: string) => void;
   updateQuantity: (itemId: string, quantity: number) => void;
+  updateItemNotes: (itemId: string, notes: string) => void;
   clearCart: () => void;
   setTable: (cafeId: string, tableNumber: string, tableId?: string) => void;
   setSpecialInstructions: (notes: string) => void;
@@ -140,6 +141,15 @@ export const OrderProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       ...prev,
       cartItems: prev.cartItems.map((c) =>
         c.id === itemId ? { ...c, quantity } : c
+      )
+    }));
+  }, []);
+
+  const updateItemNotes = useCallback((itemId: string, notes: string) => {
+    setState((prev) => ({
+      ...prev,
+      cartItems: prev.cartItems.map((c) =>
+        c.id === itemId ? { ...c, notes } : c
       )
     }));
   }, []);
@@ -256,6 +266,7 @@ export const OrderProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       addToCart,
       removeFromCart,
       updateQuantity,
+      updateItemNotes,
       clearCart,
       setTable,
       setSpecialInstructions,
@@ -271,6 +282,7 @@ export const OrderProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       addToCart,
       removeFromCart,
       updateQuantity,
+      updateItemNotes,
       clearCart,
       setTable,
       setSpecialInstructions,

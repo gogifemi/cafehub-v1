@@ -45,8 +45,10 @@ export const OrderReceiptPage = () => {
       items: placedOrder.items.map((item) => ({
         name: item.name,
         quantity: item.quantity,
-        unitPrice: item.price
+        unitPrice: item.price,
+        notes: item.notes
       })),
+      orderNotes: placedOrder.specialInstructions,
       paymentMethod: paymentMethod ?? 'Online',
       cardLast4: null,
       subtotal: placedOrder.subtotal,

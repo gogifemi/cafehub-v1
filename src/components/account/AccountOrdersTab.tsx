@@ -11,7 +11,15 @@ import { useTableSession } from '../../context/TableSessionContext';
 export function AccountOrdersTab() {
   const { t } = useTranslation();
   const { user, isAuthenticated } = useAuth();
-  const { placedOrder, orderStatus, resetOrder } = useOrder();
+  const {
+    placedOrder,
+    orderStatus,
+    resetOrder,
+    clearCart,
+    addToCart,
+    updateItemNotes,
+    setSpecialInstructions
+  } = useOrder();
   const { clearSession } = useTableSession();
   const [selectedOrder, setSelectedOrder] = useState<PastOrder | null>(null);
   const navigate = useNavigate();
@@ -105,7 +113,32 @@ export function AccountOrdersTab() {
           order={selectedOrder}
           onClose={() => setSelectedOrder(null)}
           onOrderAgain={() => {
-            window.location.href = `/cafe/${selectedOrder.cafeId}/menu`;
+            if (!selectedOrder.cafeId) return;
+
+            // Start fresh cart
+            clearCart();
+
+            // Restore overall order notes if present
+            if (selectedOrder.orderNotes) {
+              setSpecialInstructions(selectedOrder.orderNotes);
+            } else {
+              setSpecialInstructions('');
+            }
+
+            // Re-add each item with its notes
+            selectedOrder.items.forEach((item, index) => {
+              const syntheticId = `${item.name}-${item.unitPrice}-${index}`;
+              addToCart(
+                { name: item.name, price: item.unitPrice },
+                item.quantity,
+                syntheticId
+              );
+              if (item.notes) {
+                updateItemNotes(syntheticId, item.notes);
+              }
+            });
+
+            navigate(`/cafe/${selectedOrder.cafeId}/menu`);
           }}
         />
       )}

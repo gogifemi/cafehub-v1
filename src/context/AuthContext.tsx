@@ -13,6 +13,7 @@ export interface OrderItem {
   name: string;
   quantity: number;
   unitPrice: number;
+  notes?: string;
 }
 
 export interface PastOrder {
@@ -25,6 +26,7 @@ export interface PastOrder {
   total: number;
   status: 'completed';
   items: OrderItem[];
+  orderNotes?: string;
   paymentMethod: string;
   cardLast4?: string | null;
   subtotal: number;
@@ -177,17 +179,77 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = useCallback(async (_email: string, _password: string, _remember?: boolean) => {
     await new Promise((r) => setTimeout(r, 300));
-    setState({ user: MOCK_USER, isAuthenticated: true });
+
+    setState((prev) => {
+      // If we already have a user in state (including a customised profile),
+      // just mark them as authenticated without resetting their data.
+      if (prev.user) {
+        return { ...prev, isAuthenticated: true };
+      }
+
+      // Otherwise try to hydrate from localStorage before falling back to mock data.
+      if (typeof window !== 'undefined') {
+        try {
+          const savedUser = localStorage.getItem(USER_STORAGE_KEY);
+          if (savedUser) {
+            const parsed = JSON.parse(savedUser) as User;
+            return { user: parsed, isAuthenticated: true };
+          }
+        } catch {
+          // ignore storage errors and fall through to mock user
+        }
+      }
+
+      return { user: MOCK_USER, isAuthenticated: true };
+    });
   }, []);
 
   const loginWithGoogle = useCallback(async () => {
     await new Promise((r) => setTimeout(r, 300));
-    setState({ user: MOCK_USER, isAuthenticated: true });
+
+    setState((prev) => {
+      if (prev.user) {
+        return { ...prev, isAuthenticated: true };
+      }
+
+      if (typeof window !== 'undefined') {
+        try {
+          const savedUser = localStorage.getItem(USER_STORAGE_KEY);
+          if (savedUser) {
+            const parsed = JSON.parse(savedUser) as User;
+            return { user: parsed, isAuthenticated: true };
+          }
+        } catch {
+          // ignore storage errors
+        }
+      }
+
+      return { user: MOCK_USER, isAuthenticated: true };
+    });
   }, []);
 
   const loginWithApple = useCallback(async () => {
     await new Promise((r) => setTimeout(r, 300));
-    setState({ user: MOCK_USER, isAuthenticated: true });
+
+    setState((prev) => {
+      if (prev.user) {
+        return { ...prev, isAuthenticated: true };
+      }
+
+      if (typeof window !== 'undefined') {
+        try {
+          const savedUser = localStorage.getItem(USER_STORAGE_KEY);
+          if (savedUser) {
+            const parsed = JSON.parse(savedUser) as User;
+            return { user: parsed, isAuthenticated: true };
+          }
+        } catch {
+          // ignore storage errors
+        }
+      }
+
+      return { user: MOCK_USER, isAuthenticated: true };
+    });
   }, []);
 
   const signup = useCallback(

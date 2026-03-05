@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { getMockCafesForLanguage } from '../data/mockCafes';
 import { useOrder } from '../context/OrderContext';
 import { useAuth } from '../context/AuthContext';
+import { useTableSession } from '../context/TableSessionContext';
 
 const VAT_RATE = 0.1;
 
@@ -15,10 +16,11 @@ export const OrderSummaryPage = () => {
     cartItems,
     specialInstructions,
     setSpecialInstructions,
-    placeOrder,
+    placeOrderFromItems,
     serviceFeeRate
   } = useOrder();
   const { user, addOrder } = useAuth();
+  const { session, isValid } = useTableSession();
 
   const cafes = getMockCafesForLanguage(i18n.language);
   const cafe = cafes.find((c) => c.id === id);
@@ -28,7 +30,28 @@ export const OrderSummaryPage = () => {
   const total = subtotal + serviceFee;
 
   const handleConfirm = () => {
-    const order = placeOrder();
+    // Prefer live cart items; if somehow lost, fall back to session cart
+    const hasLiveCart = cartItems.length > 0;
+    const canUseSessionCart =
+      !hasLiveCart && session && isValid && session.cafeId === id && session.cart.length > 0;
+
+    const sourceItems = hasLiveCart
+      ? cartItems
+      : canUseSessionCart
+        ? session.cart.map((item) => ({
+            id: item.menuItemId || item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+            notes: item.notes
+          }))
+        : [];
+
+    const effectiveTable =
+      tableNumber ||
+      (session && isValid && session.cafeId === id ? String(session.tableNumber) : '');
+
+    const order = placeOrderFromItems(sourceItems, effectiveTable);
     if (!order) return;
 
     if (id && user) {
@@ -48,8 +71,10 @@ export const OrderSummaryPage = () => {
         items: order.items.map((item) => ({
           name: item.name,
           quantity: item.quantity,
-          unitPrice: item.price
+          unitPrice: item.price,
+          notes: item.notes
         })),
+        orderNotes: order.specialInstructions,
         paymentMethod: 'Online',
         cardLast4: null,
         subtotal: order.subtotal,
@@ -94,11 +119,18 @@ export const OrderSummaryPage = () => {
         ) : (
           <ul className="space-y-3">
             {cartItems.map((item) => (
-              <li key={item.id} className="flex justify-between text-sm">
-                <span className="text-text">
-                  {item.name} × {item.quantity}
-                </span>
-                <span className="font-medium text-text">{item.price * item.quantity} TL</span>
+              <li key={item.id} className="space-y-0.5 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-text">
+                    {item.name} × {item.quantity}
+                  </span>
+                  <span className="font-medium text-text">{item.price * item.quantity} TL</span>
+                </div>
+                {item.notes && (
+                  <p className="text-xs text-text-muted">
+                    {item.notes}
+                  </p>
+                )}
               </li>
             ))}
           </ul>

@@ -38,9 +38,6 @@ export function OrderCard({ order, onViewDetails, isActive = false, status = 'co
     text: '#ffffff'
   };
 
-  // Active order pill stays fixed; only the status pill uses the status color
-  const activeBadgeStyle = { bg: '#706455', text: '#ffffff' };
-
   const isPaidButTableOccupied = isActive && effectiveStatus === 'payment_received';
 
   const cardClasses = isActive
@@ -70,8 +67,7 @@ export function OrderCard({ order, onViewDetails, isActive = false, status = 'co
             </p>
             <div className="mt-1 flex flex-wrap gap-2">
               {isActive && (
-                <span className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
-                  style={{ backgroundColor: activeBadgeStyle.bg, color: activeBadgeStyle.text }}
+                <span className="inline-flex items-center rounded-full bg-accent px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-core-white"
                 >
                   {t('account.orders.activeBadge', 'Aktif sipariş')}
                 </span>

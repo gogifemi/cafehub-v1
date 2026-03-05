@@ -97,6 +97,7 @@ export const CafeMenuPage = () => {
     addToCart,
     removeFromCart,
     updateQuantity,
+    updateItemNotes,
     clearCart,
     serviceFeeRate
   } = useOrder();
@@ -375,6 +376,7 @@ export const CafeMenuPage = () => {
         total={total}
         onRemove={removeFromCart}
         onUpdateQuantity={updateQuantity}
+        onUpdateItemNotes={updateItemNotes}
         onPlaceOrder={() => navigate(`/cafe/${id}/order/summary`)}
       />
     </section>
