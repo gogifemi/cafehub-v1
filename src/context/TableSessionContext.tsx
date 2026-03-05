@@ -1,4 +1,11 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type Dispatch,
+  type SetStateAction
+} from 'react';
 
 export interface SessionCartItem {
   id: string;
@@ -29,7 +36,7 @@ export interface TableSession {
 
 interface TableSessionContextType {
   session: TableSession | null;
-  setSession: (session: TableSession | null) => void;
+  setSession: Dispatch<SetStateAction<TableSession | null>>;
   clearSession: () => void;
   isValid: boolean;
   addToCart: (item: Omit<SessionCartItem, 'id'>) => void;
@@ -53,21 +60,37 @@ export const TableSessionProvider = ({ children }: { children: React.ReactNode }
       const saved = window.localStorage.getItem(STORAGE_KEY);
       if (!saved) return;
 
-      const parsed = JSON.parse(saved) as Omit<TableSession, 'scannedAt' | 'expiresAt'> & {
+      const parsed = JSON.parse(saved) as {
+        cafeId: string;
+        cafeName: string;
+        tableId: string;
+        tableNumber: string | number;
+        tableArea?: string;
         scannedAt: string;
         expiresAt: string;
+        isActive: boolean;
+        cart?: SessionCartItem[];
+        orderId?: string;
+        specialInstructions?: string;
       };
       const expiresAt = new Date(parsed.expiresAt);
 
       if (expiresAt > new Date()) {
-        setSession({
-          ...parsed,
+        const restored: TableSession = {
+          cafeId: parsed.cafeId,
+          cafeName: parsed.cafeName,
+          tableId: parsed.tableId,
+          tableNumber: parsed.tableNumber,
+          tableArea: parsed.tableArea,
           scannedAt: new Date(parsed.scannedAt),
           expiresAt,
-          cart: Array.isArray((parsed as TableSession).cart)
-            ? (parsed as TableSession).cart
-            : []
-        });
+          isActive: parsed.isActive,
+          cart: Array.isArray(parsed.cart) ? parsed.cart : [],
+          orderId: parsed.orderId,
+          specialInstructions: parsed.specialInstructions
+        };
+
+        setSession(restored);
       } else {
         window.localStorage.removeItem(STORAGE_KEY);
       }

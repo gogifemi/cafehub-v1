@@ -108,31 +108,25 @@ export const Navbar = () => {
                       onClick={() => setIsMenuOpen(false)}
                       className="block px-3 py-2 text-text hover:bg-surface-subtle"
                     >
-                      {t('nav.returnToTable', { defaultValue: 'Return to table' })}
+                      {t('nav.returnToTable', { defaultValue: 'Masaya dön' })}
                     </Link>
                   )}
 
-                  <button
-                    type="button"
-                    className="flex w-full cursor-default items-center justify-between px-3 py-2 text-left text-text-muted"
-                    disabled
+                  <Link
+                    to="/map"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="flex w-full items-center justify-between px-3 py-2 text-left text-text hover:bg-surface-subtle"
                   >
-                    <span>{t('nav.nearbyGems')}</span>
-                    <span className="text-[10px] uppercase tracking-wide text-text-subtle">
-                      {t('common.soon', { defaultValue: 'Soon' })}
-                    </span>
-                  </button>
+                    <span>{t('nav.map', { defaultValue: 'Harita' })}</span>
+                  </Link>
 
-                  <button
-                    type="button"
-                    className="flex w-full cursor-default items-center justify-between px-3 py-2 text-left text-text-muted"
-                    disabled
+                  <Link
+                    to="/my-table"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="flex w-full items-center justify-between px-3 py-2 text-left text-text hover:bg-surface-subtle"
                   >
-                    <span>{t('nav.mapSoon')}</span>
-                    <span className="text-[10px] uppercase tracking-wide text-text-subtle">
-                      {t('common.soon', { defaultValue: 'Soon' })}
-                    </span>
-                  </button>
+                    <span>{t('nav.myTable', { defaultValue: 'Masam' })}</span>
+                  </Link>
 
                   <Link
                     to="/account?tab=favorites"

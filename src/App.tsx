@@ -23,6 +23,8 @@ import { SignupPage } from './pages/SignupPage';
 import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
 import { AccountPage } from './pages/AccountPage';
 import { TableSessionProvider } from './context/TableSessionContext';
+import { MapPage } from './pages/MapPage';
+import { MyTablePage } from './pages/MyTablePage';
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
               <main className="mx-auto flex max-w-6xl flex-1 flex-col px-4 pb-10 pt-6 sm:px-6 lg:px-8">
                 <Routes>
                   <Route path="/" element={<HomePage />} />
+                  <Route path="/map" element={<MapPage />} />
+                  <Route path="/my-table" element={<MyTablePage />} />
                   <Route path="/login" element={<LoginPage />} />
                   <Route path="/signup" element={<SignupPage />} />
                   <Route path="/forgot-password" element={<ForgotPasswordPage />} />

@@ -14,11 +14,11 @@ export function AvatarPicker({ onClose }: AvatarPickerProps) {
   const { user, updateAvatar } = useAuth();
 
   const initialSelectedId =
-    user?.avatar?.type === 'animal' ? (user.avatar.animalId ?? null) : null;
+    user?.avatar?.type === 'animal' ? (user.avatar?.animalId ?? null) : null;
 
   const initialStyleFromUser =
-    user?.avatar?.type === 'animal' && user.avatar.animalId
-      ? animalAvatars.find((a) => a.id === user.avatar.animalId)?.style
+    user?.avatar?.type === 'animal' && user.avatar?.animalId
+      ? animalAvatars.find((a) => a.id === user.avatar?.animalId)?.style
       : undefined;
 
   const [selectedId, setSelectedId] = useState<AnimalAvatarId | null>(initialSelectedId);
