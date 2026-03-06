@@ -1,11 +1,12 @@
 import { useTranslation } from 'react-i18next';
-import { useMemo } from 'react';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { useEffect, useMemo, useState } from 'react';
+import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { getMockCafesForLanguage } from '../data/mockCafes';
 import { useAuth } from '../context/AuthContext';
 import { Heart, MapPin, Star } from 'lucide-react';
+import type { Cafe } from '../types/cafe';
 
 // Fix default marker icons in React/Vite
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -16,11 +17,13 @@ L.Icon.Default.mergeOptions({
 });
 
 // Custom cafe pin using a Lucide-style coffee icon rendered via a divIcon
-const createCafeIcon = () => {
+const createCafeIcon = (isSelected: boolean) => {
+  const baseColor = isSelected ? '#ff7518' : '#6F4E37';
+
   return L.divIcon({
     html: `
       <div style="
-        background-color: #6F4E37;
+        background-color: ${baseColor};
         border-radius: 50% 50% 50% 0;
         transform: rotate(-45deg);
         width: 36px;
@@ -49,11 +52,38 @@ const createCafeIcon = () => {
   });
 };
 
+interface MapSelectionControllerProps {
+  selectedCafeId: string | null;
+  cafes: Cafe[];
+}
+
+// Keeps the leaflet map in sync with the currently selected cafe from the list.
+const MapSelectionController = ({ selectedCafeId, cafes }: MapSelectionControllerProps) => {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!selectedCafeId) return;
+
+    const cafe = cafes.find((c) => c.id === selectedCafeId) as
+      | (Cafe & { lat?: number; lng?: number })
+      | undefined;
+
+    if (!cafe || cafe.lat == null || cafe.lng == null) return;
+
+    map.flyTo([cafe.lat, cafe.lng], 16, {
+      duration: 1.1
+    });
+  }, [selectedCafeId, cafes, map]);
+
+  return null;
+};
+
 export const MapPage = () => {
   const { t, i18n } = useTranslation();
   const cafes = useMemo(() => getMockCafesForLanguage(i18n.language), [i18n.language]);
   const { user, addFavorite, removeFavorite } = useAuth();
   const favoriteIds = user?.favorites ?? [];
+  const [selectedCafeId, setSelectedCafeId] = useState<string | null>(null);
 
   return (
     <section className="space-y-6">
@@ -80,8 +110,12 @@ export const MapPage = () => {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
+
+          <MapSelectionController selectedCafeId={selectedCafeId} cafes={cafes} />
+
           {cafes.map((cafe) => {
             const cafeWithCoords = cafe as typeof cafe & { lat?: number; lng?: number };
+            const isSelected = cafe.id === selectedCafeId;
 
             // Only render marker if cafe has coordinates
             if (!cafeWithCoords.lat || !cafeWithCoords.lng) return null;
@@ -93,7 +127,7 @@ export const MapPage = () => {
               <Marker
                 key={cafe.id}
                 position={[cafeWithCoords.lat, cafeWithCoords.lng]}
-                icon={createCafeIcon()}
+                icon={createCafeIcon(isSelected)}
               >
                 <Popup>
                   <div className="space-y-1">
@@ -136,7 +170,8 @@ export const MapPage = () => {
             return (
               <article
                 key={cafe.id}
-                className={`rounded-2xl border p-4 shadow-sm transition ${
+                onClick={() => setSelectedCafeId(cafe.id)}
+                className={`cursor-pointer rounded-2xl border p-4 shadow-sm transition ${
                   isFavorite ? 'border-accent bg-accent-soft/10 shadow-md' : 'border-border-subtle bg-surface'
                 }`}
               >
