@@ -25,6 +25,7 @@ import { AccountPage } from './pages/AccountPage';
 import { TableSessionProvider } from './context/TableSessionContext';
 import { MapPage } from './pages/MapPage';
 import { MyTablePage } from './pages/MyTablePage';
+import { RequireAuth } from './components/auth/RequireAuth';
 
 function App() {
   return (
@@ -44,8 +45,22 @@ function App() {
                   <Route path="/forgot-password" element={<ForgotPasswordPage />} />
                   <Route path="/account" element={<AccountPage />} />
                   <Route path="/cafe/:id" element={<CafeDetailPage />} />
-                  <Route path="/cafe/:id/scan" element={<QRScanPage />} />
-                  <Route path="/cafe/:id/scan/approval" element={<QRApprovalPage />} />
+                  <Route
+                    path="/cafe/:id/scan"
+                    element={
+                      <RequireAuth>
+                        <QRScanPage />
+                      </RequireAuth>
+                    }
+                  />
+                  <Route
+                    path="/cafe/:id/scan/approval"
+                    element={
+                      <RequireAuth>
+                        <QRApprovalPage />
+                      </RequireAuth>
+                    }
+                  />
                   <Route path="/cafe/:id/menu" element={<CafeMenuPage />} />
                   <Route path="/cafe/:id/menu/:itemId" element={<MenuItemDetailPage />} />
                   <Route path="/cafe/:id/order/summary" element={<OrderSummaryPage />} />
@@ -53,10 +68,38 @@ function App() {
                   <Route path="/cafe/:id/order/payment" element={<OrderPaymentPage />} />
                   <Route path="/cafe/:id/order/receipt" element={<OrderReceiptPage />} />
                   <Route path="/cafe/:id/bill" element={<BillPage />} />
-                  <Route path="/cafe/:id/reserve" element={<ReservationDetailsPage />} />
-                  <Route path="/cafe/:id/reserve/summary" element={<ReservationSummaryPage />} />
-                  <Route path="/cafe/:id/reserve/payment" element={<ReservationPaymentPage />} />
-                  <Route path="/cafe/:id/reservation/receipt" element={<ReservationReceiptPage />} />
+                  <Route
+                    path="/cafe/:id/reserve"
+                    element={
+                      <RequireAuth>
+                        <ReservationDetailsPage />
+                      </RequireAuth>
+                    }
+                  />
+                  <Route
+                    path="/cafe/:id/reserve/summary"
+                    element={
+                      <RequireAuth>
+                        <ReservationSummaryPage />
+                      </RequireAuth>
+                    }
+                  />
+                  <Route
+                    path="/cafe/:id/reserve/payment"
+                    element={
+                      <RequireAuth>
+                        <ReservationPaymentPage />
+                      </RequireAuth>
+                    }
+                  />
+                  <Route
+                    path="/cafe/:id/reservation/receipt"
+                    element={
+                      <RequireAuth>
+                        <ReservationReceiptPage />
+                      </RequireAuth>
+                    }
+                  />
                 </Routes>
               </main>
             </OrderProvider>

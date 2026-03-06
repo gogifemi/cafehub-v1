@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation, type Location } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Camera, CalendarDays, Heart, MapPin } from 'lucide-react';
 import { getMockCafesForLanguage } from '../data/mockCafes';
@@ -9,6 +9,7 @@ import { useAuth } from '../context/AuthContext';
 export const CafeDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const { t, i18n } = useTranslation();
   const { user, isAuthenticated, addFavorite, removeFavorite } = useAuth();
 
@@ -66,7 +67,14 @@ export const CafeDetailPage = () => {
   };
 
   const onReserve = () => {
-    navigate(`/cafe/${cafe.id}/reserve`);
+    const targetPath = `/cafe/${cafe.id}/reserve`;
+    if (!isAuthenticated) {
+      navigate('/login', {
+        state: { from: { ...(location as Location), pathname: targetPath } }
+      });
+      return;
+    }
+    navigate(targetPath);
   };
 
   const isFavorite = !!user?.favorites.includes(cafe.id);
@@ -148,7 +156,17 @@ export const CafeDetailPage = () => {
             <div className="flex flex-wrap gap-2">
               <button
                 type="button"
-                onClick={() => navigate(`/cafe/${id}/scan`)}
+                onClick={() => {
+                  if (!id) return;
+                  const targetPath = `/cafe/${id}/scan`;
+                  if (!isAuthenticated) {
+                    navigate('/login', {
+                      state: { from: { ...(location as Location), pathname: targetPath } }
+                    });
+                    return;
+                  }
+                  navigate(targetPath);
+                }}
                 className="inline-flex items-center gap-1 rounded-full border border-border-subtle bg-surface-subtle px-3 py-1.5 text-xs font-medium text-text-muted hover:border-border-strong hover:text-text"
               >
                 <Camera className="h-4 w-4" />

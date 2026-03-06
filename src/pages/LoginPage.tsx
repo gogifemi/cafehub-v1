@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation, type Location } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 
 export function LoginPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const { login, loginWithGoogle, loginWithApple } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,7 +18,9 @@ export function LoginPage() {
     setLoading(true);
     try {
       await login(email, password, rememberMe);
-      navigate('/account');
+      const state = location.state as { from?: Location } | null;
+      const from = state?.from?.pathname ?? '/account';
+      navigate(from, { replace: true });
     } finally {
       setLoading(false);
     }
@@ -27,7 +30,9 @@ export function LoginPage() {
     setLoading(true);
     try {
       await loginWithGoogle();
-      navigate('/account');
+      const state = location.state as { from?: Location } | null;
+      const from = state?.from?.pathname ?? '/account';
+      navigate(from, { replace: true });
     } finally {
       setLoading(false);
     }
@@ -37,7 +42,9 @@ export function LoginPage() {
     setLoading(true);
     try {
       await loginWithApple();
-      navigate('/account');
+      const state = location.state as { from?: Location } | null;
+      const from = state?.from?.pathname ?? '/account';
+      navigate(from, { replace: true });
     } finally {
       setLoading(false);
     }
