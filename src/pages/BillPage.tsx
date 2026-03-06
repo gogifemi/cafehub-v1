@@ -1,9 +1,7 @@
-import { useState, type ReactNode } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getMockCafesForLanguage } from '../data/mockCafes';
 import { useOrder } from '../context/OrderContext';
-import { Banknote, CreditCard, Landmark, Smartphone } from 'lucide-react';
 
 const VAT_RATE = 0.1;
 
@@ -11,11 +9,7 @@ export const BillPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const { placedOrder, setPaymentMethod, paymentMethod } = useOrder();
-
-  const [selectedMethod, setSelectedMethod] = useState<string | null>(
-    paymentMethod ?? 'credit_card'
-  );
+  const { placedOrder } = useOrder();
 
   const cafes = getMockCafesForLanguage(i18n.language);
   const cafe = cafes.find((c) => c.id === id);
@@ -36,7 +30,7 @@ export const BillPage = () => {
     <section className="space-y-6">
       <button
         type="button"
-        onClick={() => navigate(`/cafe/${id}`)}
+        onClick={() => navigate(-1)}
         className="inline-flex items-center rounded-full border border-border-subtle bg-surface-subtle px-3 py-1.5 text-xs font-medium text-text-muted hover:border-border-strong hover:text-text"
       >
         {t('menu.back')}
@@ -91,79 +85,19 @@ export const BillPage = () => {
         </div>
       </div>
 
-      {/* Payment options */}
-      <div className="rounded-2xl border border-border-subtle bg-surface p-4 shadow-sm">
-        <h2 className="mb-3 text-sm font-medium text-text-muted">{t('reservation.paymentMethod')}</h2>
-        <div className="grid gap-2">
-          {([
-            {
-              key: 'credit_card',
-              label: t('order.creditCard'),
-              icon: <CreditCard className="h-4 w-4" />
-            },
-            {
-              key: 'debit_card',
-              label: t('order.debitCard'),
-              icon: <Landmark className="h-4 w-4" />
-            },
-            {
-              key: 'troy',
-              label: t('order.troy'),
-              icon: <CreditCard className="h-4 w-4" />
-            },
-            {
-              key: 'bkm_express_paycell',
-              label: t('order.bkmExpressPaycell'),
-              icon: <Smartphone className="h-4 w-4" />
-            },
-            {
-              key: 'cash',
-              label: t('order.cash'),
-              icon: <Banknote className="h-4 w-4" />
-            }
-          ] as { key: string; label: string; icon: ReactNode }[]).map((opt) => (
-            <button
-              key={opt.key}
-              type="button"
-              onClick={() => {
-                setSelectedMethod(opt.key);
-                setPaymentMethod(opt.key);
-              }}
-              className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm text-text transition-all ${
-                selectedMethod === opt.key
-                  ? 'border-accent bg-accent/10 ring-2 ring-accent/30'
-                  : 'border-border-subtle bg-bg-soft hover:border-accent'
-              }`}
-            >
-              <span>{opt.icon}</span>
-              <span>{opt.label}</span>
-              {selectedMethod === opt.key && (
-                <span className="ml-auto text-accent">✓</span>
-              )}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Split bill */}
-      <button
-        type="button"
-        className="w-full rounded-xl border border-border-subtle bg-surface py-3 font-medium text-text hover:bg-surface-subtle"
-      >
-        {t('order.splitBill')}
-      </button>
-
+      {/* Actions: back and proceed to payment */}
       <div className="flex gap-3">
         <button
           type="button"
-          className="flex-1 rounded-xl border border-border-subtle bg-surface py-3 font-medium text-text hover:bg-surface-subtle"
+          onClick={() => navigate(-1)}
+          className="flex-1 rounded-xl border border-border-subtle bg-surface py-3 text-sm font-medium text-text hover:bg-surface-subtle"
         >
-          {t('order.callWaiter')}
+          {t('reservation.back')}
         </button>
         <button
           type="button"
           onClick={() => navigate(`/cafe/${id}/order/payment`)}
-          className="flex-1 rounded-xl border border-accent-strong bg-accent py-3 font-medium text-core-white shadow-sm transition hover:bg-accent-strong hover:shadow-md"
+          className="flex-1 rounded-xl border border-accent-strong bg-accent py-3 text-sm font-medium text-core-white shadow-sm transition hover:bg-accent-strong hover:shadow-md"
         >
           {t('order.payNow')}
         </button>

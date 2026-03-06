@@ -62,7 +62,7 @@ export const CafeDetailPage = () => {
   ];
 
   const onBack = () => {
-    navigate('/');
+    navigate(-1);
   };
 
   const onReserve = () => {

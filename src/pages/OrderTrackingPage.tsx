@@ -173,7 +173,7 @@ export const OrderTrackingPage = () => {
         </button>
         <button
           type="button"
-          onClick={() => navigate(`/cafe/${id}/menu`)}
+          onClick={() => navigate(-1)}
           className="w-full rounded-xl border border-border-subtle bg-surface py-3 font-medium text-text-muted hover:bg-surface-subtle"
         >
           {t('menu.back')}

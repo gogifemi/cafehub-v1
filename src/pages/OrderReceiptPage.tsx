@@ -90,7 +90,7 @@ export const OrderReceiptPage = () => {
         </button>
         <button
           type="button"
-          onClick={() => navigate(`/cafe/${id}`)}
+          onClick={() => navigate(-1)}
           className="w-full rounded-xl border border-border-subtle bg-surface py-3 font-medium text-text hover:bg-surface-subtle"
         >
           {t('menu.back')}

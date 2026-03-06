@@ -102,16 +102,6 @@ export const Navbar = () => {
             {isMenuOpen && (
               <div className="absolute right-0 top-11 z-20 w-56 rounded-xl border border-border-subtle bg-surface shadow-lg shadow-black/5">
                 <div className="py-2 text-sm">
-                  {hasActiveSession && session && (
-                    <Link
-                      to={`/cafe/${session.cafeId}/menu`}
-                      onClick={() => setIsMenuOpen(false)}
-                      className="block px-3 py-2 text-text hover:bg-surface-subtle"
-                    >
-                      {t('nav.returnToTable', { defaultValue: 'Masaya dön' })}
-                    </Link>
-                  )}
-
                   <Link
                     to="/map"
                     onClick={() => setIsMenuOpen(false)}

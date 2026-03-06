@@ -26,6 +26,7 @@ export interface TableSession {
   tableId: string;
   tableNumber: string | number;
   tableArea?: string;
+  partySize?: number;
   scannedAt: Date;
   expiresAt: Date;
   isActive: boolean;
@@ -39,6 +40,7 @@ interface TableSessionContextType {
   setSession: Dispatch<SetStateAction<TableSession | null>>;
   clearSession: () => void;
   isValid: boolean;
+  updatePartySize: (partySize: number) => void;
   addToCart: (item: Omit<SessionCartItem, 'id'>) => void;
   removeFromCart: (itemId: string) => void;
   updateQuantity: (itemId: string, quantity: number) => void;
@@ -66,6 +68,7 @@ export const TableSessionProvider = ({ children }: { children: React.ReactNode }
         tableId: string;
         tableNumber: string | number;
         tableArea?: string;
+        partySize?: number;
         scannedAt: string;
         expiresAt: string;
         isActive: boolean;
@@ -82,6 +85,7 @@ export const TableSessionProvider = ({ children }: { children: React.ReactNode }
           tableId: parsed.tableId,
           tableNumber: parsed.tableNumber,
           tableArea: parsed.tableArea,
+          partySize: parsed.partySize,
           scannedAt: new Date(parsed.scannedAt),
           expiresAt,
           isActive: parsed.isActive,
@@ -107,6 +111,7 @@ export const TableSessionProvider = ({ children }: { children: React.ReactNode }
           STORAGE_KEY,
           JSON.stringify({
             ...session,
+            partySize: session.partySize,
             scannedAt: session.scannedAt.toISOString(),
             expiresAt: session.expiresAt.toISOString()
           })
@@ -193,6 +198,16 @@ export const TableSessionProvider = ({ children }: { children: React.ReactNode }
   const cartItemCount =
     session?.cart.reduce((count, item) => count + item.quantity, 0) ?? 0;
 
+  const updatePartySize = (partySize: number) => {
+    setSession((prev) => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        partySize
+      };
+    });
+  };
+
   return (
     <TableSessionContext.Provider
       value={{
@@ -200,6 +215,7 @@ export const TableSessionProvider = ({ children }: { children: React.ReactNode }
         setSession,
         clearSession,
         isValid,
+        updatePartySize,
         addToCart,
         removeFromCart,
         updateQuantity,

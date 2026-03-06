@@ -66,7 +66,7 @@ export const OrderPaymentPage = () => {
   };
 
   const onBack = () => {
-    navigate(`/cafe/${id}/bill`);
+    navigate(-1);
   };
 
   return (

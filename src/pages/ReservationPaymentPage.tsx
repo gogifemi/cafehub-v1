@@ -97,7 +97,7 @@ export const ReservationPaymentPage = () => {
   };
 
   const onBack = () => {
-    navigate(`/cafe/${id}/reserve/summary`);
+    navigate(-1);
   };
 
   return (

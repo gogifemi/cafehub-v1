@@ -93,7 +93,7 @@ export const MenuItemDetailPage = () => {
       <section className="space-y-4">
         <button
           type="button"
-          onClick={() => navigate(`/cafe/${id}/menu`)}
+          onClick={() => navigate(-1)}
           className="inline-flex items-center rounded-full border border-border-subtle bg-surface-subtle px-3 py-1.5 text-xs font-medium text-text-muted hover:border-border-strong hover:text-text"
         >
           {t('menu.back')}
@@ -111,7 +111,7 @@ export const MenuItemDetailPage = () => {
     <section className="space-y-6">
       <button
         type="button"
-        onClick={() => navigate(`/cafe/${id}/menu`)}
+        onClick={() => navigate(-1)}
         className="inline-flex items-center rounded-full border border-border-subtle bg-surface-subtle px-3 py-1.5 text-xs font-medium text-text-muted hover:border-border-strong hover:text-text"
       >
         {t('menu.back')}

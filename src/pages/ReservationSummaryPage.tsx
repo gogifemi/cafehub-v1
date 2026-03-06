@@ -35,7 +35,7 @@ export const ReservationSummaryPage = () => {
   const isFiftyFive = state.durationMinutes === 55;
 
   const onBack = () => {
-    navigate(`/cafe/${id}/reserve`);
+    navigate(-1);
   };
 
   const onProceed = () => {
