@@ -9,13 +9,31 @@
     "browse": "Keşfet",
     "addCafe": "Kafe ekle",
     "about": "Hakkında",
-    "logoAlt": "cafehub logosu"
+    "logoAlt": "cafehub logosu",
+    "welcomeTour": "Karşılama turu"
   },
   "home": {
     "heroTitle": "Bir sonraki kafenizi bulun",
     "heroSubtitle": "Çalışmak, sosyalleşmek veya hızlı bir espresso için gerçek puanlar, konumlar ve filtrelerle seçili kafeleri keşfedin.",
     "badgeTitle": "Tek sayfalık uygulama",
     "badgeBody": "Yönlendirme ve klasör yapısı gelecekteki sayfalar için hazır."
+  },
+  "welcome": {
+    "badge": "Hoş geldin",
+    "title": "Kafede otur, siparişinle uğraşma.",
+    "subtitle": "CafeHub ile masandaki QR kodu okutarak menüyü keşfet, sipariş ver, takibini yap ve hesabını kapat.",
+    "step1Title": "Kafeni bul",
+    "step1Body": "Haritadan yakındaki kafeleri keşfet, konseptine ve puanına göre kendine en uygun olanı seç.",
+    "step2Title": "Masandaki QR’ı tara",
+    "step2Body": "Masandaki QR kodu okutarak menüye gir, kişisel hesabını aç ve siparişini oluştur.",
+    "step3Title": "Siparişini takip et",
+    "step3Body": "Hazırlanma sürecini canlı takip et, masadan kalkmadan ödeme yap ve hesabı kolayca bölüş.",
+    "step4Title": "Rezervasyon yap",
+    "step4Body": "İstediğin kafede masanı önceden ayır; tarih, saat ve kişi sayısını seç, ödemeyi uygulama üzerinden tamamla.",
+    "dontShowAgain": "Tekrar gösterme",
+    "skipCta": "Şimdilik geç",
+    "nextCta": "Sonraki",
+    "getStartedCta": "Hadi başlayalım"
   },
   "search": {
     "label": "Kafeleri ara",
@@ -334,6 +352,7 @@
       "promotions": "Kampanya ve Fırsatlar",
       "language": "Dil Seçeneği",
       "theme": "Tema Seçeneği",
+      "welcomeTourSection": "Adım adım CafeHub",
       "deleteAccount": "Hesabı Sil",
       "deleteConfirm": "Hesabınızı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz."
     }

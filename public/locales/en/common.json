@@ -9,13 +9,31 @@
     "browse": "Browse",
     "addCafe": "Add cafe",
     "about": "About",
-    "logoAlt": "CafeHub logo"
+    "logoAlt": "CafeHub logo",
+    "welcomeTour": "Welcome tour"
   },
   "home": {
     "heroTitle": "Find your next cafe",
     "heroSubtitle": "Search curated cafes with real ratings, locations, and filters designed for working, socializing, or grabbing a quick espresso.",
     "badgeTitle": "Single-page app",
     "badgeBody": "Routing & folder structure already prepared for future pages."
+  },
+  "welcome": {
+    "badge": "Welcome",
+    "title": "Sit at the cafe, not on your order.",
+    "subtitle": "With CafeHub, scan the QR code on your table to explore the menu, place your order, track it live, and pay without waiting.",
+    "step1Title": "Find your cafe",
+    "step1Body": "Browse nearby cafes on the map and pick the one that fits your vibe and rating.",
+    "step2Title": "Scan the table QR",
+    "step2Body": "Scan the QR code on your table to open the menu, start your tab, and build your order.",
+    "step3Title": "Track and pay easily",
+    "step3Body": "Watch your order move from preparing to served, then split and pay the bill directly from your phone.",
+    "dontShowAgain": "Don’t show again",
+    "skipCta": "Skip for now",
+    "nextCta": "Next",
+    "step4Title": "Make a reservation",
+    "step4Body": "Book a table in advance; choose date, time and party size, then pay in the app.",
+    "getStartedCta": "Let’s get started"
   },
   "search": {
     "label": "Search cafes",
@@ -324,6 +342,7 @@
       "promotions": "Promotions",
       "language": "Language",
       "theme": "Theme",
+      "welcomeTourSection": "Step by step CafeHub",
       "deleteAccount": "Delete Account",
       "deleteConfirm": "Are you sure you want to delete your account? This action cannot be undone."
     }

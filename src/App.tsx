@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { Navbar } from './components/layout/Navbar';
 import { HomePage } from './pages/HomePage';
 import { ReservationProvider } from './context/ReservationContext';
@@ -26,6 +26,87 @@ import { TableSessionProvider } from './context/TableSessionContext';
 import { MapPage } from './pages/MapPage';
 import { MyTablePage } from './pages/MyTablePage';
 import { RequireAuth } from './components/auth/RequireAuth';
+import { WelcomePage } from './pages/WelcomePage';
+import { useWelcomeState } from './hooks/useWelcomeState';
+
+const AppRoutes = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { hasCompletedWelcome } = useWelcomeState();
+
+  if (location.pathname === '/' && !hasCompletedWelcome) {
+    navigate('/welcome', { replace: true });
+  }
+
+  return (
+    <Routes>
+      <Route path="/welcome" element={<WelcomePage />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/map" element={<MapPage />} />
+      <Route path="/my-table" element={<MyTablePage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignupPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/account" element={<AccountPage />} />
+      <Route path="/cafe/:id" element={<CafeDetailPage />} />
+      <Route
+        path="/cafe/:id/scan"
+        element={
+          <RequireAuth>
+            <QRScanPage />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/cafe/:id/scan/approval"
+        element={
+          <RequireAuth>
+            <QRApprovalPage />
+          </RequireAuth>
+        }
+      />
+      <Route path="/cafe/:id/menu" element={<CafeMenuPage />} />
+      <Route path="/cafe/:id/menu/:itemId" element={<MenuItemDetailPage />} />
+      <Route path="/cafe/:id/order/summary" element={<OrderSummaryPage />} />
+      <Route path="/cafe/:id/order/tracking" element={<OrderTrackingPage />} />
+      <Route path="/cafe/:id/order/payment" element={<OrderPaymentPage />} />
+      <Route path="/cafe/:id/order/receipt" element={<OrderReceiptPage />} />
+      <Route path="/cafe/:id/bill" element={<BillPage />} />
+      <Route
+        path="/cafe/:id/reserve"
+        element={
+          <RequireAuth>
+            <ReservationDetailsPage />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/cafe/:id/reserve/summary"
+        element={
+          <RequireAuth>
+            <ReservationSummaryPage />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/cafe/:id/reserve/payment"
+        element={
+          <RequireAuth>
+            <ReservationPaymentPage />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/cafe/:id/reservation/receipt"
+        element={
+          <RequireAuth>
+            <ReservationReceiptPage />
+          </RequireAuth>
+        }
+      />
+    </Routes>
+  );
+};
 
 function App() {
   return (
@@ -36,71 +117,7 @@ function App() {
           <ReservationProvider>
             <OrderProvider>
               <main className="mx-auto flex max-w-6xl flex-1 flex-col px-4 pb-10 pt-6 sm:px-6 lg:px-8">
-                <Routes>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/map" element={<MapPage />} />
-                  <Route path="/my-table" element={<MyTablePage />} />
-                  <Route path="/login" element={<LoginPage />} />
-                  <Route path="/signup" element={<SignupPage />} />
-                  <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-                  <Route path="/account" element={<AccountPage />} />
-                  <Route path="/cafe/:id" element={<CafeDetailPage />} />
-                  <Route
-                    path="/cafe/:id/scan"
-                    element={
-                      <RequireAuth>
-                        <QRScanPage />
-                      </RequireAuth>
-                    }
-                  />
-                  <Route
-                    path="/cafe/:id/scan/approval"
-                    element={
-                      <RequireAuth>
-                        <QRApprovalPage />
-                      </RequireAuth>
-                    }
-                  />
-                  <Route path="/cafe/:id/menu" element={<CafeMenuPage />} />
-                  <Route path="/cafe/:id/menu/:itemId" element={<MenuItemDetailPage />} />
-                  <Route path="/cafe/:id/order/summary" element={<OrderSummaryPage />} />
-                  <Route path="/cafe/:id/order/tracking" element={<OrderTrackingPage />} />
-                  <Route path="/cafe/:id/order/payment" element={<OrderPaymentPage />} />
-                  <Route path="/cafe/:id/order/receipt" element={<OrderReceiptPage />} />
-                  <Route path="/cafe/:id/bill" element={<BillPage />} />
-                  <Route
-                    path="/cafe/:id/reserve"
-                    element={
-                      <RequireAuth>
-                        <ReservationDetailsPage />
-                      </RequireAuth>
-                    }
-                  />
-                  <Route
-                    path="/cafe/:id/reserve/summary"
-                    element={
-                      <RequireAuth>
-                        <ReservationSummaryPage />
-                      </RequireAuth>
-                    }
-                  />
-                  <Route
-                    path="/cafe/:id/reserve/payment"
-                    element={
-                      <RequireAuth>
-                        <ReservationPaymentPage />
-                      </RequireAuth>
-                    }
-                  />
-                  <Route
-                    path="/cafe/:id/reservation/receipt"
-                    element={
-                      <RequireAuth>
-                        <ReservationReceiptPage />
-                      </RequireAuth>
-                    }
-                  />
-                </Routes>
+                <AppRoutes />
               </main>
             </OrderProvider>
           </ReservationProvider>

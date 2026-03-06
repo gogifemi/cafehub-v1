@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 import { LanguageSwitcher } from '../layout/LanguageSwitcher';
@@ -119,6 +120,20 @@ export function AccountSettingsTab() {
           <h3 className="text-sm font-medium text-text-muted">{t('account.settings.theme')}</h3>
           <div className="mt-2">
             <ThemeToggle />
+          </div>
+        </div>
+
+        <div>
+          <h3 className="text-sm font-medium text-text-muted">
+            {t('account.settings.welcomeTourSection', { defaultValue: 'Adım adım CafeHub' })}
+          </h3>
+          <div className="mt-2">
+            <Link
+              to="/welcome"
+              className="inline-flex items-center rounded-lg border border-border-subtle bg-surface px-4 py-2 text-sm font-medium text-text transition hover:border-accent hover:bg-surface-subtle hover:text-accent"
+            >
+              {t('nav.welcomeTour', { defaultValue: 'Karşılama turu' })}
+            </Link>
           </div>
         </div>
 
